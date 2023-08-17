@@ -22,9 +22,6 @@ return new class extends Migration
             $table->unsignedSmallInteger("position_id")->comment("Referência ao identificador único do cargo do funcionário");
             $table->foreign("position_id")->references("id")->on("positions")->onDelete("restrict")->onUpdate("cascade");
 
-            $table->unsignedBigInteger("login_id")->comment("Referência ao identificador único do login do funcionário");
-            $table->foreign("login_id")->references("id")->on("login")->onDelete("restrict")->onUpdate("cascade");
-
             $table->timestamps();
         });
     }

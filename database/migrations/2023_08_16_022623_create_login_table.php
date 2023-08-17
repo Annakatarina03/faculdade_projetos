@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('password')->comment("Hash da senha do usuário");
             $table->rememberToken()->comment("Token 'Lembra-me'")->nullable();
             $table->boolean("status")->comment("Status do login do funcionário");
+
+            $table->unsignedBigInteger("employee_id")->comment("Referência ao identificador único do funcionário");
+            $table->foreign("employee_id")->references("id")->on("employees")->onDelete("restrict")->onUpdate("cascade");
+
             $table->timestamps();
         });
     }
