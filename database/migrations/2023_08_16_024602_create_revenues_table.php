@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('revenues', function (Blueprint $table) {
-            $table->unsignedInteger("id")->comment("Identificador único da receita");
+            $table->uuid("id")->unique()->comment("Identificador único da receita");
+
             $table->string("name", 45)->comment("Nome da receita");
 
             $table->unsignedBigInteger("chef_id")->comment("Referência ao identificador único do cozinheiro");
             $table->foreign("chef_id")->references("id")->on("employees")->onDelete("cascade")->onUpdate("cascade");
 
-            $table->unsignedSmallInteger("category_id")->nullable()->comment("Referência ao identificador único da categoria da receita");
-            $table->foreign("category_id")->references("id")->on("categorys")->onDelete("set null")->onUpdate("cascade");
+            $table->foreignId("category_id")->nullable()->comment("Referência ao identificador único da categoria da receita");
 
             $table->date("creation_date")->nullable()->comment("Data de criação da receita");
             $table->string("method_preparation", 1000)->comment("Modo de preparo da receita");
@@ -29,9 +29,9 @@ return new class extends Migration
             $table->unsignedInteger("image_id")->nullable()->comment("Referência ao identificador único da imagem da receita");
             $table->foreign("image_id")->references("id")->on("images")->onDelete("set null")->onUpdate("cascade");
 
-            $table->primary(["id", "chef_id"]);
-
             $table->timestamps();
+
+            $table->primary(["name", "chef_id"]);
         });
     }
 

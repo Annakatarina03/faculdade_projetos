@@ -19,8 +19,8 @@ return new class extends Migration
             $table->date("date_entry")->comment("Data de admissão do funcionário");
             $table->decimal("wage", 9, 2)->comment("Salário do funcionário");
 
-            $table->unsignedSmallInteger("position_id")->comment("Referência ao identificador único do cargo do funcionário");
-            $table->foreign("position_id")->references("id")->on("positions")->onDelete("restrict")->onUpdate("cascade");
+            $table->unsignedSmallInteger("office_id")->comment("Referência ao identificador único do cargo do funcionário");
+            $table->foreign("office_id")->references("id")->on("positions")->onDelete("restrict")->onUpdate("cascade");
 
             $table->timestamps();
         });

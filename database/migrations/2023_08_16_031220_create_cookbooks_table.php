@@ -15,8 +15,8 @@ return new class extends Migration
             $table->integerIncrements("id")->comment("Identificador único livro de receitas");
             $table->string("title", 45)->comment("Nome do livro de receitas");
             $table->char("isbn", 20)->comment("Padrão Internacional de Numeração de Livro");
-            $table->unsignedBigInteger("editor_id")->nullable()->comment("Referência ao identificador único do editor");
-            $table->foreign("editor_id")->references("id")->on("employees")->onDelete("set null")->onUpdate("cascade");
+            $table->unsignedBigInteger("publisher_id")->nullable()->comment("Referência ao identificador único do editor");
+            $table->foreign("publisher_id")->references("id")->on("employees")->onDelete("set null")->onUpdate("cascade");
             $table->timestamps();
         });
     }

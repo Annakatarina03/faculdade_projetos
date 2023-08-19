@@ -15,8 +15,8 @@ return new class extends Migration
             $table->unsignedInteger("ingredient_id")->comment("Referência ao identificador único do ingrediente");
             $table->foreign("ingredient_id")->references("id")->on("ingredients")->onDelete("cascade")->onUpdate("cascade");
 
-            $table->unsignedInteger("revenue_id")->comment("Referência ao identificador único da receita");
-            $table->foreign("revenue_id")->references("id")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
+            $table->string("revenue_name", 45)->comment("Referência ao identificador do nome da receita");
+            $table->foreign("revenue_name")->references("name")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
 
             $table->unsignedBigInteger("revenue_chef_id")->comment("Referência ao identificador único do cozinheiro da receita");
             $table->foreign("revenue_chef_id")->references("chef_id")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedSmallInteger("measure_id")->nullable()->comment("Referência ao identificador único da medida da receita");
             $table->foreign("measure_id")->references("id")->on("measures")->onDelete("set null")->onUpdate("cascade");
 
-            $table->primary(["ingredient_id", "revenue_id", "revenue_chef_id"]);
+            $table->primary(["ingredient_id", "revenue_name", "revenue_chef_id"]);
 
             $table->timestamps();
         });
