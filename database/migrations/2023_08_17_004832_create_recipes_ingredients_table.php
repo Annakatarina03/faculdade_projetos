@@ -22,6 +22,8 @@ return new class extends Migration
             $table->unsignedSmallInteger("measure_id")->nullable()->comment("Referência ao identificador único da medida da receita");
             $table->foreign("measure_id")->references("id")->on("measures")->onDelete("set null")->onUpdate("cascade");
 
+            $table->smallInteger('amount')->comment("Quantidade do ingrediente na receita");
+
             $table->primary(["ingredient_id", "revenue_id"]);
 
             $table->timestamps();
