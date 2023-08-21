@@ -12,11 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cookbooks', function (Blueprint $table) {
+
             $table->integerIncrements("id")->comment("Identificador único livro de receitas");
             $table->string("title", 45)->comment("Nome do livro de receitas");
             $table->char("isbn", 20)->comment("Padrão Internacional de Numeração de Livro");
-            $table->unsignedBigInteger("publisher_id")->nullable()->comment("Referência ao identificador único do editor");
-            $table->foreign("publisher_id")->references("id")->on("employees")->onDelete("set null")->onUpdate("cascade");
+
+            $table->unsignedBigInteger("publisher_id")->comment("Referência ao identificador único do editor");
+            $table->foreign("publisher_id")->references("id")->on("employees")->onDelete("restrict")->onUpdate("cascade");
+
             $table->timestamps();
         });
     }
