@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('system_parameters', function (Blueprint $table) {
             $table->smallInteger("month_id")->comment("Mês do ano");
             $table->smallInteger("year_id")->comment("Ano");
-            $table->smallInteger("quantity_recipes")->comment("Quantidades de receitas a serem produzidas");
+            $table->smallInteger("quantity_recipes")->comment("Quantidade de receitas a serem produzidas");
             $table->timestamps();
             $table->primary(["month_id", "year_id"]);
         });

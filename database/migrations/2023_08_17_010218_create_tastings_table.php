@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("tasting_id")->comment("Referência ao identificador único do degustador");
             $table->foreign("tasting_id")->references("id")->on("employees")->onDelete("cascade")->onUpdate("cascade");
 
-            $table->unsignedBigInteger("revenue_id")->comment("Referência ao identificador único do cozinheiro da receita");
+            $table->unsignedBigInteger("revenue_id")->comment("Referência ao identificador único da receita");
             $table->foreign("revenue_id")->references("id")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
 
             $table->date("tasting_date")->nullable()->comment("Data da degustação da receita");
