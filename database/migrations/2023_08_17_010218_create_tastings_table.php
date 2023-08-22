@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tastings', function (Blueprint $table) {
 
-            $table->unsignedBigInteger("tasting_id")->comment("Referência ao identificador único do degustador");
-            $table->foreign("tasting_id")->references("id")->on("employees")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("taster_id")->comment("Referência ao identificador único do degustador");
+            $table->foreign("taster_id")->references("id")->on("employees")->onDelete("cascade")->onUpdate("cascade");
 
             $table->unsignedBigInteger("revenue_id")->comment("Referência ao identificador único da receita");
             $table->foreign("revenue_id")->references("id")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date("tasting_date")->nullable()->comment("Data da degustação da receita");
             $table->smallInteger("tasting_note")->nullable()->comment("Nota da degustação da receita");
 
-            $table->primary(["tasting_id", "revenue_id"]);
+            $table->primary(["taster_id", "revenue_id"]);
 
             $table->timestamps();
         });
