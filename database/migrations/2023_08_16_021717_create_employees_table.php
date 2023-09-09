@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign("office_id")->references("id")->on("positions")->onDelete("restrict")->onUpdate("cascade");
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

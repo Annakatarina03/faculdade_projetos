@@ -15,7 +15,9 @@ return new class extends Migration
             $table->integerIncrements("id")->comment("Identificador único do restaurante");
             $table->string("name", 45)->comment("Nome do restaurante");
             $table->string("contact")->nullable()->comment("Contato do restaurante");
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

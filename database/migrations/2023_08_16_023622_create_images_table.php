@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->integerIncrements("id")->comment("Identificador único da image da receita");
             $table->string("url", 255)->comment("URL da imagem");
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->primary(["employee_id", "restaurant_id"]);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

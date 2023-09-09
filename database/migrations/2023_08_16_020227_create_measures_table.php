@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('measures', function (Blueprint $table) {
             $table->smallIncrements("id")->comment("Identificador único da medida de um ingrediente");
             $table->string("description", 45)->comment("Descrição da medida de um ingrediente");
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

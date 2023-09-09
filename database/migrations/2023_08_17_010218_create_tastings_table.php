@@ -25,6 +25,7 @@ return new class extends Migration
             $table->primary(["taster_id", "revenue_id"]);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

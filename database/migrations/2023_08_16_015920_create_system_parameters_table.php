@@ -15,8 +15,11 @@ return new class extends Migration
             $table->smallInteger("month_id")->comment("Mês do ano");
             $table->smallInteger("year_id")->comment("Ano");
             $table->smallInteger("quantity_recipes")->comment("Quantidade de receitas a serem produzidas");
-            $table->timestamps();
+
             $table->primary(["month_id", "year_id"]);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
