@@ -10,22 +10,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Employee extends Model
+class Employee extends Authenticatable
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $casts = [
-        'name' => 'string',
-        'username' => 'string',
-        'cpf' => 'string',
-        'fantasy_name' => 'string',
-        'wage' => 'integer',
-        'date_entry' => 'date',
-        'password' => 'string',
-        'office_id' => 'integer',
-        'status' => 'bool'
+    protected $guarded = [
+        'id',
     ];
 
     protected $fillable = [
@@ -40,16 +33,21 @@ class Employee extends Model
         'status',
     ];
 
-    protected $guarded = [
-        'id',
-    ];
-
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    public $timestamps = true;
+    protected $casts = [
+        'name' => 'string',
+        'username' => 'string',
+        'cpf' => 'string',
+        'fantasy_name' => 'string',
+        'wage' => 'integer',
+        'password' => 'string',
+        'office_id' => 'integer',
+        'status' => 'bool'
+    ];
 
     public function office(): BelongsTo
     {
@@ -87,6 +85,11 @@ class Employee extends Model
     public function getCpfAttribute(string $value): string
     {
         return Formatter::formatCPF($value);
+    }
+
+    public function getDateEntryAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
     public function getCreatedAtAttribute(string $value)

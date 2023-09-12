@@ -15,7 +15,7 @@ class Office extends Model
 
     protected $casts = [
         'description' => 'string',
-        'slug' => 'description'
+        'slug' => 'string'
     ];
 
     protected $fillable = [
