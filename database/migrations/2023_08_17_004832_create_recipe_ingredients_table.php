@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recipes_ingredients', function (Blueprint $table) {
-
+        Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->unsignedInteger("ingredient_id")->comment("Referência ao identificador único do ingrediente");
             $table->foreign("ingredient_id")->references("id")->on("ingredients")->onDelete("cascade")->onUpdate("cascade");
 
-            $table->unsignedBigInteger("revenue_id")->comment("Referência ao identificador único da receita");
+            $table->unsignedBigInteger("revenue_id")->comment("Referência ao identificador único do cozinheiro da receita");
             $table->foreign("revenue_id")->references("id")->on("revenues")->onDelete("cascade")->onUpdate("cascade");
 
             $table->unsignedSmallInteger("measure_id")->nullable()->comment("Referência ao identificador único da medida da receita");

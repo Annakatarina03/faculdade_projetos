@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->smallIncrements("id")->comment("Identificador único do cargo do funcionário");
             $table->string("description", 45)->comment("Descrição do cargo do funcionário");
-
+            $table->string('slug', 45)->comment('Slug da descrição do cargo');
 
             $table->timestamps();
             $table->softDeletes();

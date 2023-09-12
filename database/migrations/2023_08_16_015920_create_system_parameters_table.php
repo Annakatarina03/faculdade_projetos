@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('system_parameters', function (Blueprint $table) {
-            $table->smallInteger("month_id")->comment("Mês do ano");
-            $table->smallInteger("year_id")->comment("Ano");
-            $table->smallInteger("quantity_recipes")->comment("Quantidade de receitas a serem produzidas");
-
-            $table->primary(["month_id", "year_id"]);
+            $table->smallInteger('month_production')->comment('Mês do ano');
+            $table->smallInteger('year_production')->comment('Ano');
+            $table->smallInteger('quantity_recipes')->comment('Quantidades de receitas a serem produzidas');
+            $table->primary(['month_production', 'year_production']);
 
             $table->timestamps();
             $table->softDeletes();
