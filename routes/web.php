@@ -29,4 +29,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+/**
+ * Employees routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/{employee}', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::post('/employees/create', [EmployeeController::class, 'store'])->name('employees.store');
+Route::put('/employees/edit/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
+/**
+ * Restaurants routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'edit'])->name('restaurants.edit');
+Route::post('/restaurants/create', [RestaurantController::class, 'store'])->name('restaurants.store');
+Route::put('/restaurants/edit/{restaurant}', [RestaurantController::class, 'update'])->name('restaurants.update');
+Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurants.destroy');
+
+
+require __DIR__ . '/auth.php';
