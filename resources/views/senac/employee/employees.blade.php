@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Funcionários')
 @section('content')
-    <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
+    <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[88.5vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
                 <span class="text-4xl text-bold">Funcionários</span>
@@ -35,14 +35,13 @@
                                 </svg>
                                 <span class="sr-only">Info</span>
                                 <div>
-                                    <span class="font-medium"> {{ session()->get('success') }}
-                                    </span>
+                                    <span class="font-medium">{{ session()->get('success') }}</span>
                                 </div>
                             </div>
                         @endif
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            @include('senac.employee.modal-create-employee')
+                            @include('senac.employee.employee-create')
                         </div>
                     </div>
                 </div>
@@ -87,17 +86,19 @@
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                         <div class="flex items-center justify-center space-x-4">
-                                    <a href="{{route('employees.edit',['employee' => $employee])}}"
-                                            class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </a>                                 
-                                            @include('senac.employee.modal-view-employee')
-                                            @include('senac.employee.modal-confirmation-delete-employee')
+                                            <a href="{{ route('admin.employees.edit', ['employee' => $employee]) }}"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20"
+                                                    fill="currentColor" aria-hidden="true">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                            @include('senac.employee.employee-view')
+                                            @include('senac.employee.employee-delete')
                                         </div>
                                     </td>
                                 </tr>
@@ -136,17 +137,19 @@
                                 <div>
                                     <td class="px-4 py-3 w-40 font-medium text-gray-900 whitespace-nowrap">
                                         <div class="flex items-center space-x-4">
-                                            <a href="{{route('employees.edit',['employee' => $employee])}}"
+                                            <a href="{{ route('admin.employees.edit', ['employee' => $employee]) }}"
                                                 class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20"
+                                                    fill="currentColor" aria-hidden="true">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                                     <path fill-rule="evenodd"
                                                         d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                                         clip-rule="evenodd" />
                                                 </svg>
-                                            </a>         
-                                            @include('senac.employee.modal-view-employee')
-                                            @include('senac.employee.modal-confirmation-delete-employee')
+                                            </a>
+                                            @include('senac.employee.employee-view')
+                                            @include('senac.employee.employee-delete')
                                         </div>
                                     </td>
                                 </div>
@@ -160,7 +163,4 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-        @vite('resources/js/modal-delete.js')
-    @endpush
 @endsection

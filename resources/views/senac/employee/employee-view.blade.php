@@ -1,6 +1,6 @@
 <div x-data="{ modelOpen: false }">
     <button @click="modelOpen =!modelOpen"
-        class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white border-gray-200 hover:bg-yellow-500  focus:z-10 focus:ring-4 focus:ring-gray-200"
+        class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4 focus:ring-gray-200"
         title="Visualizar">
         <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-4 h-4">
             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -9,23 +9,21 @@
         </svg>
     </button>
 
-    <div x-show="modelOpen" class="fixed w-screen md:top-5 inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
-        role="dialog" aria-modal="true">
-        <div class="flex items-end w-screen justify-center min-h-screen mt-20 h-screen text-center md:items-center sm:block sm:p-0">
-            <div x-cloak @click="modelOpen = false" x-show="modelOpen"
-                x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform"
-                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"></div>
-
+    <div x-show="modelOpen" class="fixed  md:top-5 inset-0 z-10 " aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+            x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"></div>
+        <div class="flex justify-center">
             <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="inline-block w-screen p-8 
-                overflow-hidden text-left transition-all transform my-20 md:my-40 bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+                class="inline-block p-8 w-screen overflow-hidden text-left transition-all transform my-20 sm:w-6/12 md:w-6/12 md:my-40 bg-white md:rounded-lg shadow-xl">
                 <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
                     <h3 class="text-lg font-semibold text-gray-900">Informações do funcionário</h3>
 
@@ -76,8 +74,8 @@
                         </div>
                     </div>
                     <div class="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                        <button  type="reset"
-                            class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+                        <button @click="modelOpen = false" type="reset"
+                            class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-200 focus:z-10">
                             <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
