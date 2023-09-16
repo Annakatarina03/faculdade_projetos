@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,22 +35,22 @@ Route::middleware('auth')->group(function () {
  * @author Rafael Henrique
  */
 
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-Route::get('/employees/{employee}', [EmployeeController::class, 'edit'])->name('employees.edit');
-Route::post('/employees/create', [EmployeeController::class, 'store'])->name('employees.store');
-Route::put('/employees/edit/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
-Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
+Route::get('/admin/employees/{employee}', [EmployeeController::class, 'edit'])->name('admin.employees.edit');
+Route::post('/admin/employees/create', [EmployeeController::class, 'store'])->name('admin.employees.store');
+Route::put('/admin/employees/edit/{employee}', [EmployeeController::class, 'update'])->name('admin.employees.update');
+Route::delete('/admin/employees/{employee}', [EmployeeController::class, 'destroy'])->name('admin.employees.destroy');
 
 /**
  * Restaurants routes
  * @author Rafael Henrique
  */
 
-Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
-Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'edit'])->name('restaurants.edit');
-Route::post('/restaurants/create', [RestaurantController::class, 'store'])->name('restaurants.store');
-Route::put('/restaurants/edit/{restaurant}', [RestaurantController::class, 'update'])->name('restaurants.update');
-Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurants.destroy');
+Route::get('/admin/restaurants', [RestaurantController::class, 'index'])->name('admin.restaurants.index');
+Route::get('/admin/restaurants/{restaurant}', [RestaurantController::class, 'edit'])->name('admin.restaurants.edit');
+Route::post('/admin/restaurants/create', [RestaurantController::class, 'store'])->name('admin.restaurants.store');
+Route::put('/admin/restaurants/edit/{restaurant}', [RestaurantController::class, 'update'])->name('admin.restaurants.update');
+Route::delete('/admin/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('admin.restaurants.destroy');
 
 
 require __DIR__ . '/auth.php';
