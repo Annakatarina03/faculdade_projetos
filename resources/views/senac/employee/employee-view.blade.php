@@ -1,5 +1,5 @@
 <div x-data="{ modelOpen: false }">
-    <button @click="modelOpen =!modelOpen"
+    <button @click=" modelOpen = !modelOpen "
         class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4 focus:ring-gray-200"
         title="Visualizar">
         <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-4 h-4">
@@ -9,13 +9,13 @@
         </svg>
     </button>
 
-    <div x-show="modelOpen" class="fixed  md:top-5 inset-0 z-10 " aria-labelledby="modal-title" role="dialog"
+    <div x-show="modelOpen" class="fixed md:top-5 inset-0" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
-        <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+        <div x-cloak @click=" modelOpen = false" x-show="modelOpen"
             x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"></div>
+            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40 " aria-hidden="true"></div>
         <div class="flex justify-center">
             <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"

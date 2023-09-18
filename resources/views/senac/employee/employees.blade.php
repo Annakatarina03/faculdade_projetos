@@ -163,4 +163,9 @@
             </div>
         </div>
     </section>
+    <script src="{{asset('build/assets/app-9c0f59c5.js')}}">
+
+        
+        console.log('sadas')
+    </script>
 @endsection
