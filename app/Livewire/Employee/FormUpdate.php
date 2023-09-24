@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Employee;
 
+use App\Helpers\Formatter;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
@@ -56,7 +57,7 @@ class FormUpdate extends Component
             'password' =>
             [
                 function ($attribute, $value, $fail) {
-                    if (!empty($value)) {
+                    if (!is_null($value)) {
                         $this->validate([$attribute => 'min:8']);
                     }
                 },
@@ -83,7 +84,7 @@ class FormUpdate extends Component
 
         $updated_employee = $this->employee->update([
             'name' => $this->name,
-            'cpf' => $this->cpf,
+            'cpf' => Formatter::clean($this->cpf),
             'username' => $this->username,
             'wage' => $this->wage,
             'status' => $this->employee->status,
