@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->smallIncrements("id")->comment("Identificador único da categoria");
-            $table->string("description", 45)->comment("Descrição da categoria");
+            $table->string("name", 45)->comment("Nome da categoria");
 
             $table->timestamps();
             $table->softDeletes();
