@@ -29,10 +29,10 @@ class FormCreate extends Component
     ])]
     public string $username;
 
-    #[RuleLivewire(rule: 'required_if:office,disabled', message: [
+    #[RuleLivewire(rule: 'required', message: [
         'office.required' => 'Campo obrigatório'
     ])]
-    public $office = "disabled";
+    public $office = '';
 
     #[RuleLivewire(rule: 'required', message: [
         'wage.required' => 'Campo obrigatório'

@@ -115,7 +115,7 @@
                         'w-full',
                         'p-2.5',
                     ])>
-                        <option value="disabled" disabled>Selecione o cargo</option>
+                        <option value='' disabled>Selecione o cargo</option>
                         @foreach ($positions as $position)
                             <option id="{{ $position->slug }}">{{ $position->description }}</option>
                         @endforeach
