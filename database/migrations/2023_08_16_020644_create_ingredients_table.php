@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->integerIncrements("id")->comment("Identificador único do ingrediente");
-            $table->string("name", 45)->nullable(false)->comment("Nome do ingrediente");
-            $table->string("description", 45)->nullable()->comment("Descrição do ingrediente");
+            $table->string("name", 45)->unique()->nullable(false)->comment("Nome do ingrediente");
+            $table->string("description", 100)->nullable()->comment("Descrição do ingrediente");
 
             $table->timestamps();
             $table->softDeletes();
