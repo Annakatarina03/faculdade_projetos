@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Formatter;
+use App\Helpers\Formatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -77,7 +77,7 @@ class Employee extends Authenticatable
             ->withTimestamps();
     }
 
-    public function getCpfAttribute(string $value): string
+    public function getCpfAttribute(string $value)
     {
         return Formatter::formatCPF($value);
     }
