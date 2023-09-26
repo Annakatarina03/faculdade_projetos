@@ -7,6 +7,7 @@ class Formatter
 
     private static $CPF_LENGHT = 11;
     private static $ISBN13_LENGHT = 13;
+    private static $RESTAURANT_PHONE = 10;
 
     public static function formatCPF(string $value): string|null
     {
@@ -29,6 +30,15 @@ class Formatter
             return preg_replace("/(\d{3})(\d{1})(\d{6})(\d{2})(\d{1})/", "\$1-\$2-\$3-\$4-\$5", $cleanISBN13);
         }
 
+        return null;
+    }
+
+    public static function formatRestaurantPhone(string $value): string|null
+    {
+        $cleanRestaurantPhone = Formatter::clean($value);
+        if (strlen($cleanRestaurantPhone) === Formatter::$RESTAURANT_PHONE) {
+            return preg_replace("/(\d{2})(\d{4})(\d{4})/", "($1) \$2-\$3", $cleanRestaurantPhone);
+        }
         return null;
     }
 
