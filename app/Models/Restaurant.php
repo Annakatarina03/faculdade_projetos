@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\Formatter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -33,5 +35,20 @@ class Restaurant extends Model
         return $this->belongsToMany(Employee::class, 'employees_restaurant')
             ->withPivot(['date_entry', 'resignation_date'])
             ->withTimestamps();
+    }
+
+    public function getContactAttribute($value)
+    {
+        return Formatter::formatRestaurantPhone($value);
+    }
+
+    public function getCreatedAtAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i:s');
     }
 }

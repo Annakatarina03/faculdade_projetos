@@ -13,7 +13,7 @@ class Category extends Model
     use SoftDeletes;
 
     protected $casts = [
-        'description' => 'string'
+        'name' => 'string'
     ];
 
     protected $fillable = [

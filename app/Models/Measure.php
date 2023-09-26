@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,11 +13,11 @@ class Measure extends Model
     use SoftDeletes;
 
     protected $casts = [
-        'description' => 'string'
+        'name' => 'string'
     ];
 
     protected $fillable = [
-        'description'
+        'name'
     ];
 
     protected $guarded = [
@@ -24,4 +25,15 @@ class Measure extends Model
     ];
 
     public $timestamp = true;
+
+
+    public function getCreatedAtAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i:s');
+    }
 }
