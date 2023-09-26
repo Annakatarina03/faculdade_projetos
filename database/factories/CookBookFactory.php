@@ -22,7 +22,7 @@ class CookBookFactory extends Factory
             'title' => $this->faker->streetName,
             'isbn' => $this->faker->isbn13,
             'editor_id' => Employee::whereHas('office', fn ($office) => $office
-                ->where('description', 'Publicador'))
+                ->where('name', 'Publicador'))
                 ->inRandomOrder()
                 ->value('id'),
         ];
