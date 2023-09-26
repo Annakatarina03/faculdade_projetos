@@ -16,7 +16,7 @@ class FormUpdate extends Component
 
     public string $name;
 
-    public string $description;
+    public string|null $description;
 
     public Office $office;
 

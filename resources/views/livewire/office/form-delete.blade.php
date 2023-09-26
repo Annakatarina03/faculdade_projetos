@@ -25,7 +25,7 @@
                 Cancelar
             </button>
             @if (!$is_employees)
-                <button wire:click="delete" @disabled($is_employees) @class([
+                <button wire:click="delete({{ $office }})" @class([
                     'py-2',
                     'px-3',
                     'text-sm',

@@ -20,7 +20,7 @@ class Index extends Component
 
         $positions = Office::where('name', 'like', "%$this->search%")
             ->orderBy('name')
-            ->paginate(5);
+            ->paginate(5)->onEachSide(0);
 
         return view('livewire.office.index', compact(['positions']));
     }

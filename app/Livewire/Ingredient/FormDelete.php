@@ -16,19 +16,19 @@ class FormDelete extends Component
 
     public function mount($id = null): void
     {
-        $ingredient = Ingredient::where('id', $id)->first();
+        $ingredient = Ingredient::find($id);
 
         $this->ingredient = $ingredient;
     }
 
-    public function delete(): Redirector
+    public function delete(Ingredient $ingredient): Redirector
     {
 
-        if (!$this->ingredient) {
+        if (!$ingredient) {
             return redirect('admin/ingredients')->with('error', 'Ingrediente não registrado');
         }
 
-        $ingredient_disabled = $this->ingredient->delete();
+        $ingredient_disabled = $ingredient->delete();
 
         if ($ingredient_disabled) {
             return redirect('admin/ingredients')->with('success', 'Ingrediente excluído com sucesso');

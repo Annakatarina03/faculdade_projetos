@@ -21,14 +21,14 @@ class FormDelete extends Component
         $this->restaurant = $restaurant;
     }
 
-    public function delete(): Redirector
+    public function delete(Restaurant $restaurant): Redirector
     {
 
-        if (!$this->restaurant) {
+        if (!$restaurant) {
             return redirect('admin/restaurants')->with('error', 'Restaurante não registrado');
         }
 
-        $restaurant_disabled = $this->restaurant->delete();
+        $restaurant_disabled = $restaurant->delete();
 
         if ($restaurant_disabled) {
             return redirect('admin/restaurants')->with('success', 'Restaurante excluído com sucesso');

@@ -16,19 +16,18 @@ class FormDelete extends Component
 
     public function mount($id = null): void
     {
-        $measure = Measure::where('id', $id)->first();
-
+        $measure = Measure::find($id);
         $this->measure = $measure;
     }
 
-    public function delete(): Redirector
+    public function delete(Measure $measure): Redirector
     {
 
-        if (!$this->measure) {
+        if (!$measure) {
             return redirect('admin/measures')->with('error', 'Medida não registrada');
         }
 
-        $measure_disabled = $this->measure->delete();
+        $measure_disabled = $measure->delete();
 
         if ($measure_disabled) {
             return redirect('admin/measures')->with('success', 'Medida excluída com sucesso');

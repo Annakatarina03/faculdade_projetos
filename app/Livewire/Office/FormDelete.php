@@ -15,29 +15,32 @@ class FormDelete extends Component
     public Office $office;
     public bool $is_employees;
 
-    public function mount($id = null): void
+    public function mount($id): void
     {
-        $office = Office::where('id', $id)->first();
-        $this->office = $office;
+        $this->office = Office::find($id);
         $this->is_employees = !empty($this->office->employees()->get()->toArray());
     }
 
-    public function delete(): Redirector
+    public function delete(Office $office): Redirector
     {
 
-        if (!$this->office) {
-            return redirect('admin/positions')->with('error', 'Cargo não registrado');
+        if (!$office) {
+            return redirect('admin/positions')
+                ->with('error', 'Cargo não registrado');
         }
 
 
         if ($this->is_employees) {
-            return redirect('admin/positions')->with('error', 'Existe funcionários vinculados a esse cargo');
+            return redirect('admin/positions')
+                ->with('error', 'Existe funcionários vinculados a esse cargo');
         }
 
-        // $office_disabled = $this->office->delete();
 
-        if (true) {
-            return redirect('admin/positions')->with('success', 'Cargo excluído com sucesso');
+        $office_disabled = $office->delete();
+
+        if ($office_disabled) {
+            return redirect('admin/positions')
+                ->with('success', 'Cargo excluído com sucesso');
         }
 
         return redirect('admin/positions')->with('error', 'Erro na exclusão do cargo');
