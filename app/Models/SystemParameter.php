@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SystemParameter extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $casts = [
         'month_production' => 'integer',
