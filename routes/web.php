@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\MeasureController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,11 +40,34 @@ Route::middleware('auth')->group(function () {
  */
 
 Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
+
 /**
  * Restaurants routes
  * @author Rafael Henrique
  */
 
 Route::get('/admin/restaurants', [RestaurantController::class, 'index'])->name('admin.restaurants.index');
+
+/**
+ * Measures routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/admin/measures', [MeasureController::class, 'index'])->name('admin.measures.index');
+
+/**
+ * Ingredients routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/admin/ingredients', [IngredientController::class, 'index'])->name('admin.ingredients.index');
+
+/**
+ * Positions routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/admin/positions', [OfficeController::class, 'index'])->name('admin.positions.index');
+
 
 require __DIR__ . '/auth.php';
