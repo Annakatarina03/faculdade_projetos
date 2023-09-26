@@ -15,18 +15,17 @@ return new class extends Migration
             $table->bigIncrements('id')->comment('Identificador único do funcionário');
             $table->string('name', 45)->comment('Nome do funcionário');
             $table->string('username', 45)->unique()->comment('Usuário do funcionário');
-            $table->char('cpf', 11)->comment('CPF do funcionário');
+            $table->char('cpf', 11)->unique()->comment('CPF do funcionário');
             $table->string('fantasy_name', 45)->nullable()->comment('Nome fantasia do funcionário');
             $table->string('password', 255)->comment('Senha de acesso do usuário do funcionário');
             $table->date('date_entry')->comment('Data de admissão do funcionário');
             $table->decimal('wage', 9, 2)->comment('Salário do funcionário');
             $table->boolean('status')->default(true)->comment('Status do usuário do funcionário');
 
-            $table->unsignedSmallInteger('office_id')->comment('Referência ao identificador único do cargo do funcionário');
+            $table->unsignedSmallInteger('office_id')->nullable()->comment('Referência ao identificador único do cargo do funcionário');
             $table->foreign('office_id')->references('id')->on('positions')->onDelete('restrict')->onUpdate('cascade');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
