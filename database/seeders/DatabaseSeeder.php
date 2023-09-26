@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $restaurants = Restaurant::factory(8)
             ->create();
 
-        $employees = Employee::factory(30)
+        $employees = Employee::factory(45)
             ->create();
 
         $revenues = Revenue::factory()

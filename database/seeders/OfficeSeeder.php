@@ -18,7 +18,7 @@ class OfficeSeeder extends Seeder
 
         foreach ($positions as $office) {
             Office::create([
-                'description' => $office,
+                'name' => $office,
                 'slug' => Str::slug($office)
             ]);
         }

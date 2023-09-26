@@ -17,7 +17,7 @@ class MeasureSeeder extends Seeder
 
         foreach ($measures as $measure) {
             Measure::create([
-                'description' => $measure
+                'name' => $measure
             ]);
         }
     }
