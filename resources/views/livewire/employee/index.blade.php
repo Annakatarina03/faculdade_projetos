@@ -10,8 +10,6 @@
                         class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between sm:mx-0 py-4">
                         <div class="w-full md:w-3/12">
                             <form>
-                                <label for="default-search"
-                                    class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                                 <div class="relative flex gap-2">
                                     <input type="search" id="search" name="search" wire:model.live="search"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
@@ -58,7 +56,7 @@
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                Adicionar funcionário
+                                Registrar funcionário
                             </button>
                         </div>
                     </div>
@@ -70,6 +68,7 @@
                                 <th scope="col" class="p-4 w-10"></th>
                                 <th scope="col" class="p-4 w-40 text-center">Nome</th>
                                 <th scope="col" class="p-4 text-center">CPF</th>
+                                <th scope="col" class="p-4 text-center">Status</th>
                                 <th scope="col" class="p-4 w-40 text-center">Última atualização</th>
                                 <th scope="col" class="p-4 w-40"></th>
                             </tr>
@@ -81,14 +80,14 @@
                                     <td class="px-4 py-3 w-full justify-center flex items-center whitespace-nowrap">
                                         <div class="flex items-center justify-sttart w-72">
                                             <div class="flex py-1.5 items-center gap-3 mr-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-gray-900"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-blue-800"
                                                     viewBox="0 0 512 512">
                                                     <path
                                                         d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
                                                 </svg>
                                             </div>
                                             <span
-                                                class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">
+                                                class="bg-blue-100 text-blue-800 text-sm font-medium px-2 py-0.5 rounded">
                                                 {{ $employee->name }}
                                             </span>
                                         </div>
@@ -96,6 +95,21 @@
                                     <td scope="row" class="font-medium w-40 text-gray-900 whitespace-nowrap">
                                         <div class="flex justify-center">
                                             {{ $employee->cpf }}
+                                        </div>
+                                    </td>
+                                    <td scope="row" class="font-medium w-40 text-gray-900 whitespace-nowrap">
+                                        <div class="flex justify-center">
+                                            <span
+                                                @class([
+                                                    'w-14',
+                                                    'font-bold',
+                                                    'text-xs',
+                                                    'text-center',
+                                                    'rounded-lg',
+                                                    'text-white',
+                                                    'bg-green-600' => $employee->status,
+                                                    'bg-red-600' => !$employee->status,
+                                                ])>{{ $employee->status ? 'Ativo' : 'Inativo' }}</span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
@@ -148,12 +162,12 @@
                 </div>
                 <div class="grid grid-cols-1 gap-4 md:hidden">
                     @foreach ($employees as $employee)
-                        <div class="p-4 uppercase bg-gray-50 space-y-3">
+                        <div class="p-4 bg-gray-50 space-y-3">
                             <div>
                                 <div>
                                     <div class="px-1 py-1 flex items-center whitespace-nowrap">
                                         <div class="flex items-center gap-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-gray-900"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-blue-800"
                                                 viewBox="0 0 512 512">
                                                 <path
                                                     d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
@@ -172,6 +186,20 @@
                                         }).mask($refs.input_mobile)" x-ref="input_mobile">
                                         {{ $employee->cpf }}
                                     </span>
+                                </div>
+                                <div class=" py-1 flex items-center whitespace-nowrap">
+                                    <span
+                                        @class([
+                                            'w-14',
+                                            'font-bold',
+                                            'px-1',
+                                            'text-xs',
+                                            'text-center',
+                                            'rounded-lg',
+                                            'text-white',
+                                            'bg-green-500' => $employee->status,
+                                            'bg-red-500' => !$employee->status,
+                                        ])>{{ $employee->status ? 'Ativo' : 'Inativo' }}</span>
                                 </div>
                                 <div class="px-1 py-1 font-medium text-gray-900 w-40 whitespace-nowrap">
                                     <span class="flex items-center">

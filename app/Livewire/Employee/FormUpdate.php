@@ -6,7 +6,10 @@ use App\Helpers\Formatter;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 use Livewire\Attributes\Rule as RuleLivewire;
 use Livewire\Component;
 
@@ -19,9 +22,6 @@ class FormUpdate extends Component
     ])]
     public string $name;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'required' => 'Campo obrigatório',
-    ])]
     public string $cpf;
 
     #[RuleLivewire(rule: 'required', message: [
@@ -29,10 +29,7 @@ class FormUpdate extends Component
     ])]
     public string $username;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'required' => 'Campo obrigatório'
-    ])]
-    public string $office;
+    public string $office = '';
 
     #[RuleLivewire(rule: 'required', message: [
         'required' => 'Campo obrigatório'
@@ -43,9 +40,11 @@ class FormUpdate extends Component
         'required' => 'Campo obrigatório',
         'before_or_equal' => 'Data inválida'
     ])]
-    public $date_entry;
+    public string $date_entry;
 
-    public $password = null;
+    public string $password = '';
+
+    public bool $status;
 
     public Employee $employee;
 
@@ -53,11 +52,11 @@ class FormUpdate extends Component
     public function rules(): array
     {
         return [
-            'name' => ['required'],
+            'cpf' => ['required', Rule::unique('employees', 'cpf')->ignore($this->employee->id), 'min:11'],
             'password' =>
             [
                 function ($attribute, $value, $fail) {
-                    if (!is_null($value)) {
+                    if (!empty($value)) {
                         $this->validate([$attribute => 'min:8']);
                     }
                 },
@@ -68,18 +67,19 @@ class FormUpdate extends Component
     public function messages(): array
     {
         return [
-            'name.required' => 'Campo obrigatório',
+            'cpf.required' => 'Campo obrigatório',
+            'cpf.unique' => 'CPF já registrado',
+            'cpf.min' => 'CPF inválido',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres'
         ];
     }
 
 
-    public function update()
+    public function update(): Redirector
     {
-
         $this->validate();
 
-        $employee_office = Office::where('description', $this->office)->first();
+        $employee_office = Office::where('name', $this->office)->first();
         $this->employee->office()->associate($employee_office);
 
         $updated_employee = $this->employee->update([
@@ -89,14 +89,15 @@ class FormUpdate extends Component
             'wage' => $this->wage,
             'status' => $this->employee->status,
             'date_entry' => $this->date_entry,
-            'password' => $this->password ? Hash::make($this->password) : $this->employee->password
+            'password' => $this->password ? Hash::make($this->password) : $this->employee->password,
+            'status' => $this->status
         ]);
 
         if ($updated_employee) {
-            return redirect('admin/employees')->with('success', 'Registro atualizado com sucesso');
+            return redirect('admin/employees')->with('success', 'Funcionário atualizado com sucesso');
         }
 
-        return redirect('admin/employees')->with('error', 'Erro na atualização do registro');
+        return redirect('admin/employees')->with('error', 'Erro na atualização do funcionário');
     }
 
     public function mount($id = null)
@@ -105,19 +106,20 @@ class FormUpdate extends Component
         $employee = Employee::where('id', $id)->first();
 
         if (!$employee) {
-            return redirect('admin/employees')->with('error', 'Funcionário não existe');
+            return redirect('admin/employees')->with('error', 'Funcionário não registrado');
         }
 
         $this->employee = $employee;
         $this->name = $employee->name;
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
-        $this->office = $employee->office->description;
+        $this->office = $employee->office ? $employee->office->name : $this->office;
         $this->wage = $employee->wage;
         $this->date_entry = $employee->date_entry;
+        $this->status = $employee->status;
     }
 
-    public function render()
+    public function render(): View
     {
         $positions = Office::all();
         $employee = $this->employee;

@@ -14,17 +14,12 @@ class Index extends Component
     use WithPagination;
     use WithModal;
 
-    public $search = '';
+    public string $search = '';
 
     public function render()
     {
         $positions = Office::all();
-
-
-        $employees = Employee::where([
-            ['status', true],
-            ['name', 'like', "%$this->search%"]
-        ])
+        $employees = Employee::where([['name', 'like', "%$this->search%"]])
             ->orderBy('name')
             ->paginate(5)->onEachSide(0);
 
