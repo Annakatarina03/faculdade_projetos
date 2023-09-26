@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("contact")->unique()->nullable()->comment("Contato do restaurante");
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

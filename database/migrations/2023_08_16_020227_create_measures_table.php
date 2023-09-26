@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("name", 45)->comment("Nome da medida de um ingrediente");
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->primary(['cookbook_id', 'revenue_id']);
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

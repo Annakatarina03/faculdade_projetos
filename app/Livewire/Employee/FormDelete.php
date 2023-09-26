@@ -16,18 +16,18 @@ class FormDelete extends Component
 
     public function mount($id = null): void
     {
-        $employee = Employee::where('id', $id)->first();
+        $employee = Employee::find($id);
 
         $this->employee = $employee;
     }
 
-    public function delete(): Redirector
+    public function delete(Employee $employee): Redirector
     {
 
-        if (!$this->employee) {
+        if (!$employee) {
             return redirect('admin/employees')->with('error', 'Funcionário não registrado');
         }
-        $employee_disabled = $this->employee->delete();
+        $employee_disabled = $employee->delete();
 
         if ($employee_disabled) {
             return redirect('admin/employees')->with('success', 'Funcionário excluído com sucesso');

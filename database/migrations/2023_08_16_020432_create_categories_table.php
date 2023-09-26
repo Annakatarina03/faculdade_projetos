@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("name", 45)->comment("Nome da categoria");
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

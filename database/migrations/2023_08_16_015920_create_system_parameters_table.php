@@ -18,7 +18,6 @@ return new class extends Migration
             $table->primary(['month_production', 'year_production']);
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

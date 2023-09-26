@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("description", 100)->nullable()->comment("Descrição do ingrediente");
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

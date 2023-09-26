@@ -30,7 +30,6 @@ return new class extends Migration
             $table->unique(['name', 'chef_id']);
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
