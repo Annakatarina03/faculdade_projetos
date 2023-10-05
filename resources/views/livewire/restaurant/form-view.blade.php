@@ -9,7 +9,8 @@
                 <div class="pb-2.5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
                     <input type="text" name="name" wire:model.live="name" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -23,7 +24,7 @@
                         'p-2.5',
                         'cursor-not-allowed',
                     ])
-                        placeholder="Nome do funcionário" disabled>
+                        disabled>
                 </div>
                 @error('name')
                     <div class="absolute bottom-0 flex gap-1 items-center">
@@ -43,7 +44,8 @@
                         'autoUnmask': true,
                     }).mask($refs.input)" x-ref="input" name="contact"
                         wire:model.live="contact" @class([
-                            'bg-gray-50',
+                            'bg-[#EEE]',
+                            'shadow-inner',
                             'mb-2',
                             'border-1',
                             'border-gray-300',
@@ -55,10 +57,8 @@
                             'block',
                             'w-full',
                             'p-2.5',
-                        
                             'cursor-not-allowed',
-                        ]) placeholder="Contato do restaurante"
-                        disabled>
+                        ]) disabled>
                 </div>
 
                 @error('contact')

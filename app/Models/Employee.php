@@ -14,8 +14,16 @@ class Employee extends Authenticatable
 {
     use HasFactory;
 
-    protected $guarded = [
-        'id',
+
+    protected $casts = [
+        'name' => 'string',
+        'username' => 'string',
+        'cpf' => 'string',
+        'fantasy_name' => 'string',
+        'wage' => 'double',
+        'password' => 'string',
+        'office_id' => 'integer',
+        'status' => 'bool'
     ];
 
     protected $fillable = [
@@ -35,15 +43,8 @@ class Employee extends Authenticatable
         'remember_token',
     ];
 
-    protected $casts = [
-        'name' => 'string',
-        'username' => 'string',
-        'cpf' => 'string',
-        'fantasy_name' => 'string',
-        'wage' => 'integer',
-        'password' => 'string',
-        'office_id' => 'integer',
-        'status' => 'bool'
+    protected $guarded = [
+        'id',
     ];
 
     public function office(): BelongsTo

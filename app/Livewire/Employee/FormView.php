@@ -19,7 +19,7 @@ class FormView extends Component
 
     public string $username;
 
-    public string $office = '';
+    public ?string $office = '';
 
     public string $wage;
 
@@ -37,7 +37,7 @@ class FormView extends Component
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
         $this->office = $employee->office ? $employee->office->name : $this->office;
-        $this->wage = $employee->wage;
+        $this->wage = str_replace('.', ',', $employee->wage);
         $this->date_entry = $employee->date_entry;
         $this->status = $employee->status;
     }

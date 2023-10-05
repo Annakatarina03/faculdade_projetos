@@ -144,11 +144,11 @@
                     <input type="text" x-data x-init="Inputmask({
                         'alias': 'numeric',
                         'autoUnmask': true,
-                        'radixPoint': '.',
-                        'groupSeparator': ',',
+                        'radixPoint': ',',
+                        'groupSeparator': '.',
                         'autoGroup': true,
                         'digits': 2,
-                        'digitsOptional': true,
+                        'digitsOptional': false,
                         'prefix': 'R$ ',
                         'max': '1000000',
                         'rightAlign': false
@@ -248,16 +248,14 @@
                         <div class="flex items-center">
                             <input id="active" type="radio" wire:model.live="status"
                                 value="{{ true }}" name="status"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="active"
-                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sim</label>
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="active" class="ml-2 text-sm font-medium text-gray-900">Sim</label>
                         </div>
                         <div class="flex items-center">
                             <input id="disable" type="radio" wire:model.live="status"
                                 value="{{ false }}" name="status"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="disable"
-                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não</label>
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="disable" class="ml-2 text-sm font-medium text-gray-900">Não</label>
                         </div>
                     </div>
                 </div>

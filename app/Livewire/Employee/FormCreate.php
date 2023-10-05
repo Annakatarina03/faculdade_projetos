@@ -33,7 +33,7 @@ class FormCreate extends Component
     ])]
     public string $username;
 
-    public string $office = '';
+    public ?string $office = '';
 
     #[RuleLivewire(rule: 'required', message: [
         'wage.required' => 'Campo obrigatório'
@@ -71,7 +71,7 @@ class FormCreate extends Component
                 'name' => $this->name,
                 'cpf' => $this->cpf,
                 'username' => $this->username,
-                'wage' => $this->wage,
+                'wage' => str_replace(',', '.', $this->wage),
                 'date_entry' => $this->date_entry,
                 'password' => Hash::make($this->password),
             ]);
@@ -80,7 +80,7 @@ class FormCreate extends Component
                 'name' => $this->name,
                 'cpf' => $this->cpf,
                 'username' => $this->username,
-                'wage' => $this->wage,
+                'wage' => str_replace(',', '.', $this->wage),
                 'date_entry' => $this->date_entry,
                 'password' => Hash::make($this->password),
             ]);

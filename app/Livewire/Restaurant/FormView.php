@@ -14,7 +14,7 @@ class FormView extends Component
 
     public string $name;
 
-    public string|null $contact;
+    public ?string $contact;
 
     public Restaurant $restaurant;
 

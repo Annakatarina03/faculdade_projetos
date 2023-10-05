@@ -145,11 +145,11 @@
                     <input type="text" x-data x-init="Inputmask({
                         'alias': 'numeric',
                         'autoUnmask': true,
-                        'radixPoint': '.',
-                        'groupSeparator': ',',
+                        'radixPoint': ',',
+                        'groupSeparator': '.',
                         'autoGroup': true,
                         'digits': 2,
-                        'digitsOptional': true,
+                        'digitsOptional': false,
                         'prefix': 'R$ ',
                         'max': '1000000',
                         'rightAlign': false

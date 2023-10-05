@@ -9,7 +9,8 @@
                 <div class="pb-2.5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
                     <input type="text" name="name" wire:model.live="name" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -22,8 +23,7 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
-                    ])
-                        placeholder="Nome do cargo" disabled>
+                    ]) disabled>
                 </div>
                 @error('name')
                     <div class="absolute bottom-0 flex gap-1 items-center">
@@ -39,7 +39,8 @@
                 <div class="pb-2.5">
                     <label for="descrption" class="block mb-2 text-sm font-medium text-gray-900">Descrição</label>
                     <textarea id="message" id="description" wire:model.live="description" rows="4" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -52,8 +53,9 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
+                        'resize-none',
                     ])
-                        placeholder="Descrição do cargo" disabled></textarea>
+                        disabled></textarea>
                 </div>
 
                 @error('description')

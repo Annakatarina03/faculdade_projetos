@@ -29,7 +29,7 @@ class FormUpdate extends Component
     ])]
     public string $username;
 
-    public string $office = '';
+    public ?string $office = '';
 
     #[RuleLivewire(rule: 'required', message: [
         'required' => 'Campo obrigatório'
@@ -78,7 +78,6 @@ class FormUpdate extends Component
     public function update(): Redirector
     {
         $this->validate();
-
         $employee_office = Office::where('name', $this->office)->first();
         $this->employee->office()->associate($employee_office);
 
@@ -86,7 +85,7 @@ class FormUpdate extends Component
             'name' => $this->name,
             'cpf' => Formatter::clean($this->cpf),
             'username' => $this->username,
-            'wage' => $this->wage,
+            'wage' => str_replace(',', '.', $this->wage),
             'status' => $this->employee->status,
             'date_entry' => $this->date_entry,
             'password' => $this->password ? Hash::make($this->password) : $this->employee->password,
@@ -108,13 +107,12 @@ class FormUpdate extends Component
         if (!$employee) {
             return redirect('admin/employees')->with('error', 'Funcionário não registrado');
         }
-
         $this->employee = $employee;
         $this->name = $employee->name;
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
         $this->office = $employee->office ? $employee->office->name : $this->office;
-        $this->wage = $employee->wage;
+        $this->wage = str_replace('.', ',', $employee->wage);
         $this->date_entry = $employee->date_entry;
         $this->status = $employee->status;
     }

@@ -15,7 +15,7 @@ class FormUpdate extends Component
 
     public string $name;
 
-    public string $description;
+    public ?string $description = null;
 
     public Ingredient $ingredient;
 
@@ -23,7 +23,6 @@ class FormUpdate extends Component
     {
         return [
             'name' => ['required', Rule::unique('ingredients', 'name')->ignore($this->ingredient->id)],
-            'description' => ['required']
         ];
     }
 
@@ -32,7 +31,6 @@ class FormUpdate extends Component
         return [
             'name.required' => 'Campo obrigatório',
             'name.unique' => 'Ingrediente já registrado',
-            'description.required' => 'Campo obrigatório',
         ];
     }
 

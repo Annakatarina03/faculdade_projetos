@@ -9,7 +9,8 @@
                 <div class="pb-2.5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
                     <input type="text" name="name" wire:model.live="name" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -22,8 +23,7 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
-                    ])
-                        placeholder="Nome do funcionário" disabled>
+                    ]) disabled>
 
                 </div>
                 @error('name')
@@ -44,7 +44,8 @@
                         'autoUnmask': true,
                     }).mask($refs.input)" x-ref="input" name="cpf"
                         wire:model.live="cpf" @class([
-                            'bg-gray-50',
+                            'bg-[#EEE]',
+                            'shadow-inner',
                             'mb-2',
                             'border-1',
                             'border-gray-300',
@@ -57,8 +58,7 @@
                             'w-full',
                             'p-2.5',
                             'cursor-not-allowed',
-                        ]) placeholder="CPF do funcionário"
-                        disabled>
+                        ]) disabled>
 
                 </div>
                 @error('cpf')
@@ -76,7 +76,8 @@
                 <div class="pb-2.5">
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
                     <input type="text" name="username" wire:model.live="username" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -90,7 +91,7 @@
                         'p-2.5',
                         'cursor-not-allowed',
                     ])
-                        placeholder="Usuário do funcionário" disabled>
+                        disabled>
 
                 </div>
                 @error('username')
@@ -106,8 +107,9 @@
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
                     <label for="office" class="block mb-2 text-sm font-medium text-gray-900">Cargo</label>
-                    <select name="office" wire:model.live="office" @class([
-                        'bg-gray-50',
+                    <input type="text" name="office" wire:model.live="office" @class([
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -120,13 +122,8 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
-                    ]) disabled>
-                        <option value="">Sem cargo</option>
-                        @foreach ($positions as $position)
-                            <option {{ $position->name === $office }}>
-                                {{ $position->name }}</option>
-                        @endforeach
-                    </select>
+                    ])
+                        disabled>
                 </div>
                 @error('office')
                     <div class="absolute bottom-0 flex gap-1 items-center">
@@ -144,17 +141,18 @@
                     <input type="text" x-data x-init="Inputmask({
                         'alias': 'numeric',
                         'autoUnmask': true,
-                        'radixPoint': '.',
-                        'groupSeparator': ',',
+                        'radixPoint': ',',
+                        'groupSeparator': '.',
                         'autoGroup': true,
                         'digits': 2,
-                        'digitsOptional': true,
+                        'digitsOptional': false,
                         'prefix': 'R$ ',
                         'max': '1000000',
                         'rightAlign': false
                     }).mask($refs.input)" x-ref="input" name="wage"
                         wire:model.live="wage" @class([
-                            'bg-gray-50',
+                            'bg-[#EEE]',
+                            'shadow-inner',
                             'mb-2',
                             'border-1',
                             'border-gray-300',
@@ -167,7 +165,7 @@
                             'w-full',
                             'p-2.5',
                             'cursor-not-allowed',
-                        ]) placeholder="R$" disabled>
+                        ]) disabled>
 
                 </div>
                 @error('wage')
@@ -186,7 +184,8 @@
                         admissão</label>
                     <input wire:model.live="date_entry" type="date" max="{{ date('Y-m-d') }}"
                         @class([
-                            'bg-gray-50',
+                            'bg-[#EEE]',
+                            'shadow-inner',
                             'mb-2',
                             'border-1',
                             'border-gray-300',
@@ -212,22 +211,24 @@
                 @enderror
             </div>
             <div class="relative md:grid md:col-span-4">
-                <div class="flex gap-3">
-                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">Ativo:</label>
-                    <div class="flex flex-col gap-1">
+                <div class="flex gap-2">
+                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">Status:</label>
+                    <div class="flex flex-col">
                         <div class="flex items-center">
-                            <input id="active" type="radio" wire:model.live="status" disabled
-                                value="{{ true }}" name="status"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="active"
-                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sim</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="disable" type="radio" wire:model.live="status" disabled
-                                value="{{ false }}" name="status"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="disable"
-                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não</label>
+                            <span @class([
+                                'w-2',
+                                'h-2',
+                                'rounded-full',
+                                $status ? 'bg-green-700' : 'bg-red-700',
+                            ])></span>
+                            <label for="active" @class([
+                                'ml-2',
+                                'text-sm',
+                                'font-bold',
+                                $status ? 'text-green-700' : 'text-red-700',
+                            ])>
+                                {{ $status ? 'Ativo' : 'Inativo' }}
+                            </label>
                         </div>
                     </div>
                 </div>

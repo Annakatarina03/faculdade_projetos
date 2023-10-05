@@ -24,7 +24,7 @@ class FormCreate extends Component
         'contact.required' => 'Campo obrigatório',
         'contact.min' => 'Contato inválido'
     ])]
-    public string $contact;
+    public ?string $contact;
 
     public function create(): Redirector
     {

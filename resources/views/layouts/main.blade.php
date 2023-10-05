@@ -127,6 +127,22 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="w-full pl-8">
+
+                            <a href="{{ url('admin/categories') }}"
+                                class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/categories') ? 'active' : '' }}">
+                                <div class="dashboard-nav-dropdown-item-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
+                                        viewBox="0 0 448 512">
+                                        <path
+                                            d="M0 80V229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7H48C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                    </svg>
+                                </div>
+                                <div class="row-text-link flex w-[120px]">
+                                    Categorias
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

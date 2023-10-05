@@ -4,7 +4,7 @@
             <h4 class="text-lg font-semibold text-gray-900 text-center">Confirmação de exclusão</h3>
         </div>
         <div class="flex justify-center  rounded-t">
-            <p class="mb-4 text-gray-500 dark:text-gray-300">Você deseja mesmo excluir esse funcionário?</p>
+            <p class="mb-4 text-gray-500">Você deseja mesmo excluir esse funcionário?</p>
         </div>
     </div>
     <div class="relative p-4 text-center bg-white sm:p-5">

@@ -9,7 +9,8 @@
                 <div class="pb-2.5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
                     <input type="text" name="name" wire:model.live="name" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -23,7 +24,7 @@
                         'p-2.5',
                         'cursor-not-allowed',
                     ])
-                        placeholder="Nome do ingrediente" disabled>
+                        disabled>
                 </div>
                 @error('name')
                     <div class="absolute bottom-0 flex gap-1 items-center">
@@ -39,7 +40,8 @@
                 <div class="pb-2.5">
                     <label for="descrption" class="block mb-2 text-sm font-medium text-gray-900">Descrição</label>
                     <textarea id="message" id="description" wire:model.live="description" rows="4" @class([
-                        'bg-gray-50',
+                        'bg-[#EEE]',
+                        'shadow-inner',
                         'mb-2',
                         'border-1',
                         'border-gray-300',
@@ -52,8 +54,9 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
+                        'resize-none',
                     ])
-                        placeholder="Descrição do ingrediente" disabled></textarea>
+                        disabled></textarea>
                 </div>
 
                 @error('description')
@@ -70,7 +73,7 @@
         </div>
         <div class="items-center sm:flex py-4 gap-2">
             <button wire:click.prevent='closeModal'
-                class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
+                class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
                 <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
