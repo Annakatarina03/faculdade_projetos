@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->smallIncrements("id")->comment("Identificador único da categoria");
-            $table->string("name", 45)->comment("Nome da categoria");
+            $table->smallIncrements('id')->comment('Identificador único da categoria');
+            $table->string('name', 45)->comment('Nome da categoria');
 
             $table->timestamps();
         });

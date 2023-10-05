@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('measures', function (Blueprint $table) {
-            $table->smallIncrements("id")->comment("Identificador único da medida de um ingrediente");
-            $table->string("name", 45)->comment("Nome da medida de um ingrediente");
+            $table->smallIncrements('id')->comment('Identificador único da medida de um ingrediente');
+            $table->string('name', 45)->comment('Nome da medida de um ingrediente');
 
             $table->timestamps();
         });

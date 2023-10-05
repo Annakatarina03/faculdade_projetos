@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->integerIncrements("id")->comment("Identificador único do restaurante");
-            $table->string("name", 45)->unique()->comment("Nome do restaurante");
-            $table->string("contact")->unique()->nullable()->comment("Contato do restaurante");
+            $table->integerIncrements('id')->comment('Identificador único do restaurante');
+            $table->string('name', 45)->unique()->comment('Nome do restaurante');
+            $table->string('contact')->unique()->nullable()->comment('Contato do restaurante');
 
             $table->timestamps();
         });

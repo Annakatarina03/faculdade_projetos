@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees_restaurant', function (Blueprint $table) {
-            $table->unsignedBigInteger("employee_id")->nullable()->comment("Referência ao identificador único do funcionário");
-            $table->foreign("employee_id")->references("id")->on("employees")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger('employee_id')->nullable()->comment('Referência ao identificador único do funcionário');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->unsignedInteger("restaurant_id")->comment("Referência ao identificador único do restaurante");
-            $table->foreign("restaurant_id")->references("id")->on("restaurants")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedInteger('restaurant_id')->comment('Referência ao identificador único do restaurante');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->date("date_entry")->comment("Data de admissão do funcionário em determinado restaurante");
-            $table->date("resignation_date")->nullable()->comment("Data de demissão do funcionário em determinado restaurante");
+            $table->date('date_entry')->comment('Data de admissão do funcionário em determinado restaurante');
+            $table->date('resignation_date')->nullable()->comment('Data de demissão do funcionário em determinado restaurante');
 
-            $table->primary(["employee_id", "restaurant_id"]);
+            $table->primary(['employee_id', 'restaurant_id']);
 
             $table->timestamps();
         });

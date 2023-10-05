@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('positions', function (Blueprint $table) {
-            $table->smallIncrements("id")->comment("Identificador único do cargo do funcionário");
-            $table->string("name", 45)->comment("Nome do cargo do funcionário");
-            $table->string("description", 1000)->nullable()->comment("Descrição do cargo do funcionário");
+            $table->smallIncrements('id')->comment('Identificador único do cargo do funcionário');
+            $table->string('name', 45)->comment('Nome do cargo do funcionário');
+            $table->string('description', 1000)->nullable()->comment('Descrição do cargo do funcionário');
             $table->string('slug', 45)->comment('Slug da descrição do cargo');
 
             $table->timestamps();
