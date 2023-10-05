@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MeasureController;
@@ -68,6 +69,13 @@ Route::get('/admin/ingredients', [IngredientController::class, 'index'])->name('
  */
 
 Route::get('/admin/positions', [OfficeController::class, 'index'])->name('admin.positions.index');
+
+/**
+ * Categories routes
+ * @author Rafael Henrique
+ */
+
+Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
 
 
 require __DIR__ . '/auth.php';
