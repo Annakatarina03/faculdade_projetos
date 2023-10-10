@@ -1,13 +1,17 @@
 <div class="min-w-[30vw]">
     <div class="flex py-4 rounded-t border-b">
-        <h3 class="text-lg font-semibold text-gray-900">Informações da categoria</h3>
+        <h3 class="text-lg font-semibold text-gray-900">
+            Informações da categoria
+        </h3>
     </div>
     <form method="POST" class="py-2">
         @csrf
         <div class="grid gap-2 mb-1 md:grid-cols-4">
             <div class="relative md:col-span-4">
                 <div class="pb-2.5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                        Nome
+                    </label>
                     <input type="text" name="name" wire:model.live="name" @class([
                         'bg-[#EEE]',
                         'shadow-inner',

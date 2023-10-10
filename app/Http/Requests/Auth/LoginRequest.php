@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Employee;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -50,11 +51,22 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        $employee = Employee::where('username', $this->request->get('username'))->first();
+
+        if ($employee && !$employee->status) {
+
+            throw ValidationException::withMessages([
+                'username' => 'Usuário ou senha inválidos',
+                'password' => 'Usuário ou senha inválidos',
+            ]);
+        }
+
         if (!Auth::attempt($this->only('username', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'username' => 'Usuário ou senha inválidos',
+                'password' => 'Usuário ou senha inválidos',
             ]);
         }
 

@@ -24,7 +24,6 @@ class FormUpdate extends Component
     {
         return [
             'name' => ['required', Rule::unique('positions', 'name')->ignore($this->office->id)],
-            'description' => ['required'],
         ];
     }
 
@@ -33,7 +32,6 @@ class FormUpdate extends Component
         return [
             'name.required' => 'Campo obrigatório',
             'name.unique' => 'Cargo já registrado',
-            'description.required' => 'Campo obrigatório',
         ];
     }
 

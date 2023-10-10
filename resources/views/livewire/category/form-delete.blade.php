@@ -1,11 +1,13 @@
 <div class="relative w-full p-4 h-full md:h-auto">
     <div>
         <div class="flex justify-center py-2 rounded-t">
-            <h4 class="text-lg font-semibold text-gray-900 text-center">Confirmação de exclusão</h3>
+            <h4 class="text-lg font-semibold text-gray-900 text-center">
+                Confirmação de exclusão
+                </h3>
         </div>
         <div class="flex justify-center  rounded-t">
-            <p class="mb-4 text-gray-500">Você deseja mesmo excluir a categoria
-                <span class="font-bold">{{ $category->name }}</span>?
+            <p class="mb-4 text-gray-500">
+                Você deseja mesmo excluir a categoria <span class="font-bold">{{ $category->name }}</span>?
             </p>
         </div>
         @if ($is_revenues)
@@ -14,7 +16,9 @@
                     <path
                         d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
                 </svg>
-                <p class="text-red-500 font-bold">Existem receitas vinculadas a essa categoria.</p>
+                <p class="text-red-500 font-bold">
+                    Existem receitas vinculadas a essa categoria
+                </p>
             </div>
         @endif
     </div>

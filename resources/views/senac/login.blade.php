@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css'])
-    <title>Document</title>
+    <title>Login</title>
 </head>
 
 <body>
     <section class="min-h-[92.5vh] flex flex-col items-center justify-center bg-[#F4F1E9]">
         <div
-            class="flex flex-col items-center justify-center bg-white py-16 px-20 rounded-xl shadow-[4px_2px_3px_rgba(0,0,0,0.3)]">
+            class="w-screen md:w-auto flex flex-col items-center justify-center bg-white py-16 md:px-20 rounded-xl shadow-[4px_2px_3px_rgba(0,0,0,0.3)]">
             <div>
-                <h1 class="text-3xl font-bold text-[#D1D9DF] ">Sistema de livro
-                    de acervo de receitas</h1>
+                <h1 class="text-xl md:text-3xl font-bold text-[#D1D9DF] ">
+                    Sistema de livro de acervo de receitas
+                </h1>
             </div>
-            <div class="flex items-center">
+            <div class="flex flex-col md:flex-row items-center">
                 <div class="p-8">
-                    <img src="{{ asset('images/logo.png') }}" class="w-80" alt="Sample image">
+                    <img src="{{ asset('images/logo.png') }}" class="w-64 md:w-80" alt="Sample image">
                 </div>
                 <div class="p-8 space-y-8">
                     <div class="flex justify-center">

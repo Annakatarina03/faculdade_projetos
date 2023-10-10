@@ -1,10 +1,14 @@
 <div class="relative w-full p-4 h-full md:h-auto">
     <div>
         <div class="flex justify-center py-2 rounded-t">
-            <h4 class="text-lg font-semibold text-gray-900 text-center">Confirmação de exclusão</h3>
+            <h4 class="text-lg font-semibold text-gray-900 text-center">
+                Confirmação de exclusão
+                </h3>
         </div>
         <div class="flex justify-center  rounded-t">
-            <p class="mb-4 text-gray-500 dark:text-gray-300">Você deseja mesmo excluir esse ingrediente?</p>
+            <p class="mb-4 text-gray-500 dark:text-gray-300">
+                Você deseja mesmo excluir esse ingrediente?
+            </p>
         </div>
     </div>
     <div class="relative p-4 text-center bg-white sm:p-5">

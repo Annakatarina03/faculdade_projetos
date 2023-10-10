@@ -2,7 +2,9 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl text-bold">Ingredientes</span>
+                <span class="text-4xl text-bold">
+                    Ingredientes
+                </span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller

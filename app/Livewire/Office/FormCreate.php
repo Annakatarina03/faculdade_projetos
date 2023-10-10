@@ -21,9 +21,6 @@ class FormCreate extends Component
     ])]
     public string $name;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'description.required' => 'Campo obrigatório',
-    ])]
     public ?string $description;
 
     public function create(): Redirector

@@ -7,8 +7,8 @@
         <div class="grid gap-2 mb-1 md:grid-cols-4">
             <div class="relative md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                        Nome <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="text" name="name" wire:model.live="name" @class([
                         'bg-gray-50',
@@ -38,8 +38,8 @@
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900">CPF
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900">
+                        CPF <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="text" x-data x-init="Inputmask({
                         'mask': '999.999.999-99',
@@ -75,8 +75,8 @@
 
             <div class="relative md:grid md:col-span-4">
                 <div class="pb-2.5">
-                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Usuário
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
+                        Usuário <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="text" name="username" wire:model.live="username" @class([
                         'bg-gray-50',
@@ -106,7 +106,9 @@
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="office" class="block mb-2 text-sm font-medium text-gray-900">Cargo</label>
+                    <label for="office" class="block mb-2 text-sm font-medium text-gray-900">
+                        Cargo
+                    </label>
                     <select name="office" wire:model.live="office" @class([
                         'bg-gray-50',
                         'mb-2',
@@ -121,7 +123,9 @@
                         'w-full',
                         'p-2.5',
                     ])>
-                        <option value='' disabled>Selecione o cargo</option>
+                        <option value='' disabled>
+                            Selecione o cargo
+                        </option>
                         @foreach ($positions as $position)
                             <option id="{{ $position->slug }}">{{ $position->name }}</option>
                         @endforeach
@@ -139,8 +143,8 @@
             </div>
             <div class="relative md:grid md:col-span-1">
                 <div class="pb-2.5">
-                    <label for="wage" class="block mb-2 text-sm font-medium text-gray-900">Salário
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="wage" class="block mb-2 text-sm font-medium text-gray-900">
+                        Salário <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="text" x-data x-init="Inputmask({
                         'alias': 'numeric',
@@ -181,9 +185,8 @@
             </div>
             <div class="relative md:grid md:col-span-1">
                 <div class="pb-2.5">
-                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">Data de
-                        admissão
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">
+                        Data de admissão <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input wire:model.live="date_entry" type="date" max="{{ date('Y-m-d') }}"
                         @class([
@@ -213,8 +216,8 @@
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Senha
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
+                        Senha <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="password" name="password" wire:model.live="password" @class([
                         'bg-gray-50',
@@ -245,10 +248,8 @@
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
 
-                    <label for="password_confirmation"
-                        class="block mb-2 text-sm font-medium text-gray-900">Confirmação da
-                        senha
-                        <span class="text-red-500" title="Campo obrigatório">*</span>
+                    <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900">
+                        Confirmação da senha <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
                     <input type="password" name="password_confirmation" wire:model.live="password_confirmation"
                         @class([
@@ -279,8 +280,9 @@
         </div>
         <div class="items-center sm:flex py-4 gap-2">
             <button type="submit"
-                class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Criar
-                funcionário</button>
+                class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Criar funcionário
+            </button>
             <button wire:click.prevent='closeModal'
                 class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
                 <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"

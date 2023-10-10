@@ -30,52 +30,52 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    /**
+     * Employees routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
+
+    /**
+     * Restaurants routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/restaurants', [RestaurantController::class, 'index'])->name('admin.restaurants.index');
+
+    /**
+     * Measures routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/measures', [MeasureController::class, 'index'])->name('admin.measures.index');
+
+    /**
+     * Ingredients routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/ingredients', [IngredientController::class, 'index'])->name('admin.ingredients.index');
+
+    /**
+     * Positions routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/positions', [OfficeController::class, 'index'])->name('admin.positions.index');
+
+    /**
+     * Categories routes
+     * @author Rafael Henrique
+     */
+
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+
+    Route::get('/profile', function () {
+        return view('senac.employee.profile');
+    })->name('profile');
 });
-
-/**
- * Employees routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
-
-/**
- * Restaurants routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/restaurants', [RestaurantController::class, 'index'])->name('admin.restaurants.index');
-
-/**
- * Measures routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/measures', [MeasureController::class, 'index'])->name('admin.measures.index');
-
-/**
- * Ingredients routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/ingredients', [IngredientController::class, 'index'])->name('admin.ingredients.index');
-
-/**
- * Positions routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/positions', [OfficeController::class, 'index'])->name('admin.positions.index');
-
-/**
- * Categories routes
- * @author Rafael Henrique
- */
-
-Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
-
 
 require __DIR__ . '/auth.php';
