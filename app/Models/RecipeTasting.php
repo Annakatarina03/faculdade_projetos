@@ -12,6 +12,10 @@ class RecipeTasting extends Model
 
     protected $table = 'recipes_tasting';
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function revenue(): HasOne
     {
         return $this->hasOne(Revenue::class, 'id', 'revenue_id');

@@ -1,6 +1,6 @@
 <div x-data="{ modelOpen: @entangle('show').live }">
-    <div x-show="modelOpen" class="fixed md:top-5 inset-0 z-50 overflow-y-auto overflow-x-hidden"
-        aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div x-show="modelOpen" class="fixed  inset-0 z-50 overflow-y-auto overflow-x-hidden" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
         <div class="flex flex-col items-center justify-center min-h-screen px-4 text-center sm:p-0">
             <div x-cloak x-show="modelOpen" wire:click='close()'
                 x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"

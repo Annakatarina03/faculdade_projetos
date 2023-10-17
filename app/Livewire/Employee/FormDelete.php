@@ -12,6 +12,12 @@ class FormDelete extends Component
 {
     use WithModal;
 
+    public bool $is_cook_books;
+
+    public bool $is_revenues;
+
+    public bool $is_tasting_revenues;
+
     public Employee $employee;
 
     public function mount($id = null): void
@@ -19,6 +25,9 @@ class FormDelete extends Component
         $employee = Employee::find($id);
 
         $this->employee = $employee;
+        $this->is_cook_books = !empty($this->employee->cookbooks()->get()->toArray());
+        $this->is_revenues = !empty($this->employee->revenues()->get()->toArray());
+        $this->is_tasting_revenues = !empty($this->employee->tastingRevenues()->get()->toArray());
     }
 
     public function delete(Employee $employee): Redirector
@@ -27,6 +36,18 @@ class FormDelete extends Component
         if (!$employee) {
             return redirect('admin/employees')->with('error', 'Funcionário não registrado');
         }
+
+        if ($this->is_cook_books) {
+            return redirect('admin/employees')
+                ->with('error', 'Existem livros de receitas vinculados a esse editor');
+        } else if ($this->is_revenues) {
+            return redirect('admin/employees')
+                ->with('error', 'Existem receitas vinculadas a esse cozinheiro');
+        } else if ($this->is_tasting_revenues) {
+            return redirect('admin/employees')
+                ->with('error', 'Existem degustações vinculadas a esse degustador');
+        }
+
         $employee_disabled = $employee->delete();
 
         if ($employee_disabled) {

@@ -7,6 +7,8 @@ use App\Http\Controllers\MeasureController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipeTastingController;
+use App\Models\Revenue;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,6 +78,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return view('senac.employee.profile');
     })->name('profile');
+
+    Route::get('/revenues/schedule-tasting', [RecipeTastingController::class, 'index'])->name('tasting.revenues-schedule-tasting');
 });
+
+
 
 require __DIR__ . '/auth.php';

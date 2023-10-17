@@ -40,7 +40,7 @@ class Revenue extends Model
 
     public function chef(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'chef_id');
+        return $this->belongsTo(Employee::class, 'chef_id', 'id');
     }
 
     public function category(): BelongsTo
