@@ -23,16 +23,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('view-admin', function (Employee $employee) {
-            return $employee->office->slug === 'administrador';
-        });
-
-        Gate::define('view-desenvolvedor', function (Employee $employee) {
-            return $employee->office->slug === 'desenvolvedor';
-        });
-
-        Gate::define('view-chefe-de-cozinha', function (Employee $employee) {
-            return $employee->office->slug === 'chefe-de-cozinha';
-        });
+        // 
     }
 }

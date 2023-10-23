@@ -6,12 +6,14 @@ use App\Helpers\Formatter;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Attributes\Rule as RuleLivewire;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
+use Spatie\Permission\Models\Role;
 
 class FormUpdate extends Component
 {
@@ -28,6 +30,8 @@ class FormUpdate extends Component
         'required' => 'Campo obrigatório',
     ])]
     public string $username;
+
+    public array $employeeRoles;
 
     public ?string $office = '';
 
@@ -75,11 +79,13 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
         $this->validate();
-        $employee_office = Office::where('name', $this->office)->first();
+        $employee_office = Office::firstWhere('name', $this->office);
+
         $this->employee->office()->associate($employee_office);
+        $this->employee->syncRoles($this->employeeRoles);
 
         $updated_employee = $this->employee->update([
             'name' => $this->name,
@@ -92,25 +98,33 @@ class FormUpdate extends Component
             'status' => $this->status
         ]);
 
+
         if ($updated_employee) {
-            return redirect('admin/employees')->with('success', 'Funcionário atualizado com sucesso');
+            return redirect()
+                ->route('admin.employees.index')
+                ->with('success', 'Funcionário atualizado com sucesso');
         }
 
-        return redirect('admin/employees')->with('error', 'Erro na atualização do funcionário');
+        return redirect()
+            ->route('admin.employees.index')
+            ->with('error', 'Erro na atualização do funcionário');
     }
 
     public function mount($id = null)
     {
 
-        $employee = Employee::where('id', $id)->first();
+        $employee = Employee::find($id);
 
         if (!$employee) {
-            return redirect('admin/employees')->with('error', 'Funcionário não registrado');
+            return redirect()
+                ->route('admin.employees.index')
+                ->with('error', 'Funcionário não registrado');
         }
         $this->employee = $employee;
         $this->name = $employee->name;
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
+        $this->employeeRoles = $employee->roles->pluck('name')->toArray();
         $this->office = $employee->office ? $employee->office->name : $this->office;
         $this->wage = str_replace('.', ',', $employee->wage);
         $this->date_entry = $employee->date_entry;
@@ -121,6 +135,8 @@ class FormUpdate extends Component
     {
         $positions = Office::all();
         $employee = $this->employee;
-        return view('livewire.employee.form-update', compact(['positions', 'employee']));
+        $roles = Role::all();
+
+        return view('livewire.employee.form-update', compact(['positions', 'employee', 'roles']));
     }
 }

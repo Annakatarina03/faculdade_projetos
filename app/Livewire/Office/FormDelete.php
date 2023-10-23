@@ -4,9 +4,10 @@ namespace App\Livewire\Office;
 
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
@@ -21,17 +22,19 @@ class FormDelete extends Component
         $this->is_employees = !empty($this->office->employees()->get()->toArray());
     }
 
-    public function delete(Office $office): Redirector
+    public function delete(Office $office): RedirectResponse|Redirector
     {
 
         if (!$office) {
-            return redirect('admin/positions')
+            return redirect()
+                ->route('admin.positions.index')
                 ->with('error', 'Cargo não registrado');
         }
 
 
         if ($this->is_employees) {
-            return redirect('admin/positions')
+            return redirect()
+                ->route('admin.positions.index')
                 ->with('error', 'Existe funcionários vinculados a esse cargo');
         }
 
@@ -39,11 +42,14 @@ class FormDelete extends Component
         $office_disabled = $office->delete();
 
         if ($office_disabled) {
-            return redirect('admin/positions')
+            return redirect()
+                ->route('admin.positions.index')
                 ->with('success', 'Cargo excluído com sucesso');
         }
 
-        return redirect('admin/positions')->with('error', 'Erro na exclusão do cargo');
+        return redirect()
+            ->route('admin.positions.index')
+            ->with('error', 'Erro na exclusão do cargo');
     }
 
     public function render(): View

@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title', 'Funcionários')
+@extends('layouts.app')
+@section('title', 'Meu perfil')
 @section('content')
-    @livewire('employee.profile', ['id' => Auth::user()->id])
+    @livewire('employee.profile', ['id' => auth()->user()->id])
 @endsection

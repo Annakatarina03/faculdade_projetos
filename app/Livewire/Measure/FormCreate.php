@@ -4,10 +4,11 @@ namespace App\Livewire\Measure;
 
 use App\Models\Measure;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -20,7 +21,7 @@ class FormCreate extends Component
     ])]
     public string $name;
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -29,10 +30,14 @@ class FormCreate extends Component
         ]);
 
         if ($measure) {
-            return redirect('admin/measures')->with('success', 'Medida registrada com sucesso');
+            return redirect()
+                ->route('admin.measures.index')
+                ->with('success', 'Medida registrada com sucesso');
         }
 
-        return redirect('admin/measures')->with('error', 'Erro no registro da medida');
+        return redirect()
+            ->route('admin.measures.index')
+            ->with('error', 'Erro no registro da medida');
     }
 
     public function render(): View

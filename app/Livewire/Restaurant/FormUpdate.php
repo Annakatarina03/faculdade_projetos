@@ -5,10 +5,12 @@ namespace App\Livewire\Restaurant;
 use App\Helpers\Formatter;
 use App\Models\Restaurant;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
+use SebastianBergmann\Type\VoidType;
 
 class FormUpdate extends Component
 {
@@ -41,7 +43,7 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
 
         $this->validate();
@@ -52,19 +54,25 @@ class FormUpdate extends Component
         ]);
 
         if ($updated_restaurant) {
-            return redirect('admin/restaurants')->with('success', 'Restaurante atualizado com sucesso');
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('success', 'Restaurante atualizado com sucesso');
         }
 
-        return redirect('admin/restaurants')->with('error', 'Erro na atualização do restaurante');
+        return redirect()
+            ->route('admin.restaurants.index')
+            ->with('error', 'Erro na atualização do restaurante');
     }
 
     public function mount($id = null)
     {
 
-        $restaurant = Restaurant::where('id', $id)->first();
+        $restaurant = Restaurant::find($id);
 
         if (!$restaurant) {
-            return redirect('admin/restaurants')->with('error', 'Restaurante não registrado');
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('error', 'Restaurante não registrado');
         }
 
         $this->restaurant = $restaurant;

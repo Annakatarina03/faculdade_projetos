@@ -22,7 +22,12 @@ class DatabaseSeeder extends Seeder
 
         $faker  = Factory::create();
 
-        $this->call([OfficeSeeder::class, CategorySeeder::class, MeasureSeeder::class]);
+        $this->call([
+            OfficeSeeder::class,
+            CategorySeeder::class,
+            MeasureSeeder::class,
+            RoleAndPermissionSeeder::class,
+        ]);
 
         $restaurants = Restaurant::factory(8)
             ->create();

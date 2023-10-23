@@ -4,10 +4,11 @@ namespace App\Livewire\Restaurant;
 
 use App\Models\Restaurant;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -26,7 +27,7 @@ class FormCreate extends Component
     ])]
     public ?string $contact;
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -36,10 +37,14 @@ class FormCreate extends Component
         ]);
 
         if ($restaurant) {
-            return redirect('admin/restaurants')->with('success', 'Restaurante registrado com sucesso');
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('success', 'Restaurante registrado com sucesso');
         }
 
-        return redirect('admin/restaurants')->with('error', 'Erro no registro do restaurante');
+        return redirect()
+            ->route('admin.restaurants.index')
+            ->with('error', 'Erro no registro do restaurante');
     }
 
     public function render(): View

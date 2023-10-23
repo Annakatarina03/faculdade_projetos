@@ -4,9 +4,10 @@ namespace App\Livewire\Restaurant;
 
 use App\Models\Restaurant;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
@@ -16,25 +17,31 @@ class FormDelete extends Component
 
     public function mount($id = null): void
     {
-        $restaurant = Restaurant::where('id', $id)->first();
+        $restaurant = Restaurant::find($id);
 
         $this->restaurant = $restaurant;
     }
 
-    public function delete(Restaurant $restaurant): Redirector
+    public function delete(Restaurant $restaurant): RedirectResponse|Redirector
     {
 
         if (!$restaurant) {
-            return redirect('admin/restaurants')->with('error', 'Restaurante não registrado');
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('error', 'Restaurante não registrado');
         }
 
         $restaurant_disabled = $restaurant->delete();
 
         if ($restaurant_disabled) {
-            return redirect('admin/restaurants')->with('success', 'Restaurante excluído com sucesso');
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('success', 'Restaurante excluído com sucesso');
         }
 
-        return redirect('admin/restaurants')->with('error', 'Erro na exclusão do restaurante');
+        return redirect()
+            ->route('admin.restaurants.index')
+            ->with('error', 'Erro na exclusão do restaurante');
     }
 
     public function render(): View

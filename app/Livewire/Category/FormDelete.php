@@ -4,17 +4,18 @@ namespace App\Livewire\Category;
 
 use App\Models\Category;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
     use WithModal;
 
     public Category $category;
-    public bool $is_revenues;
 
+    public bool $is_revenues;
 
     public function mount($id = null): void
     {
@@ -22,26 +23,31 @@ class FormDelete extends Component
         $this->is_revenues = !empty($this->category->revenues()->get()->toArray());
     }
 
-    public function delete(Category $category): Redirector
+    public function delete(Category $category): RedirectResponse|Redirector
     {
 
         if (!$category) {
-            return redirect('admin/categories')
+            return redirect()
+                ->route('admin.categories.index')
                 ->with('error', 'Categoria não registrada');
         }
 
         if ($this->is_revenues) {
-            return redirect('admin/categories')
+            return redirect()
+                ->route('admin.categories.index')
                 ->with('error', 'Existe receitas vinculados a essa categoria');
         }
+
         $category_disabled = $category->delete();
 
         if ($category_disabled) {
-            return redirect('admin/categories')
+            return redirect()
+                ->route('admin.categories.index')
                 ->with('success', 'Categoria excluída com sucesso');
         }
 
-        return redirect('admin/categories')
+        return redirect()
+            ->route('admin.categories.index')
             ->with('error', 'Erro na exclusão da categoria');
     }
 

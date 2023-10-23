@@ -4,9 +4,10 @@ namespace App\Livewire\Measure;
 
 use App\Models\Measure;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
@@ -20,20 +21,26 @@ class FormDelete extends Component
         $this->measure = $measure;
     }
 
-    public function delete(Measure $measure): Redirector
+    public function delete(Measure $measure): RedirectResponse|Redirector
     {
 
         if (!$measure) {
-            return redirect('admin/measures')->with('error', 'Medida não registrada');
+            return redirect()
+                ->route('admin.measures.index')
+                ->with('error', 'Medida não registrada');
         }
 
         $measure_disabled = $measure->delete();
 
         if ($measure_disabled) {
-            return redirect('admin/measures')->with('success', 'Medida excluída com sucesso');
+            return redirect()
+                ->route('admin.measures.index')
+                ->with('success', 'Medida excluída com sucesso');
         }
 
-        return redirect('admin/measures')->with('error', 'Erro na exclusão da medida');
+        return redirect()
+            ->route('admin.measures.index')
+            ->with('error', 'Erro na exclusão da medida');
     }
 
     public function render(): View

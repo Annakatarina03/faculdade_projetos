@@ -27,7 +27,7 @@
 
                 </div>
             </div>
-            <div class="relative md:col-span-1">
+            <div class="relative md:col-span-2">
                 <div class="pb-2.5">
                     <label for="chef_name" class="block mb-2 text-sm font-medium text-gray-900">Chef</label>
                     <input type="text" name="chef_name" wire:model.live="chef_name" @class([
@@ -49,7 +49,7 @@
 
                 </div>
             </div>
-            <div class="relative md:col-span-3">
+            <div class="relative md:col-span-2">
                 <div class="pb-2.5">
                     <label for="revenue_name" class="block mb-2 text-sm font-medium text-gray-900">Receita</label>
                     <input type="text" name="revenue_name" wire:model.live="revenue_name"

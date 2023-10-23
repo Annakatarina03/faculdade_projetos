@@ -4,11 +4,12 @@ namespace App\Livewire\Office;
 
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -23,7 +24,7 @@ class FormCreate extends Component
 
     public ?string $description;
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -34,10 +35,14 @@ class FormCreate extends Component
         ]);
 
         if ($office) {
-            return redirect('admin/positions')->with('success', 'Cargo registrado com sucesso');
+            return redirect()
+                ->route('admin.positions.index')
+                ->with('success', 'Cargo registrado com sucesso');
         }
 
-        return redirect('admin/positions')->with('error', 'Erro no registro do cargo');
+        return redirect()
+            ->route('admin.positions.index')
+            ->with('error', 'Erro no registro do cargo');
     }
 
     public function render(): View

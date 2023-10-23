@@ -4,10 +4,11 @@ namespace App\Livewire\Ingredient;
 
 use App\Models\Ingredient;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -22,7 +23,7 @@ class FormCreate extends Component
 
     public ?string $description = null;
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -32,10 +33,14 @@ class FormCreate extends Component
         ]);
 
         if ($ingredient) {
-            return redirect('admin/ingredients')->with('success', 'Ingrediente registrado com sucesso');
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('success', 'Ingrediente registrado com sucesso');
         }
 
-        return redirect('admin/ingredients')->with('error', 'Erro no registro do ingrediente');
+        return redirect()
+            ->route('admin.ingredients.index')
+            ->with('error', 'Erro no registro do ingrediente');
     }
 
     public function render(): View

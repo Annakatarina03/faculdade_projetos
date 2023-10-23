@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Livewire\RecipeTasting;
+namespace App\Livewire\RecipeTasting\ScheduleTasting;
 
 use App\Models\Employee;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
-
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -33,7 +34,7 @@ class FormCreate extends Component
     ])]
     public string $tasting_date;
 
-    public function create()
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -47,17 +48,21 @@ class FormCreate extends Component
                     'tasting_date' => $this->tasting_date
                 ]);
             DB::commit();
-            return redirect()->route('tasting.revenues-schedule-tasting')->with('success', 'Degustação marcada com sucesso');
+            return redirect()
+                ->route('tasting.revenues-schedule-tasting')
+                ->with('success', 'Degustação marcada com sucesso');
         } catch (UniqueConstraintViolationException $e) {
             DB::rollBack();
-            return redirect()->route('tasting.revenues-schedule-tasting')->with('error', 'Erro na marcação da degustação');
+            return redirect()
+                ->route('tasting.revenues-schedule-tasting')
+                ->with('error', 'Erro na marcação da degustação');
         }
     }
 
     public function mount($id = null): void
     {
-        $this->taster = Employee::where('id', Auth::user()->id)->first();
-        $this->revenue = Revenue::where('id', $id)->first();
+        $this->taster = Employee::find(Auth::user()->id);
+        $this->revenue = Revenue::find($id);
 
         $this->taster_name = $this->taster->name;
         $this->chef_name = $this->revenue->chef->name;
@@ -66,6 +71,6 @@ class FormCreate extends Component
 
     public function render(): View
     {
-        return view('livewire.recipe-tasting.form-create');
+        return view('livewire.recipe-tasting.schedule-tasting.form-create');
     }
 }

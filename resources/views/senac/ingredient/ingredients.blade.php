@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title', 'Ingredientes')
 @section('content')
     @livewire('ingredient.index')

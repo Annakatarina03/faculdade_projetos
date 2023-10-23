@@ -4,9 +4,10 @@ namespace App\Livewire\Employee;
 
 use App\Models\Employee;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
@@ -30,31 +31,40 @@ class FormDelete extends Component
         $this->is_tasting_revenues = !empty($this->employee->tastingRevenues()->get()->toArray());
     }
 
-    public function delete(Employee $employee): Redirector
+    public function delete(Employee $employee): RedirectResponse|Redirector
     {
 
         if (!$employee) {
-            return redirect('admin/employees')->with('error', 'Funcionário não registrado');
+            return redirect()
+                ->route('admin.employees.index')
+                ->with('error', 'Funcionário não registrado');
         }
 
         if ($this->is_cook_books) {
-            return redirect('admin/employees')
+            return redirect()
+                ->route('admin.employees.index')
                 ->with('error', 'Existem livros de receitas vinculados a esse editor');
         } else if ($this->is_revenues) {
-            return redirect('admin/employees')
+            return redirect()
+                ->route('admin.employees.index')
                 ->with('error', 'Existem receitas vinculadas a esse cozinheiro');
         } else if ($this->is_tasting_revenues) {
-            return redirect('admin/employees')
+            return redirect()
+                ->route('admin.employees.index')
                 ->with('error', 'Existem degustações vinculadas a esse degustador');
         }
 
         $employee_disabled = $employee->delete();
 
         if ($employee_disabled) {
-            return redirect('admin/employees')->with('success', 'Funcionário excluído com sucesso');
+            return redirect()
+                ->route('admin.employees.index')
+                ->with('success', 'Funcionário excluído com sucesso');
         }
 
-        return redirect('admin/employees')->with('error', 'Erro na exclusão do funcionário');
+        return redirect()
+            ->route('admin.employees.index')
+            ->with('error', 'Erro na exclusão do funcionário');
     }
 
     public function render(): View

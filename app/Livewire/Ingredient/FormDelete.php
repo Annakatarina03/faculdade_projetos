@@ -4,9 +4,10 @@ namespace App\Livewire\Ingredient;
 
 use App\Models\Ingredient;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormDelete extends Component
 {
@@ -21,20 +22,26 @@ class FormDelete extends Component
         $this->ingredient = $ingredient;
     }
 
-    public function delete(Ingredient $ingredient): Redirector
+    public function delete(Ingredient $ingredient): RedirectResponse|Redirector
     {
 
         if (!$ingredient) {
-            return redirect('admin/ingredients')->with('error', 'Ingrediente não registrado');
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('error', 'Ingrediente não registrado');
         }
 
         $ingredient_disabled = $ingredient->delete();
 
         if ($ingredient_disabled) {
-            return redirect('admin/ingredients')->with('success', 'Ingrediente excluído com sucesso');
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('success', 'Ingrediente excluído com sucesso');
         }
 
-        return redirect('admin/ingredients')->with('error', 'Erro na exclusão do ingrediente');
+        return redirect()
+            ->route('admin.ingredients.index')
+            ->with('error', 'Erro na exclusão do ingrediente');
     }
 
     public function render(): View

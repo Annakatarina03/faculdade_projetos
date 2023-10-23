@@ -5,11 +5,13 @@ namespace App\Livewire\Employee;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
+use Livewire\Features\SupportRedirects\Redirector;
+use Spatie\Permission\Models\Role;
 
 class FormCreate extends Component
 {
@@ -32,6 +34,8 @@ class FormCreate extends Component
         'username.unique' => 'Nome de usuário já registrado',
     ])]
     public string $username;
+
+    public array $employeeRoles;
 
     public ?string $office = '';
 
@@ -60,13 +64,14 @@ class FormCreate extends Component
     public string $password_confirmation;
 
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
-        $office = Office::where('name', $this->office)->first();
+        $office = Office::firstWhere('name', $this->office);
+        $employee = new Employee;
 
-        if ($this->office) {
+        if ($office) {
             $employee = $office->employees()->create([
                 'name' => $this->name,
                 'cpf' => $this->cpf,
@@ -86,16 +91,26 @@ class FormCreate extends Component
             ]);
         }
 
-        if ($employee) {
-            return redirect('admin/employees')->with('success', 'Funcionário registrado com sucesso');
+        if ($this->employeeRoles) {
+            $employee->assignRole($this->employeeRoles);
         }
 
-        return redirect('admin/employees')->with('error', 'Erro no registro do funcionário');
+        if ($employee) {
+            return redirect()
+                ->route('admin.employees.index')
+                ->with('success', 'Funcionário registrado com sucesso');
+        }
+
+        return redirect()
+            ->route('admin.employees.index')
+            ->with('error', 'Erro no registro do funcionário');
     }
 
     public function render(): View
     {
         $positions = Office::all();
-        return view('livewire.employee.form-create', compact(['positions']));
+        $roles = Role::all();
+
+        return view('livewire.employee.form-create', compact(['positions', 'roles']));
     }
 }

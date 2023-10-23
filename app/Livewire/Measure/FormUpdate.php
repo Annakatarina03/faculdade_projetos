@@ -4,10 +4,11 @@ namespace App\Livewire\Measure;
 
 use App\Models\Measure;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormUpdate extends Component
 {
@@ -33,7 +34,7 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
 
         $this->validate();
@@ -43,19 +44,25 @@ class FormUpdate extends Component
         ]);
 
         if ($updated_measure) {
-            return redirect('admin/measures')->with('success', 'Medida atualizada com sucesso');
+            return redirect()
+                ->route('admin.measures.index')
+                ->with('success', 'Medida atualizada com sucesso');
         }
 
-        return redirect('admin/measures')->with('error', 'Erro na atualização da medida');
+        return redirect()
+            ->route('admin.measures.index')
+            ->with('error', 'Erro na atualização da medida');
     }
 
     public function mount($id = null)
     {
 
-        $measure = Measure::where('id', $id)->first();
+        $measure = Measure::find($id);
 
         if (!$measure) {
-            return redirect('admin/measures')->with('error', 'Medida não registrada');
+            return redirect()
+                ->route('admin.measures.index')
+                ->with('error', 'Medida não registrada');
         }
 
         $this->measure = $measure;
@@ -65,6 +72,7 @@ class FormUpdate extends Component
     public function render(): View
     {
         $measure = $this->measure;
+
         return view('livewire.measure.form-update', compact(['measure']));
     }
 }

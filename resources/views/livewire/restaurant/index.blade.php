@@ -2,7 +2,7 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl text-bold">Restaurantes</span>
+                <span class="text-4xl font-bold text-[#2A384C]">Restaurantes</span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
 

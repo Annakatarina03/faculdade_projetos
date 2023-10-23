@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title', 'Cargos')
 @section('content')
     @livewire('office.index')

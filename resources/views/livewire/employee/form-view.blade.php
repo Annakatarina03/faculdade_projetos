@@ -14,7 +14,6 @@
                         'mb-2',
                         'border-1',
                         'border-gray-300',
-                        'border-red-500' => $errors->has('name'),
                         'text-gray-900',
                         'text-sm rounded-lg',
                         'focus:ring-blue-600',
@@ -23,6 +22,7 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
+                        'pointer-events-none',
                     ]) disabled>
 
                 </div>
@@ -49,7 +49,6 @@
                             'mb-2',
                             'border-1',
                             'border-gray-300',
-                            'border-red-500' => $errors->has('cpf'),
                             'text-gray-900',
                             'text-sm rounded-lg',
                             'focus:ring-blue-600',
@@ -58,6 +57,7 @@
                             'w-full',
                             'p-2.5',
                             'cursor-not-allowed',
+                            'pointer-events-none',
                         ]) disabled>
 
                 </div>
@@ -81,7 +81,6 @@
                         'mb-2',
                         'border-1',
                         'border-gray-300',
-                        'border-red-500' => $errors->has('username'),
                         'text-gray-900',
                         'text-sm rounded-lg',
                         'focus:ring-blue-600',
@@ -90,19 +89,32 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
+                        'pointer-events-none',
                     ])
                         disabled>
 
                 </div>
-                @error('username')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
+            </div>
+            <div class="relative md:grid md:col-span-4">
+                <div class="pb-2.5">
+                    <label for="role" class="block mb-4 text-sm font-medium text-gray-900">
+                        Permissões
+                    </label>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+
+                        <ul class="max-w-md space-y-1 text-black list-disc list-inside">
+                            @foreach ($employeeRoles as $employeeRole)
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 mr-2 text-green-500 flex-shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg> {{ $employeeRole->name }}
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                @enderror
+                </div>
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
@@ -113,7 +125,6 @@
                         'mb-2',
                         'border-1',
                         'border-gray-300',
-                        'border-red-500' => $errors->has('office'),
                         'text-gray-900',
                         'text-sm rounded-lg',
                         'focus:ring-blue-600',
@@ -122,8 +133,8 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
-                    ])
-                        disabled>
+                        'pointer-events-none',
+                    ]) disabled>
                 </div>
                 @error('office')
                     <div class="absolute bottom-0 flex gap-1 items-center">
@@ -156,7 +167,6 @@
                             'mb-2',
                             'border-1',
                             'border-gray-300',
-                            'border-red-500' => $errors->has('wage'),
                             'text-gray-900',
                             'text-sm rounded-lg',
                             'focus:ring-blue-600',
@@ -165,6 +175,7 @@
                             'w-full',
                             'p-2.5',
                             'cursor-not-allowed',
+                            'pointer-events-none',
                         ]) disabled>
 
                 </div>
@@ -189,7 +200,6 @@
                             'mb-2',
                             'border-1',
                             'border-gray-300',
-                            'border-red-500' => $errors->has('date_entry'),
                             'text-gray-900',
                             'text-sm rounded-lg',
                             'focus:ring-blue-600',
@@ -198,6 +208,7 @@
                             'w-full',
                             'p-2.5',
                             'cursor-not-allowed',
+                            'pointer-events-none',
                         ]) disabled>
                 </div>
                 @error('date_entry')
@@ -219,13 +230,13 @@
                                 'w-2',
                                 'h-2',
                                 'rounded-full',
-                                $status ? 'bg-green-700' : 'bg-red-700',
+                                $status ? 'bg-green-500' : 'bg-red-500',
                             ])></span>
                             <label for="active" @class([
                                 'ml-2',
                                 'text-sm',
                                 'font-bold',
-                                $status ? 'text-green-700' : 'text-red-700',
+                                $status ? 'text-green-500' : 'text-red-500',
                             ])>
                                 {{ $status ? 'Ativo' : 'Inativo' }}
                             </label>

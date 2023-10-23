@@ -4,10 +4,11 @@ namespace App\Livewire\Category;
 
 use App\Models\Category;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\Rule as RuleLivewire;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
 {
@@ -20,7 +21,7 @@ class FormCreate extends Component
     ])]
     public string $name;
 
-    public function create(): Redirector
+    public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
@@ -29,11 +30,13 @@ class FormCreate extends Component
         ]);
 
         if ($category) {
-            return redirect('admin/categories')
+            return redirect()
+                ->route('admin.categories.index')
                 ->with('success', 'Categoria registrada com sucesso');
         }
 
-        return redirect('admin/categories')
+        return redirect()
+            ->route('admin.categories.index')
             ->with('error', 'Erro no registro da categoria');
     }
 

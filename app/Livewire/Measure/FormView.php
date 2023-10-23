@@ -18,7 +18,7 @@ class FormView extends Component
 
     public function mount($id = null): void
     {
-        $measure = Measure::where('id', $id)->first();
+        $measure = Measure::find($id);
 
         $this->measure = $measure;
         $this->name = $measure->name;

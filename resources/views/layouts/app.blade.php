@@ -29,8 +29,9 @@
                 </a>
             </header>
             <nav class="dashboard-nav-list flex flex-col">
+
                 {{-- Painel do administrador --}}
-                @canany(['view-admin', 'view-desenvolvedor'])
+                @role('Administrador')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <span href=""
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] cursor-pointer pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
@@ -42,13 +43,13 @@
                         </span>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col items-center'>
                             <div class="w-full pl-8">
-                                <a href="{{ url('admin/employees') }}"
+                                <a href="{{ route('admin.employees.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/employees') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
                                             viewBox="0 0 640 512">
                                             <path
-                                                d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
+                                                d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
                                         </svg>
                                     </div>
                                     <div class="row-text-link flex w-[120px]">
@@ -57,13 +58,14 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="{{ url('admin/restaurants') }}"
+                                <a href="{{ route('admin.restaurants.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/restaurants') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
-                                            viewBox="0 0 384 512">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
+                                            viewBox="0 0 183 189" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
                                             <path
-                                                d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z" />
+                                                d="M83.5 20.5c-5.1 1.8-11 8.1-12.4 13.1-.6 2.2-1.1 8.7-1.1 14.6V59H49.3c-12.2 0-22.5.5-24.8 1.1-5.2 1.5-11.9 8.2-13.4 13.4-1.5 5.5-1.5 85.5 0 91 1.5 5.4 8.2 12 13.6 13.4 3 .8 22.8 1.1 67.5.9 61.2-.3 63.4-.4 66.7-2.3 1.9-1.1 4.8-3.7 6.5-5.8l3.1-3.9V99 31.2l-3.1-3.9c-6.4-7.9-5.7-7.8-43.9-8-27.5-.2-34.8 0-38 1.2zm25.3 19.7c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2C90.4 59 89 57.7 89 49s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm40 0c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2c-9.5 0-10.9-1.3-10.9-10s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm-40 30c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2C90.4 89 89 87.7 89 79s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm40 0c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2c-9.5 0-10.9-1.3-10.9-10s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm-100 10c1.6 1.6 1.6 16 0 17.6-.7.7-4.3 1.2-8.9 1.2C30.4 99 29 97.7 29 89s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm60 20c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2c-9.5 0-10.9-1.3-10.9-10s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm40 0c.7.7 1.2 4.2 1.2 8.8s-.5 8.1-1.2 8.8-4.3 1.2-8.9 1.2c-9.5 0-10.9-1.3-10.9-10s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2zm-100 10c1.6 1.6 1.6 16 0 17.6-.7.7-4.3 1.2-8.9 1.2-9.5 0-10.9-1.3-10.9-10s1.4-10 10.9-10c4.6 0 8.2.5 8.9 1.2z" />
                                         </svg>
                                     </div>
                                     <div class="row-text-link flex w-[120px]">
@@ -72,7 +74,7 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="{{ url('admin/positions') }}"
+                                <a href="{{ route('admin.positions.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/positions') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
@@ -100,7 +102,7 @@
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
 
-                                <a href="{{ url('admin/measures') }}"
+                                <a href="{{ route('admin.measures.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/measures') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
@@ -115,7 +117,7 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="{{ url('admin/ingredients') }}"
+                                <a href="{{ route('admin.ingredients.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/ingredients') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
@@ -130,7 +132,7 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="{{ url('admin/categories') }}"
+                                <a href="{{ route('admin.categories.index') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/categories') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
@@ -157,7 +159,6 @@
                         </a>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
-
                                 <a href="#"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/measures') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
@@ -173,7 +174,6 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-
                                 <a href="#"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/ingredients') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
@@ -218,16 +218,17 @@
                             </div>
                         </div>
                     </div>
-                @endcan
+                @endrole
 
                 {{-- Painel do Chefe de Cozinha --}}
-                @can('chefe-de-cozinha')
+                @role('Chefe de cozinha')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <a href="#!"
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 448 512">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 188 181"
+                                preserveAspectRatio="xMidYMid meet" xmlns:v="https://vecta.io/nano">
                                 <path
-                                    d="M0 96C0 43 43 0 96 0h96V190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5V0h32 32c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384 96c-53 0-96-43-96-96V96zM64 416c0 17.7 14.3 32 32 32H352V384H96c-17.7 0-32 14.3-32 32z" />
+                                    d="M81.3 9.5c-7.6 2.1-12.9 5-17.8 10l-4.4 4.3-4.6-2.3c-18.3-9.3-40.8 3.1-43.1 23.7-1 9 6.7 34.8 17.1 57l2.6 5.8h11.5c10.5 0 11.5-.2 11.1-1.8-.3-.9-2.2-12.4-4.3-25.5-2.9-17.7-3.6-24.2-2.8-25.5 1.4-2.1 6.7-2.8 8.2-.9.6.7 3.1 13 5.4 27.3l4.4 25.9 10.7.3 10.7.3V81.7c0-28.1.1-28.7 5-28.7s5 .6 5 28.7v26.4l10.7-.3 10.7-.3 4.4-25.9c2.3-14.3 4.8-26.6 5.4-27.3 1.5-1.9 6.8-1.2 8.2.9.8 1.3.1 7.8-2.8 25.5l-4.3 25.5c-.4 1.6.6 1.8 11.1 1.8h11.5l2.6-5.8c4.4-9.4 11.2-27.1 14.1-36.7 3.6-12 3.8-22.9.5-29.8-7.3-15.1-26-21.6-40.6-14.2l-4.6 2.3-4.4-4.3c-5-5.1-10.2-7.9-18.2-10-7-1.8-12.1-1.8-19 0zM31 133.7c0 8.7.5 17.6 1.1 19.8 1.5 5.2 8.2 11.9 13.4 13.4 5.5 1.5 85.5 1.5 91 0 5.2-1.5 11.9-8.2 13.4-13.4.6-2.2 1.1-11.1 1.1-19.8V118H91 31v15.7z" />
                             </svg>
                             Receitas
                         </a>
@@ -238,9 +239,10 @@
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/measures') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
-                                            viewBox="0 0 448 512">
+                                            viewBox="0 0 188 181" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
                                             <path
-                                                d="M0 96C0 43 43 0 96 0h96V190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5V0h32 32c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384 96c-53 0-96-43-96-96V96zM64 416c0 17.7 14.3 32 32 32H352V384H96c-17.7 0-32 14.3-32 32z" />
+                                                d="M81.3 9.5c-7.6 2.1-12.9 5-17.8 10l-4.4 4.3-4.6-2.3c-18.3-9.3-40.8 3.1-43.1 23.7-1 9 6.7 34.8 17.1 57l2.6 5.8h11.5c10.5 0 11.5-.2 11.1-1.8-.3-.9-2.2-12.4-4.3-25.5-2.9-17.7-3.6-24.2-2.8-25.5 1.4-2.1 6.7-2.8 8.2-.9.6.7 3.1 13 5.4 27.3l4.4 25.9 10.7.3 10.7.3V81.7c0-28.1.1-28.7 5-28.7s5 .6 5 28.7v26.4l10.7-.3 10.7-.3 4.4-25.9c2.3-14.3 4.8-26.6 5.4-27.3 1.5-1.9 6.8-1.2 8.2.9.8 1.3.1 7.8-2.8 25.5l-4.3 25.5c-.4 1.6.6 1.8 11.1 1.8h11.5l2.6-5.8c4.4-9.4 11.2-27.1 14.1-36.7 3.6-12 3.8-22.9.5-29.8-7.3-15.1-26-21.6-40.6-14.2l-4.6 2.3-4.4-4.3c-5-5.1-10.2-7.9-18.2-10-7-1.8-12.1-1.8-19 0zM31 133.7c0 8.7.5 17.6 1.1 19.8 1.5 5.2 8.2 11.9 13.4 13.4 5.5 1.5 85.5 1.5 91 0 5.2-1.5 11.9-8.2 13.4-13.4.6-2.2 1.1-11.1 1.1-19.8V118H91 31v15.7z" />
                                         </svg>
                                     </div>
                                     <div class="row-text-link flex w-[120px]">
@@ -253,9 +255,10 @@
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/ingredients') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
-                                            viewBox="0 0 448 512">
+                                            viewBox="0 0 188 181" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
                                             <path
-                                                d="M0 96C0 43 43 0 96 0h96V190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5V0h32 32c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384 96c-53 0-96-43-96-96V96zM64 416c0 17.7 14.3 32 32 32H352V384H96c-17.7 0-32 14.3-32 32z" />
+                                                d="M81.3 9.5c-7.6 2.1-12.9 5-17.8 10l-4.4 4.3-4.6-2.3c-18.3-9.3-40.8 3.1-43.1 23.7-1 9 6.7 34.8 17.1 57l2.6 5.8h11.5c10.5 0 11.5-.2 11.1-1.8-.3-.9-2.2-12.4-4.3-25.5-2.9-17.7-3.6-24.2-2.8-25.5 1.4-2.1 6.7-2.8 8.2-.9.6.7 3.1 13 5.4 27.3l4.4 25.9 10.7.3 10.7.3V81.7c0-28.1.1-28.7 5-28.7s5 .6 5 28.7v26.4l10.7-.3 10.7-.3 4.4-25.9c2.3-14.3 4.8-26.6 5.4-27.3 1.5-1.9 6.8-1.2 8.2.9.8 1.3.1 7.8-2.8 25.5l-4.3 25.5c-.4 1.6.6 1.8 11.1 1.8h11.5l2.6-5.8c4.4-9.4 11.2-27.1 14.1-36.7 3.6-12 3.8-22.9.5-29.8-7.3-15.1-26-21.6-40.6-14.2l-4.6 2.3-4.4-4.3c-5-5.1-10.2-7.9-18.2-10-7-1.8-12.1-1.8-19 0zM31 133.7c0 8.7.5 17.6 1.1 19.8 1.5 5.2 8.2 11.9 13.4 13.4 5.5 1.5 85.5 1.5 91 0 5.2-1.5 11.9-8.2 13.4-13.4.6-2.2 1.1-11.1 1.1-19.8V118H91 31v15.7z" />
                                         </svg>
                                     </div>
                                     <div class="row-text-link flex w-[120px]">
@@ -265,8 +268,106 @@
                             </div>
                         </div>
                     </div>
-                @endcan
+                @endrole
                 {{-- Final do painel do chefe de cozinha --}}
+
+                {{-- Painel do Degustador --}}
+                @role('Degustador')
+                    <div class="dashboard-nav-dropdown relative flex flex-col">
+                        <a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white" viewBox="0 0 216 208"
+                                preserveAspectRatio="xMidYMid meet" xmlns:v="https://vecta.io/nano">
+                                <path
+                                    d="M17.5 36.2c-.2.7-2.7 11.4-5.5 23.7-4.7 20.7-5 22.8-4 27.2 2.2 9.2 9 15.7 18.3 17.4l3.7.7v37.5 37.4l2.5 2.4c2.6 2.7 4.1 3 7.8 1.6 4.3-1.7 4.7-5 4.7-43v-35.6l5.8-1.7A22.5 22.5 0 0 0 67 82.2c0-3.3-8.4-41-10-45-.5-1.2-1.6-2.2-2.5-2.2-2 0-2.2 1.6-3.5 23-.6 10.1-1.4 18.8-1.6 19.2-.7 1-4.1 1-4.7 0-.3-.4-1.5-9.9-2.8-21.1-2.3-20-3.2-23.2-6-20.4-.5.5-1.8 8.8-2.9 18.4C30.1 79 30.3 78 27.5 78c-3 0-3-.5-4.4-23.8-.6-9.5-1.3-17.7-1.6-18.2-.9-1.4-3.5-1.2-4 .2zm175 2c-7.8 4-17 13.4-20.6 21.2-4 8.6-5.1 18.4-4.7 43.4l.3 21.4 3.3 2.9c3.1 2.7 3.7 2.9 12.2 2.9h9v24c0 19.3.3 24.7 1.5 27 2.5 4.9 9.8 5 12.5 0 .6-1.2 1-26.1 1-71.9 0-68.8 0-70.1-2-72.1-2.7-2.7-5.4-2.5-12.5 1.2zM98 41.4c-11.9 2.5-26 9.5-26 12.8 0 2.5 4.1 19.8 4.7 19.8.3 0 2.1-1.4 4-3 7.4-6.5 20.2-11 31.5-11 16.6 0 33.1 8.9 41.8 22.7l3 4.7v-6.2c0-3.4.7-9.8 1.6-14.2l1.6-7.9-3.2-2.8c-5.9-5.2-15.4-10.3-23.5-12.9-9.9-3.2-25.7-4-35.5-2zm4 30.2c-19.7 5.3-32.6 25.1-29.1 44.6 3 17.1 15.7 29.8 33 33 16.7 3.1 34.6-6.2 42.3-22 3.1-6.3 3.3-7.4 3.3-17.2s-.2-10.9-3.3-17.2c-8.4-17.3-27.7-26.2-46.2-21.2zm-43.7 40.3l-3.3 1.5v18.9 19l8.3 8.1c9.1 9 19.9 15.2 31.7 18.3 8.8 2.3 26.3 2.3 34.9-.1 12.6-3.4 28.1-13 35.3-21.8 3.9-4.8 9.8-13.8 9.8-15 0-.4-1.9-1.3-4.2-2-2.6-.8-5.9-2.9-8.4-5.4l-4-4.2-2.8 5.3c-3.8 7.3-14 16.8-21.8 20.5-24.6 11.5-53.9 1.6-66-22.5-1.7-3.3-3.8-9.6-4.7-14l-1.6-8-3.2 1.4z" />
+                            </svg>
+                            Degustações
+                        </a>
+                        <div class='dashboard-nav-dropdown-menu hidden flex-col'>
+                            <div class="w-full pl-8">
+                                <a href="{{ route('tasting.revenues-my-tasting') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/my-tasting') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
+                                            viewBox="0 0 216 208" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
+                                            <path
+                                                d="M17.5 36.2c-.2.7-2.7 11.4-5.5 23.7-4.7 20.7-5 22.8-4 27.2 2.2 9.2 9 15.7 18.3 17.4l3.7.7v37.5 37.4l2.5 2.4c2.6 2.7 4.1 3 7.8 1.6 4.3-1.7 4.7-5 4.7-43v-35.6l5.8-1.7A22.5 22.5 0 0 0 67 82.2c0-3.3-8.4-41-10-45-.5-1.2-1.6-2.2-2.5-2.2-2 0-2.2 1.6-3.5 23-.6 10.1-1.4 18.8-1.6 19.2-.7 1-4.1 1-4.7 0-.3-.4-1.5-9.9-2.8-21.1-2.3-20-3.2-23.2-6-20.4-.5.5-1.8 8.8-2.9 18.4C30.1 79 30.3 78 27.5 78c-3 0-3-.5-4.4-23.8-.6-9.5-1.3-17.7-1.6-18.2-.9-1.4-3.5-1.2-4 .2zm175 2c-7.8 4-17 13.4-20.6 21.2-4 8.6-5.1 18.4-4.7 43.4l.3 21.4 3.3 2.9c3.1 2.7 3.7 2.9 12.2 2.9h9v24c0 19.3.3 24.7 1.5 27 2.5 4.9 9.8 5 12.5 0 .6-1.2 1-26.1 1-71.9 0-68.8 0-70.1-2-72.1-2.7-2.7-5.4-2.5-12.5 1.2zM98 41.4c-11.9 2.5-26 9.5-26 12.8 0 2.5 4.1 19.8 4.7 19.8.3 0 2.1-1.4 4-3 7.4-6.5 20.2-11 31.5-11 16.6 0 33.1 8.9 41.8 22.7l3 4.7v-6.2c0-3.4.7-9.8 1.6-14.2l1.6-7.9-3.2-2.8c-5.9-5.2-15.4-10.3-23.5-12.9-9.9-3.2-25.7-4-35.5-2zm4 30.2c-19.7 5.3-32.6 25.1-29.1 44.6 3 17.1 15.7 29.8 33 33 16.7 3.1 34.6-6.2 42.3-22 3.1-6.3 3.3-7.4 3.3-17.2s-.2-10.9-3.3-17.2c-8.4-17.3-27.7-26.2-46.2-21.2zm-43.7 40.3l-3.3 1.5v18.9 19l8.3 8.1c9.1 9 19.9 15.2 31.7 18.3 8.8 2.3 26.3 2.3 34.9-.1 12.6-3.4 28.1-13 35.3-21.8 3.9-4.8 9.8-13.8 9.8-15 0-.4-1.9-1.3-4.2-2-2.6-.8-5.9-2.9-8.4-5.4l-4-4.2-2.8 5.3c-3.8 7.3-14 16.8-21.8 20.5-24.6 11.5-53.9 1.6-66-22.5-1.7-3.3-3.8-9.6-4.7-14l-1.6-8-3.2 1.4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Minhas degustações
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-full pl-8">
+                                <a href="{{ route('tasting.revenues-schedule-tasting') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/schedule-tasting') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
+                                            viewBox="0 0 216 208" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
+                                            <path
+                                                d="M17.5 36.2c-.2.7-2.7 11.4-5.5 23.7-4.7 20.7-5 22.8-4 27.2 2.2 9.2 9 15.7 18.3 17.4l3.7.7v37.5 37.4l2.5 2.4c2.6 2.7 4.1 3 7.8 1.6 4.3-1.7 4.7-5 4.7-43v-35.6l5.8-1.7A22.5 22.5 0 0 0 67 82.2c0-3.3-8.4-41-10-45-.5-1.2-1.6-2.2-2.5-2.2-2 0-2.2 1.6-3.5 23-.6 10.1-1.4 18.8-1.6 19.2-.7 1-4.1 1-4.7 0-.3-.4-1.5-9.9-2.8-21.1-2.3-20-3.2-23.2-6-20.4-.5.5-1.8 8.8-2.9 18.4C30.1 79 30.3 78 27.5 78c-3 0-3-.5-4.4-23.8-.6-9.5-1.3-17.7-1.6-18.2-.9-1.4-3.5-1.2-4 .2zm175 2c-7.8 4-17 13.4-20.6 21.2-4 8.6-5.1 18.4-4.7 43.4l.3 21.4 3.3 2.9c3.1 2.7 3.7 2.9 12.2 2.9h9v24c0 19.3.3 24.7 1.5 27 2.5 4.9 9.8 5 12.5 0 .6-1.2 1-26.1 1-71.9 0-68.8 0-70.1-2-72.1-2.7-2.7-5.4-2.5-12.5 1.2zM98 41.4c-11.9 2.5-26 9.5-26 12.8 0 2.5 4.1 19.8 4.7 19.8.3 0 2.1-1.4 4-3 7.4-6.5 20.2-11 31.5-11 16.6 0 33.1 8.9 41.8 22.7l3 4.7v-6.2c0-3.4.7-9.8 1.6-14.2l1.6-7.9-3.2-2.8c-5.9-5.2-15.4-10.3-23.5-12.9-9.9-3.2-25.7-4-35.5-2zm4 30.2c-19.7 5.3-32.6 25.1-29.1 44.6 3 17.1 15.7 29.8 33 33 16.7 3.1 34.6-6.2 42.3-22 3.1-6.3 3.3-7.4 3.3-17.2s-.2-10.9-3.3-17.2c-8.4-17.3-27.7-26.2-46.2-21.2zm-43.7 40.3l-3.3 1.5v18.9 19l8.3 8.1c9.1 9 19.9 15.2 31.7 18.3 8.8 2.3 26.3 2.3 34.9-.1 12.6-3.4 28.1-13 35.3-21.8 3.9-4.8 9.8-13.8 9.8-15 0-.4-1.9-1.3-4.2-2-2.6-.8-5.9-2.9-8.4-5.4l-4-4.2-2.8 5.3c-3.8 7.3-14 16.8-21.8 20.5-24.6 11.5-53.9 1.6-66-22.5-1.7-3.3-3.8-9.6-4.7-14l-1.6-8-3.2 1.4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Marcar degustação
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endrole
+
+                {{-- Painel do Editor --}}
+                @role('Editor')
+                    <div class="dashboard-nav-dropdown relative flex flex-col">
+                        <a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white" viewBox="0 0 237 191"
+                                preserveAspectRatio="xMidYMid meet" xmlns:v="https://vecta.io/nano">
+                                <path
+                                    d="M50.9 17.5c-1.5.8-3.2 2.9-3.8 4.6-1.2 3.4-1.7 107.9-.5 107.9.6 0 54.1 10.2 60.7 11.6l2.7.6V83.7 25.2l-2.7-.6c-5.8-1.2-51.2-8.6-52.5-8.6-.7.1-2.5.7-3.9 1.5zm103.1 2L128.3 24l-7.3 1.2v58.4l.8 58.4c.7 0 48.2-9.1 58-11.1l5.2-1v-54-54.1l-2.9-2.9c-3.7-3.6-4.4-3.6-28.1.6zM23.4 22.8c-1.2.2-3.2 1.4-4.5 2.8l-2.4 2.6-.3 59.8.7 62.3c.6 1.4 2.1 3.3 3.3 4.1 1.3.9 23.3 5.8 48.9 11l46.5 9.4 46.7-9.4 48.6-10.4c1.2-.6 2.5-1.9 3.1-3 1.4-2.7 1.4-122.4-.1-125.2-1.8-3.4-6.6-4.8-12.6-3.6l-5.3 1.1v54.9c0 59.9.1 59.4-5.7 61.6-1.5.6-18.9 4.3-38.5 8.2l-35.8 7.1-35.8-7c-19.6-3.9-37.3-7.9-39.2-8.9-2.4-1.1-3.9-2.8-4.7-5.2-.9-2.5-1.2-18.4-1.2-57.3L34.3 24c-.5-.1-2.6-.4-4.8-.8s-5-.6-6.1-.4z" />
+                            </svg>
+                            Publicações
+                        </a>
+                        <div class='dashboard-nav-dropdown-menu hidden flex-col'>
+                            <div class="w-full pl-8">
+                                <a href="{{ route('tasting.revenues-my-tasting') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/my-tasting') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
+                                            viewBox="0 0 237 191" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
+                                            <path
+                                                d="M50.9 17.5c-1.5.8-3.2 2.9-3.8 4.6-1.2 3.4-1.7 107.9-.5 107.9.6 0 54.1 10.2 60.7 11.6l2.7.6V83.7 25.2l-2.7-.6c-5.8-1.2-51.2-8.6-52.5-8.6-.7.1-2.5.7-3.9 1.5zm103.1 2L128.3 24l-7.3 1.2v58.4l.8 58.4c.7 0 48.2-9.1 58-11.1l5.2-1v-54-54.1l-2.9-2.9c-3.7-3.6-4.4-3.6-28.1.6zM23.4 22.8c-1.2.2-3.2 1.4-4.5 2.8l-2.4 2.6-.3 59.8.7 62.3c.6 1.4 2.1 3.3 3.3 4.1 1.3.9 23.3 5.8 48.9 11l46.5 9.4 46.7-9.4 48.6-10.4c1.2-.6 2.5-1.9 3.1-3 1.4-2.7 1.4-122.4-.1-125.2-1.8-3.4-6.6-4.8-12.6-3.6l-5.3 1.1v54.9c0 59.9.1 59.4-5.7 61.6-1.5.6-18.9 4.3-38.5 8.2l-35.8 7.1-35.8-7c-19.6-3.9-37.3-7.9-39.2-8.9-2.4-1.1-3.9-2.8-4.7-5.2-.9-2.5-1.2-18.4-1.2-57.3L34.3 24c-.5-.1-2.6-.4-4.8-.8s-5-.6-6.1-.4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Meus livros
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-full pl-8">
+                                <a href="{{ route('tasting.revenues-schedule-tasting') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/schedule-tasting') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
+                                            viewBox="0 0 237 191" preserveAspectRatio="xMidYMid meet"
+                                            xmlns:v="https://vecta.io/nano">
+                                            <path
+                                                d="M50.9 17.5c-1.5.8-3.2 2.9-3.8 4.6-1.2 3.4-1.7 107.9-.5 107.9.6 0 54.1 10.2 60.7 11.6l2.7.6V83.7 25.2l-2.7-.6c-5.8-1.2-51.2-8.6-52.5-8.6-.7.1-2.5.7-3.9 1.5zm103.1 2L128.3 24l-7.3 1.2v58.4l.8 58.4c.7 0 48.2-9.1 58-11.1l5.2-1v-54-54.1l-2.9-2.9c-3.7-3.6-4.4-3.6-28.1.6zM23.4 22.8c-1.2.2-3.2 1.4-4.5 2.8l-2.4 2.6-.3 59.8.7 62.3c.6 1.4 2.1 3.3 3.3 4.1 1.3.9 23.3 5.8 48.9 11l46.5 9.4 46.7-9.4 48.6-10.4c1.2-.6 2.5-1.9 3.1-3 1.4-2.7 1.4-122.4-.1-125.2-1.8-3.4-6.6-4.8-12.6-3.6l-5.3 1.1v54.9c0 59.9.1 59.4-5.7 61.6-1.5.6-18.9 4.3-38.5 8.2l-35.8 7.1-35.8-7c-19.6-3.9-37.3-7.9-39.2-8.9-2.4-1.1-3.9-2.8-4.7-5.2-.9-2.5-1.2-18.4-1.2-57.3L34.3 24c-.5-.1-2.6-.4-4.8-.8s-5-.6-6.1-.4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Todos os livros
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endrole
             </nav>
             <div class="w-full flex justify-center sm:justify-start lg:justify-center px-6">
                 <div

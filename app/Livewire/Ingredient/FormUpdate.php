@@ -4,10 +4,11 @@ namespace App\Livewire\Ingredient;
 
 use App\Models\Ingredient;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormUpdate extends Component
 {
@@ -35,7 +36,7 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
 
         $this->validate();
@@ -46,19 +47,25 @@ class FormUpdate extends Component
         ]);
 
         if ($updated_ingredient) {
-            return redirect('admin/ingredients')->with('success', 'Ingrediente atualizado com sucesso');
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('success', 'Ingrediente atualizado com sucesso');
         }
 
-        return redirect('admin/ingredients')->with('error', 'Erro na atualização do ingrediente');
+        return redirect()
+            ->route('admin.ingredients.index')
+            ->with('error', 'Erro na atualização do ingrediente');
     }
 
     public function mount($id = null)
     {
 
-        $ingredient = Ingredient::where('id', $id)->first();
+        $ingredient = Ingredient::find($id);
 
         if (!$ingredient) {
-            return redirect('admin/ingredients')->with('error', 'Ingrediente não registrado');
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('error', 'Ingrediente não registrado');
         }
 
         $this->ingredient = $ingredient;
@@ -69,6 +76,7 @@ class FormUpdate extends Component
     public function render(): View
     {
         $ingredient = $this->ingredient;
+
         return view('livewire.ingredient.form-update', compact(['ingredient']));
     }
 }

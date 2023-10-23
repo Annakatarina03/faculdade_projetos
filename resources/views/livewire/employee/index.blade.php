@@ -2,7 +2,7 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl text-bold">Funcionários</span>
+                <span class="text-4xl font-bold text-[#2A384C]">Funcionários</span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
                 <div class="w-full bg-[#D1D9DF] px-4 rounded-tr-lg rounded-tl-lg">
@@ -80,10 +80,11 @@
                                     <td class="px-4 py-3 w-full justify-center flex items-center whitespace-nowrap">
                                         <div class="flex items-center justify-sttart w-72">
                                             <div class="flex py-1.5 items-center gap-3 mr-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-blue-800"
-                                                    viewBox="0 0 512 512">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 208"
+                                                    class="w-6 h-6 fill-blue-800" preserveAspectRatio="xMidYMid meet"
+                                                    xmlns:v="https://vecta.io/nano">
                                                     <path
-                                                        d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
+                                                        d="M96.7 31.4C84.9 34.8 74.2 44.6 69.9 56c-1.6 4-2.2 7.7-2.2 14 0 10.4 2.3 17.1 8.6 25 12.9 16.3 37.3 19.6 53.9 7.5 22.3-16.3 22.3-48.7 0-65-2.6-1.9-6.7-4.2-9.2-5-6.2-2.3-18.4-2.8-24.3-1.1zm.7 95.7c-1.9 2.1-1.8 2.2 1.7 8.7l3.6 6.7-5.1 18.8c-2.7 10.3-5.3 18.2-5.7 17.5-.3-.7-3-11-5.9-22.8s-5.7-22.1-6.2-22.8c-1.5-1.8-5.6-1.4-12.1 1.2-17.1 7.1-29.5 25.1-30 43.8-.2 5.6 0 6.1 3.1 8.9l3.3 2.9 64-.2 64.1-.3 2.4-2.8c1.7-2.1 2.4-4 2.4-7.2 0-17.9-10.9-35.3-27.2-43.5-9.4-4.7-14.3-5.2-15.8-1.8-.5 1.3-3.3 12.1-6.2 24.1-2.9 11.9-5.5 21.1-5.9 20.5-.4-.7-2.8-9.2-5.4-18.9l-4.6-17.7 3-5.4c5.5-9.6 3.9-11.8-8.2-11.8-6.2 0-7.7.3-9.3 2.1z" />
                                                 </svg>
                                             </div>
                                             <span
@@ -167,10 +168,11 @@
                                 <div>
                                     <div class="px-1 py-1 flex items-center whitespace-nowrap">
                                         <div class="flex items-center gap-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-blue-800"
-                                                viewBox="0 0 512 512">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 208"
+                                                class="w-6 h-6 fill-blue-800" preserveAspectRatio="xMidYMid meet"
+                                                xmlns:v="https://vecta.io/nano">
                                                 <path
-                                                    d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
+                                                    d="M96.7 31.4C84.9 34.8 74.2 44.6 69.9 56c-1.6 4-2.2 7.7-2.2 14 0 10.4 2.3 17.1 8.6 25 12.9 16.3 37.3 19.6 53.9 7.5 22.3-16.3 22.3-48.7 0-65-2.6-1.9-6.7-4.2-9.2-5-6.2-2.3-18.4-2.8-24.3-1.1zm.7 95.7c-1.9 2.1-1.8 2.2 1.7 8.7l3.6 6.7-5.1 18.8c-2.7 10.3-5.3 18.2-5.7 17.5-.3-.7-3-11-5.9-22.8s-5.7-22.1-6.2-22.8c-1.5-1.8-5.6-1.4-12.1 1.2-17.1 7.1-29.5 25.1-30 43.8-.2 5.6 0 6.1 3.1 8.9l3.3 2.9 64-.2 64.1-.3 2.4-2.8c1.7-2.1 2.4-4 2.4-7.2 0-17.9-10.9-35.3-27.2-43.5-9.4-4.7-14.3-5.2-15.8-1.8-.5 1.3-3.3 12.1-6.2 24.1-2.9 11.9-5.5 21.1-5.9 20.5-.4-.7-2.8-9.2-5.4-18.9l-4.6-17.7 3-5.4c5.5-9.6 3.9-11.8-8.2-11.8-6.2 0-7.7.3-9.3 2.1z" />
                                             </svg>
                                         </div>
                                         <span

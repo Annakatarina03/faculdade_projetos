@@ -4,11 +4,12 @@ namespace App\Livewire\Office;
 
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormUpdate extends Component
 {
@@ -36,7 +37,7 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
 
         $this->validate();
@@ -48,18 +49,24 @@ class FormUpdate extends Component
         ]);
 
         if ($updated_office) {
-            return redirect('admin/positions')->with('success', 'Cargo atualizado com sucesso');
+            return redirect()
+                ->route('admin.positions.index')
+                ->with('success', 'Cargo atualizado com sucesso');
         }
 
-        return redirect('admin/positions')->with('error', 'Erro na atualização do cargo');
+        return redirect()
+            ->route('admin.positions.index')
+            ->with('error', 'Erro na atualização do cargo');
     }
 
     public function mount($id = null)
     {
 
-        $office = Office::where('id', $id)->first();
+        $office = Office::find($id);
         if (!$office) {
-            return redirect('admin/positions')->with('error', 'Cargo não registrado');
+            return redirect()
+                ->route('admin.positions.index')
+                ->with('error', 'Cargo não registrado');
         }
 
         $this->office = $office;

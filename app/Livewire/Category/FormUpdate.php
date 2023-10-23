@@ -4,10 +4,11 @@ namespace App\Livewire\Category;
 
 use App\Models\Category;
 use App\Traits\WithModal;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class FormUpdate extends Component
 {
@@ -33,7 +34,7 @@ class FormUpdate extends Component
     }
 
 
-    public function update(): Redirector
+    public function update(): RedirectResponse|Redirector
     {
 
         $this->validate();
@@ -43,31 +44,35 @@ class FormUpdate extends Component
         ]);
 
         if ($updated_category) {
-            return redirect('admin/categories')
+            return redirect()
+                ->route('admin.categories.index')
                 ->with('success', 'Categoria atualizada com sucesso');
         }
 
-        return redirect('admin/categories')
+        return redirect()
+            ->route('admin.categories.index')
             ->with('error', 'Erro na atualização da Categoria');
     }
 
     public function mount($id = null)
     {
 
-        $category = Category::where('id', $id)->first();
+        $category = Category::find($id);
 
         if (!$category) {
-            return redirect('admin/categories')
+            return redirect()->route('admin.categories.index')
                 ->with('error', 'Categoria não registrada');
         }
 
         $this->category = $category;
+
         $this->name = $category->name;
     }
 
     public function render(): View
     {
         $category = $this->category;
+
         return view('livewire.category.form-update', compact(['category']));
     }
 }

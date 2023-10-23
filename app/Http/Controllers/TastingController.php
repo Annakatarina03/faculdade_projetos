@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\RecipeTasting;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
-class RecipeTastingController extends Controller
+class TastingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('senac.recipe-tasting.schedule-tasting.index');
+        return view('senac.recipe-tasting.my-tasting.index');
     }
 
     /**

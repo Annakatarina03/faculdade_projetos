@@ -18,7 +18,7 @@ class FormView extends Component
 
     public function mount($id = null): void
     {
-        $category = Category::where('id', $id)->first();
+        $category = Category::find($id);
 
         $this->category = $category;
         $this->name = $category->name;
