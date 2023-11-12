@@ -4,10 +4,13 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MeasureController;
+use App\Http\Controllers\MyCookBook;
+use App\Http\Controllers\MyRevenueController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RecipeTastingController;
+use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TastingController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,14 +59,31 @@ Route::middleware('auth')->group(function () {
     /**
      * Profile route
      */
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     /**
      * Tasting routes
      */
-    Route::get('/tasting/revenues/schedule-tasting', [RecipeTastingController::class, 'index'])->name('tasting.revenues-schedule-tasting');
 
     Route::get('/tasting/revenues/my-tasting', [TastingController::class, 'index'])->name('tasting.revenues-my-tasting');
+
+    Route::get('/tasting/revenues/schedule-tasting', [RecipeTastingController::class, 'index'])->name('tasting.revenues-schedule-tasting');
+
+
+    /**
+     * Revenues routes
+     */
+
+    Route::get('/revenues/all-revenues', [RevenueController::class, 'index'])->name('revenues.all-revenues');
+
+    Route::get('/revenues/my-revenues', [MyRevenueController::class, 'index'])->name('revenues.my-revenues');
+
+    /**
+     * Cookbooks routes
+     */
+
+    Route::get('/cookbooks/my-cookbooks', [MyCookBook::class, 'index'])->name('cookbooks.my-cookbooks');
 });
 
 
