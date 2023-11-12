@@ -42,9 +42,4 @@ class CookBook extends Model
         return $this->belongsToMany(Revenue::class, 'cookbook_recipes', 'cookbook_id', 'revenue_id')
             ->withTimestamps();
     }
-
-    public function getIsbnAttribute(string $value): string
-    {
-        return Formatter::formatISBN13($value);
-    }
 }
