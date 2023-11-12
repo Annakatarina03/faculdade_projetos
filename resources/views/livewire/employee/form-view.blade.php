@@ -1,13 +1,18 @@
 <div class="w-full">
-    <div class="flex py-4 rounded-t border-b">
-        <h3 class="text-lg font-semibold text-gray-900">Informações do funcionário</h3>
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
+        <h3 class="text-lg font-semibold text-gray-900">
+            Informações do funcionário
+        </h3>
+        @include('layouts.components.logo')
     </div>
     <form class="py-2">
         @csrf
         <div class="grid gap-2 mb-1 md:grid-cols-4">
             <div class="relative md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nome</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                        Nome
+                    </label>
                     <input type="text" name="name" wire:model.live="name" @class([
                         'bg-[#EEE]',
                         'shadow-inner',
@@ -26,15 +31,6 @@
                     ]) disabled>
 
                 </div>
-                @error('name')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
@@ -61,20 +57,13 @@
                         ]) disabled>
 
                 </div>
-                @error('cpf')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
 
             <div class="relative md:grid md:col-span-4">
                 <div class="pb-2.5">
-                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
+                        Usuário
+                    </label>
                     <input type="text" name="username" wire:model.live="username" @class([
                         'bg-[#EEE]',
                         'shadow-inner',
@@ -103,13 +92,13 @@
                     <div class="flex flex-col sm:flex-row sm:items-center gap-4">
 
                         <ul class="max-w-md space-y-1 text-black list-disc list-inside">
-                            @foreach ($employeeRoles as $employeeRole)
+                            @foreach ($employee_roles as $employee_role)
                                 <li class="flex items-center">
                                     <svg class="w-3.5 h-3.5 mr-2 text-green-500 flex-shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                    </svg> {{ $employeeRole->name }}
+                                    </svg> {{ $employee_role->name }}
                                 </li>
                             @endforeach
                         </ul>
@@ -118,7 +107,9 @@
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
-                    <label for="office" class="block mb-2 text-sm font-medium text-gray-900">Cargo</label>
+                    <label for="office" class="block mb-2 text-sm font-medium text-gray-900">
+                        Cargo
+                    </label>
                     <input type="text" name="office" wire:model.live="office" @class([
                         'bg-[#EEE]',
                         'shadow-inner',
@@ -136,19 +127,12 @@
                         'pointer-events-none',
                     ]) disabled>
                 </div>
-                @error('office')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
             <div class="relative md:grid md:col-span-1">
                 <div class="pb-2.5">
-                    <label for="wage" class="block mb-2 text-sm font-medium text-gray-900">Salário</label>
+                    <label for="wage" class="block mb-2 text-sm font-medium text-gray-900">
+                        Salário
+                    </label>
                     <input type="text" x-data x-init="Inputmask({
                         'alias': 'numeric',
                         'autoUnmask': true,
@@ -179,20 +163,12 @@
                         ]) disabled>
 
                 </div>
-                @error('wage')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
             <div class="relative md:grid md:col-span-1">
                 <div class="pb-2.5">
-                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">Data de
-                        admissão</label>
+                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">
+                        Data de admissão
+                    </label>
                     <input wire:model.live="date_entry" type="date" max="{{ date('Y-m-d') }}"
                         @class([
                             'bg-[#EEE]',
@@ -211,19 +187,12 @@
                             'pointer-events-none',
                         ]) disabled>
                 </div>
-                @error('date_entry')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
             <div class="relative md:grid md:col-span-4">
                 <div class="flex gap-2">
-                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">Status:</label>
+                    <label for="date_entry" class="block mb-2 text-sm font-medium text-gray-900">
+                        Status:
+                    </label>
                     <div class="flex flex-col">
                         <div class="flex items-center">
                             <span @class([
@@ -243,15 +212,6 @@
                         </div>
                     </div>
                 </div>
-                @error('status')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
         </div>
         <div class="items-center sm:flex py-4 gap-2">

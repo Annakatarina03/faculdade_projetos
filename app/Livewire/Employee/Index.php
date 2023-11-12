@@ -5,7 +5,6 @@ namespace App\Livewire\Employee;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
-use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 

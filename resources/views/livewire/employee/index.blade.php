@@ -2,7 +2,9 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl font-bold text-[#2A384C]">Funcionários</span>
+                <span class="text-4xl font-bold text-[#2A384C]">
+                    Funcionários
+                </span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
                 <div class="w-full bg-[#D1D9DF] px-4 rounded-tr-lg rounded-tl-lg">
@@ -25,7 +27,6 @@
                                     <path
                                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                                 </svg>
-                                <span class="sr-only">Info</span>
                                 <div>
                                     <span class="font-medium"> {{ session()->get('success') }}
                                     </span>
@@ -40,7 +41,6 @@
                                     <path
                                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                                 </svg>
-                                <span class="sr-only">Info</span>
                                 <div>
                                     <span class="font-medium"> {{ session()->get('error') }}
                                     </span>
@@ -66,10 +66,18 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr class="overflow-x-hidden">
                                 <th scope="col" class="p-4 w-10"></th>
-                                <th scope="col" class="p-4 w-40 text-center">Nome</th>
-                                <th scope="col" class="p-4 text-center">CPF</th>
-                                <th scope="col" class="p-4 text-center">Status</th>
-                                <th scope="col" class="p-4 w-40 text-center">Última atualização</th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Nome
+                                </th>
+                                <th scope="col" class="p-4 text-center">
+                                    CPF
+                                </th>
+                                <th scope="col" class="p-4 text-center">
+                                    Status
+                                </th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Última atualização
+                                </th>
                                 <th scope="col" class="p-4 w-40"></th>
                             </tr>
                         </thead>
@@ -100,17 +108,18 @@
                                     </td>
                                     <td scope="row" class="font-medium w-40 text-gray-900 whitespace-nowrap">
                                         <div class="flex justify-center">
-                                            <span
-                                                @class([
-                                                    'w-14',
-                                                    'font-bold',
-                                                    'text-xs',
-                                                    'text-center',
-                                                    'rounded-lg',
-                                                    'text-white',
-                                                    'bg-green-600' => $employee->status,
-                                                    'bg-red-600' => !$employee->status,
-                                                ])>{{ $employee->status ? 'Ativo' : 'Inativo' }}</span>
+                                            <span @class([
+                                                'w-14',
+                                                'font-bold',
+                                                'text-xs',
+                                                'text-center',
+                                                'rounded-lg',
+                                                'text-white',
+                                                'bg-green-600' => $employee->status,
+                                                'bg-red-600' => !$employee->status,
+                                            ])>
+                                                {{ $employee->status ? 'Ativo' : 'Inativo' }}
+                                            </span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
@@ -135,7 +144,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('employee.form-view', {'id' : {{ $employee->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -146,7 +155,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('employee.form-delete', {'id' : {{ $employee->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -155,6 +164,7 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -226,7 +236,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('employee.form-view', {'id' : {{ $employee->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -237,7 +247,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('employee.form-delete', {'id' : {{ $employee->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">

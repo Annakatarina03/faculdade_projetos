@@ -43,7 +43,7 @@ class FormUpdate extends Component
 
         $updated_ingredient = $this->ingredient->update([
             'name' => $this->name,
-            'description' => $this->description,
+            'description' => $this->description ? $this->description : null,
         ]);
 
         if ($updated_ingredient) {
@@ -57,7 +57,7 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização do ingrediente');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
 
         $ingredient = Ingredient::find($id);

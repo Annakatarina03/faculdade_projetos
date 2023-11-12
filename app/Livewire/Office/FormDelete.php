@@ -16,7 +16,7 @@ class FormDelete extends Component
     public Office $office;
     public bool $is_employees;
 
-    public function mount($id): void
+    public function mount(int $id): void
     {
         $this->office = Office::find($id);
         $this->is_employees = !empty($this->office->employees()->get()->toArray());

@@ -18,7 +18,7 @@ class FormView extends Component
 
     public Office $office;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
         $office = Office::find($id);
 

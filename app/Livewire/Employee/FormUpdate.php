@@ -6,11 +6,11 @@ use App\Helpers\Formatter;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
+use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use Livewire\Attributes\Rule as RuleLivewire;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 use Spatie\Permission\Models\Role;
@@ -19,34 +19,21 @@ class FormUpdate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'required' => 'Campo obrigatório'
-    ])]
     public string $name;
 
     public string $cpf;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'required' => 'Campo obrigatório',
-    ])]
     public string $username;
 
-    public array $employeeRoles;
+    public array $employee_roles;
 
-    public ?string $office = '';
+    public string $office;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'required' => 'Campo obrigatório'
-    ])]
     public string $wage;
 
-    #[RuleLivewire(rule: 'required|before_or_equal:today', message: [
-        'required' => 'Campo obrigatório',
-        'before_or_equal' => 'Data inválida'
-    ])]
     public string $date_entry;
 
-    public string $password = '';
+    public string $password;
 
     public bool $status;
 
@@ -56,7 +43,19 @@ class FormUpdate extends Component
     public function rules(): array
     {
         return [
+
+            'name' => ['required'],
+            'username' => ['required'],
             'cpf' => ['required', Rule::unique('employees', 'cpf')->ignore($this->employee->id), 'min:11'],
+            'wage' => [
+                'required', function ($attribute, $value, Closure $fail) {
+                    $value = str_replace(',', '.', $value);
+                    if ($value <= 0.00) {
+                        $fail('Valor inválido');
+                    }
+                },
+            ],
+            'date_entry' => ['before_or_equal:today'],
             'password' =>
             [
                 function ($attribute, $value, $fail) {
@@ -71,9 +70,12 @@ class FormUpdate extends Component
     public function messages(): array
     {
         return [
+            'name.required' => 'Campo obrigatório',
+            'username.required' => 'Campo obrigatório',
             'cpf.required' => 'Campo obrigatório',
             'cpf.unique' => 'CPF já registrado',
             'cpf.min' => 'CPF inválido',
+            'wage.required' => 'Campo obrigatório',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres'
         ];
     }
@@ -85,7 +87,7 @@ class FormUpdate extends Component
         $employee_office = Office::firstWhere('name', $this->office);
 
         $this->employee->office()->associate($employee_office);
-        $this->employee->syncRoles($this->employeeRoles);
+        $this->employee->syncRoles($this->employee_roles);
 
         $updated_employee = $this->employee->update([
             'name' => $this->name,
@@ -110,7 +112,7 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização do funcionário');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
 
         $employee = Employee::find($id);
@@ -124,11 +126,12 @@ class FormUpdate extends Component
         $this->name = $employee->name;
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
-        $this->employeeRoles = $employee->roles->pluck('name')->toArray();
+        $this->employee_roles = $employee->roles->pluck('name')->toArray();
         $this->office = $employee->office ? $employee->office->name : $this->office;
         $this->wage = str_replace('.', ',', $employee->wage);
         $this->date_entry = $employee->date_entry;
         $this->status = $employee->status;
+        $this->password = '';
     }
 
     public function render(): View

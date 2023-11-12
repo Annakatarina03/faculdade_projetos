@@ -7,7 +7,6 @@ use App\Traits\WithModal;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\Attributes\Rule as RuleLivewire;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -15,14 +14,26 @@ class FormCreate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required|unique:positions,name', message: [
-        'name.required' => 'Campo obrigatório',
-        'name.unique' => 'Cargo já registrado'
-
-    ])]
     public string $name;
 
-    public ?string $description;
+    public ?string $description = null;
+
+    public function rules(): array
+    {
+        return
+            [
+                'name' => ['required', 'unique:positions,name']
+            ];
+    }
+
+    public function messages(): array
+    {
+        return
+            [
+                'name.required' => 'Campo obrigatório',
+                'name.unique' => 'Cargo já registrado',
+            ];
+    }
 
     public function create(): RedirectResponse|Redirector
     {

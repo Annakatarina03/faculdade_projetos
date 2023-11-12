@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @vite(['resources/css/sidebar.css', 'resources/js/sidebar.js', 'resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <title>
@@ -31,7 +35,7 @@
             <nav class="dashboard-nav-list flex flex-col">
 
                 {{-- Painel do administrador --}}
-                @role('Administrador')
+                @role('administrador')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <span href=""
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] cursor-pointer pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
@@ -221,7 +225,7 @@
                 @endrole
 
                 {{-- Painel do Chefe de Cozinha --}}
-                @role('Chefe de cozinha')
+                @role('chefe-de-cozinha')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <a href="#!"
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
@@ -235,8 +239,8 @@
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
 
-                                <a href="#"
-                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/measures') ? 'active' : '' }}">
+                                <a href="{{ route('revenues.my-revenues') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('revenues/my-revenues') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
                                             viewBox="0 0 188 181" preserveAspectRatio="xMidYMid meet"
@@ -251,8 +255,8 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="#"
-                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('admin/ingredients') ? 'active' : '' }}">
+                                <a href="{{ route('revenues.all-revenues') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('revenues/all-revenues') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
                                             viewBox="0 0 188 181" preserveAspectRatio="xMidYMid meet"
@@ -272,7 +276,7 @@
                 {{-- Final do painel do chefe de cozinha --}}
 
                 {{-- Painel do Degustador --}}
-                @role('Degustador')
+                @role('degustador')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <a href="#!"
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
@@ -321,7 +325,7 @@
                 @endrole
 
                 {{-- Painel do Editor --}}
-                @role('Editor')
+                @role('editor')
                     <div class="dashboard-nav-dropdown relative flex flex-col">
                         <a href="#!"
                             class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
@@ -334,8 +338,8 @@
                         </a>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
-                                <a href="{{ route('tasting.revenues-my-tasting') }}"
-                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/my-tasting') ? 'active' : '' }}">
+                                <a href="{{ route('cookbooks.my-cookbooks') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('cookbooks/my-cookbooks') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
                                             viewBox="0 0 237 191" preserveAspectRatio="xMidYMid meet"
@@ -350,8 +354,8 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href="{{ route('tasting.revenues-schedule-tasting') }}"
-                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('tasting/revenues/schedule-tasting') ? 'active' : '' }}">
+                                <a href=""
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
                                             viewBox="0 0 237 191" preserveAspectRatio="xMidYMid meet"

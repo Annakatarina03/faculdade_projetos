@@ -13,13 +13,13 @@ class FormDelete extends Component
 {
     use WithModal;
 
+    public bool $has_recipes;
     public Ingredient $ingredient;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
-        $ingredient = Ingredient::find($id);
-
-        $this->ingredient = $ingredient;
+        $this->ingredient = Ingredient::find($id);
+        $this->has_recipes = !$this->ingredient->revenues()->get()->isEmpty();
     }
 
     public function delete(Ingredient $ingredient): RedirectResponse|Redirector
@@ -29,6 +29,12 @@ class FormDelete extends Component
             return redirect()
                 ->route('admin.ingredients.index')
                 ->with('error', 'Ingrediente não registrado');
+        }
+
+        if ($this->has_recipes) {
+            return redirect()
+                ->route('admin.ingredients.index')
+                ->with('error', 'Existem receitas vinculadas a esse ingrediente');
         }
 
         $ingredient_disabled = $ingredient->delete();

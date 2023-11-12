@@ -1,8 +1,7 @@
 <div class="min-w-[40vw]">
-    <div class="flex py-4 rounded-t border-b">
-        <h3 class="text-lg font-semibold text-gray-900">
-            Editar ingrediente
-        </h3>
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
+        <h3 class="text-lg font-semibold text-gray-900">Editar ingrediente</h3>
+        @include('layouts.components.logo')
     </div>
     <form wire:submit="update" method="POST" class="py-2">
         @csrf
@@ -73,7 +72,7 @@
 
             </div>
         </div>
-        <div class="items-center sm:flex py-4 gap-2">
+        <div class="items-center flex py-4 gap-4">
             <button type="submit"
                 class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 Editar ingrediente

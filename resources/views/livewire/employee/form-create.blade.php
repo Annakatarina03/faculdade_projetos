@@ -1,6 +1,9 @@
 <div class="w-full">
-    <div class="flex py-4 rounded-t border-b">
-        <h3 class="text-lg font-semibold text-gray-900">Criar funcionário</h3>
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
+        <h3 class="text-lg font-semibold text-gray-900">
+            Registrar funcionário
+        </h3>
+        @include('layouts.components.logo')
     </div>
     <form wire:submit="create" method="POST" class="py-2">
         @csrf
@@ -112,8 +115,8 @@
                     <div class="flex flex-col sm:flex-row sm:items-center gap-4">
                         @foreach ($roles as $role)
                             <div class="flex items-center">
-                                <input name="employeeRoles" id="{{ $role->name }}" type="checkbox"
-                                    value="{{ $role->name }}" wire:model.live="employeeRoles"
+                                <input name="employee_roles" id="{{ $role->name }}" type="checkbox"
+                                    value="{{ $role->name }}" wire:model.live="employee_roles"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
                                 <label for="{{ $role->name }}" class="ml-2 text-sm font-medium text-gray-900">
                                     {{ $role->name }}
@@ -276,7 +279,6 @@
             </div>
             <div class="relative md:grid md:col-span-2">
                 <div class="pb-2.5">
-
                     <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900">
                         Confirmação da senha <span class="text-red-500" title="Campo obrigatório">*</span>
                     </label>
@@ -307,7 +309,7 @@
                 @enderror
             </div>
         </div>
-        <div class="items-center sm:flex py-4 gap-2">
+        <div class="items-center flex py-4 gap-4">
             <button type="submit"
                 class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 Criar funcionário

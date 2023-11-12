@@ -16,7 +16,7 @@ class FormView extends Component
 
     public Measure $measure;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
         $measure = Measure::find($id);
 

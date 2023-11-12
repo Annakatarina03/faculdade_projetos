@@ -2,8 +2,9 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl font-bold text-[#2A384C]">Ingredientes</span>
-
+                <span class="text-4xl font-bold text-[#2A384C]">
+                    Ingredientes
+                </span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
 
@@ -20,7 +21,7 @@
                             </form>
                         </div>
                         @if (session()->has('success'))
-                            <div class="flex items-center p-2  text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
+                            <div class="flex items-center p-2 justify-center text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
                                 role="alert">
                                 <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -29,6 +30,20 @@
                                 </svg>
                                 <div>
                                     <span class="font-medium"> {{ session()->get('success') }}
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
+                        @if (session()->has('error'))
+                            <div class="flex items-center p-2 justify-center text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
+                                role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                </svg>
+                                <div>
+                                    <span class="font-medium"> {{ session()->get('error') }}
                                     </span>
                                 </div>
                             </div>
@@ -52,8 +67,12 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr class="overflow-x-hidden">
                                 <th scope="col" class="p-4 w-10"></th>
-                                <th scope="col" class="p-4 w-40 text-center">Nome</th>
-                                <th scope="col" class="p-4 w-40 text-center">Última atualização</th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Nome
+                                </th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Última atualização
+                                </th>
                                 <th scope="col" class="p-4 w-40"></th>
                             </tr>
                         </thead>
@@ -97,7 +116,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('ingredient.form-view', {'id' : {{ $ingredient->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -108,7 +127,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('ingredient.form-delete', {'id' : {{ $ingredient->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -165,7 +184,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('ingredient.form-view', {'id' : {{ $ingredient->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -176,7 +195,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('ingredient.form-delete', {'id' : {{ $ingredient->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">

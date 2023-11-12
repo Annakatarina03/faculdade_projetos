@@ -14,12 +14,24 @@ class FormCreate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required|unique:measures,name', message: [
-        'name.required' => 'Campo obrigatório',
-        'name.unique' => 'Medida já registrada'
-
-    ])]
     public string $name;
+
+    public function rules(): array
+    {
+        return
+            [
+                "name" => ["required", "unique:measures,name"]
+            ];
+    }
+
+    public function messages(): array
+    {
+        return
+            [
+                "name.required" => "Campo obrigatório",
+                "name.unique" => 'Medida já registrada'
+            ];
+    }
 
     public function create(): RedirectResponse|Redirector
     {

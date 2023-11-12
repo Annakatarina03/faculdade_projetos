@@ -54,7 +54,7 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização da medida');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
 
         $measure = Measure::find($id);

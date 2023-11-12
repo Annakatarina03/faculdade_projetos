@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <section class="min-h-[92.5vh] flex flex-col items-center justify-center bg-[#F4F1E9]">
+    <section class="min-h-[95.5vh] flex flex-col items-center justify-center bg-[#F4F1E9]">
         <div
             class="w-screen md:w-auto flex flex-col items-center justify-center bg-white py-16 md:px-20 rounded-xl shadow-[4px_2px_3px_rgba(0,0,0,0.3)]">
             <div>
@@ -20,7 +20,7 @@
             </div>
             <div class="flex flex-col md:flex-row items-center">
                 <div class="p-8">
-                    <img src="{{ asset('images/logo.png') }}" class="w-64 md:w-80" alt="Sample image">
+                    <img src="{{ asset('images/logo-system.png') }}" class="w-64 md:w-80" alt="S">
                 </div>
                 <div class="p-8 space-y-8">
                     <div class="flex justify-center">

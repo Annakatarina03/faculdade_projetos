@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
-use SebastianBergmann\Type\VoidType;
 
 class FormUpdate extends Component
 {

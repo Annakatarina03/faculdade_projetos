@@ -13,22 +13,21 @@ class FormDelete extends Component
 {
     use WithModal;
 
-    public bool $is_cook_books;
+    public bool $has_cook_books;
 
-    public bool $is_revenues;
+    public bool $has_revenues;
 
-    public bool $is_tasting_revenues;
+    public bool $has_tasting_revenues;
 
     public Employee $employee;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
-        $employee = Employee::find($id);
 
-        $this->employee = $employee;
-        $this->is_cook_books = !empty($this->employee->cookbooks()->get()->toArray());
-        $this->is_revenues = !empty($this->employee->revenues()->get()->toArray());
-        $this->is_tasting_revenues = !empty($this->employee->tastingRevenues()->get()->toArray());
+        $this->employee = Employee::find($id);
+        $this->has_cook_books = !$this->employee->cookbooks()->get()->isEmpty();
+        $this->has_revenues = !$this->employee->revenues()->get()->isEmpty();
+        $this->has_tasting_revenues = !$this->employee->tastingRevenues()->get()->isEmpty();
     }
 
     public function delete(Employee $employee): RedirectResponse|Redirector
@@ -40,15 +39,15 @@ class FormDelete extends Component
                 ->with('error', 'Funcionário não registrado');
         }
 
-        if ($this->is_cook_books) {
+        if ($this->has_cook_books) {
             return redirect()
                 ->route('admin.employees.index')
                 ->with('error', 'Existem livros de receitas vinculados a esse editor');
-        } else if ($this->is_revenues) {
+        } else if ($this->has_revenues) {
             return redirect()
                 ->route('admin.employees.index')
                 ->with('error', 'Existem receitas vinculadas a esse cozinheiro');
-        } else if ($this->is_tasting_revenues) {
+        } else if ($this->has_tasting_revenues) {
             return redirect()
                 ->route('admin.employees.index')
                 ->with('error', 'Existem degustações vinculadas a esse degustador');

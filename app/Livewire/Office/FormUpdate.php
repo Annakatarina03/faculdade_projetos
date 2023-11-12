@@ -17,7 +17,7 @@ class FormUpdate extends Component
 
     public string $name;
 
-    public ?string $description;
+    public ?string $description = null;
 
     public Office $office;
 
@@ -44,7 +44,7 @@ class FormUpdate extends Component
 
         $updated_office = $this->office->update([
             'name' => $this->name,
-            'description' => $this->description,
+            'description' => $this->description ? $this->description : null,
             'slug' => Str::slug($this->name)
         ]);
 
@@ -59,7 +59,7 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização do cargo');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
 
         $office = Office::find($id);

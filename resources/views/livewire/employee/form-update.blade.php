@@ -1,6 +1,7 @@
 <div class="w-full">
-    <div class="flex py-4 rounded-t border-b">
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
         <h3 class="text-lg font-semibold text-gray-900">Editar funcionário</h3>
+        @include('layouts.components.logo')
     </div>
     <form wire:submit="update" method="POST" class="py-2">
         @csrf
@@ -111,9 +112,9 @@
 
                         @foreach ($roles as $role)
                             <div class="flex items-center">
-                                <input name="employeeRoles" id="{{ $role->name }}" type="checkbox"
-                                    @checked (in_array($role->name, $employeeRoles)) value="{{ $role->name }}"
-                                    wire:model.live="employeeRoles"
+                                <input name="employee_roles" id="{{ $role->name }}" type="checkbox"
+                                    @checked (in_array($role->name, $employee_roles)) value="{{ $role->name }}"
+                                    wire:model.live="employee_roles"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2">
                                 <label for="{{ $role->name }}" class="ml-2 text-sm font-medium text-gray-900">
                                     {{ $role->name }}
@@ -151,8 +152,9 @@
                     ])>
                         <option value="" disabled>Selecione o cargo</option>
                         @foreach ($positions as $position)
-                            <option id="{{ $position->slug }}" {{ $position->name === $office }}>
-                                {{ $position->name }}</option>
+                            <option id="{{ $position->slug }}">
+                                {{ $position->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -300,10 +302,11 @@
                 @enderror
             </div>
         </div>
-        <div class="items-center sm:flex py-4 gap-2">
+        <div class="items-center flex py-4 gap-4">
             <button type="submit"
-                class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Editar
-                funcionário</button>
+                class="w-full sm:w-auto justify-center text-white inline-flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Editar funcionário
+            </button>
             <button wire:click.prevent='closeModal'
                 class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
                 <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"

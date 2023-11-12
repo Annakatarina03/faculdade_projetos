@@ -14,18 +14,35 @@ class FormCreate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required|unique:restaurants,name', message: [
-        'name.required' => 'Campo obrigatório',
-        'name.unique' => 'Restaurante já cadastrado'
-
-    ])]
     public string $name;
 
-    #[RuleLivewire(rule: 'required|min:10', message: [
-        'contact.required' => 'Campo obrigatório',
-        'contact.min' => 'Contato inválido'
-    ])]
     public ?string $contact;
+
+    public function rules(): array
+    {
+        return
+            [
+                'name' => ['required', 'unique:restaurants,name'],
+                'contact' => ['required', 'unique:restaurants,contact', 'min:10'],
+            ];
+    }
+
+    public function messages(): array
+    {
+        return
+            [
+                'name.required' => 'Campo obrigatório',
+                'name.unique' => 'Restaurante já registrado',
+                'contact.required' => 'Campo obrigatório',
+                'contact.unique' => 'Contato já registrado',
+                'contact.min' => 'Contato inválido'
+            ];
+    }
+
+    public function mount(): void
+    {
+        $this->contact = '';
+    }
 
     public function create(): RedirectResponse|Redirector
     {

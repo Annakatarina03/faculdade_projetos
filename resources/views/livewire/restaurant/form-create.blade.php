@@ -1,6 +1,7 @@
 <div class="w-full">
-    <div class="flex py-4 rounded-t border-b">
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
         <h3 class="text-lg font-semibold text-gray-900">Registrar restaurante</h3>
+        @include('layouts.components.logo')
     </div>
     <form wire:submit="create" method="POST" class="py-2">
         @csrf

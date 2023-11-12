@@ -14,12 +14,24 @@ class FormCreate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required|unique:categories,name', message: [
-        'name.required' => 'Campo obrigatório',
-        'name.unique' => 'Catrgoria já registrada'
-
-    ])]
     public string $name;
+
+    public function rules(): array
+    {
+        return
+            [
+                "name" => ["required", "unique:categories,name"]
+            ];
+    }
+
+    public function messages(): array
+    {
+        return
+            [
+                "name.required" => "Campo obrigatório",
+                "name.unique" => 'Categoria já registrada'
+            ];
+    }
 
     public function create(): RedirectResponse|Redirector
     {

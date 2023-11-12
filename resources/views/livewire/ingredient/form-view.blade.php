@@ -1,8 +1,7 @@
 <div class="min-w-[40vw]">
-    <div class="flex py-4 rounded-t border-b">
-        <h3 class="text-lg font-semibold text-gray-900">
-            Informações do ingrediente
-        </h3>
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
+        <h3 class="text-lg font-semibold text-gray-900">Informações do ingrediente</h3>
+        @include('layouts.components.logo')
     </div>
     <form method="POST" class="py-2">
         @csrf
@@ -27,8 +26,7 @@
                         'w-full',
                         'p-2.5',
                         'cursor-not-allowed',
-                    ])
-                        disabled>
+                    ]) disabled>
                 </div>
             </div>
             <div class="relative md:grid md:col-span-4">

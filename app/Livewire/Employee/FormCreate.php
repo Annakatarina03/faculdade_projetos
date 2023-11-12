@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Employee;
 
-use App\Models\Employee;
 use App\Models\Office;
 use App\Traits\WithModal;
+use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\Attributes\Rule as RuleLivewire;
 use Livewire\Features\SupportRedirects\Redirector;
 use Spatie\Permission\Models\Role;
 
@@ -17,82 +16,91 @@ class FormCreate extends Component
 {
     use WithModal;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'name.required' => 'Campo obrigatório'
-    ])]
     public string $name;
 
-    #[RuleLivewire(rule: 'required|unique:employees,cpf|min:11', message: [
-        'cpf.required' => 'Campo obrigatório',
-        'cpf.unique' => 'CPF já registrado',
-        'cpf.min' => 'CPF inválido'
-    ])]
     public string $cpf;
 
-    #[RuleLivewire(rule: 'required|unique:employees,username', message: [
-        'username.required' => 'Campo obrigatório',
-        'username.unique' => 'Nome de usuário já registrado',
-    ])]
     public string $username;
 
-    public array $employeeRoles;
+    public array $employee_roles;
 
-    public ?string $office = '';
+    public string $office;
 
-    #[RuleLivewire(rule: 'required', message: [
-        'wage.required' => 'Campo obrigatório'
-    ])]
     public string $wage;
 
-    #[RuleLivewire(rule: 'required|before_or_equal:today', message: [
-        'date_entry.required' => 'Campo obrigatório',
-        'date_entry.before_or_equal' => 'Data inválida'
-    ])]
     public string $date_entry;
 
-    #[RuleLivewire(rule: 'required|min:8|same:password_confirmation', message: [
-        'password.required' => 'Campo obrigatório',
-        'password.min' => 'Senha deve ter no mínimo 8 caracteres',
-        'password.same' => 'Senhas não se correspondem'
-    ])]
     public string $password;
 
-    #[RuleLivewire(rule: 'required|same:password', message: [
-        'password_confirmation.required' => 'Campo obrigatório',
-        'password_confirmation.same' => 'Senhas não se correspondem'
-    ])]
     public string $password_confirmation;
 
+    public function rules(): array
+    {
+        return
+            [
+                'name' => ['required'],
+                'cpf' => ['required', 'unique:employees,cpf', 'min:11'],
+                'username' => ['required', 'unique:employees,username'],
+                'office' => ['required'],
+                'wage' => [
+                    'required', function ($attribute, $value, Closure $fail) {
+                        $value = str_replace(',', '.', $value);
+                        if ($value <= 0.00) {
+                            $fail('Valor inválido');
+                        }
+                    },
+                ],                'date_entry' => ['required', 'before_or_equal:today'],
+                'password' => ['required', 'min:8', 'same:password_confirmation'],
+                'password_confirmation' => ['required', 'same:password']
+
+            ];
+    }
+
+    public function messages(): array
+    {
+        return
+            [
+                'name.required' => 'Campo obrigatório',
+                'cpf.required' => 'Campo obrigatório',
+                'cpf.unique' => 'CPF já registrado',
+                'cpf.min' => 'CPF inválido',
+                'username.required' => 'Campo obrigatório',
+                'username.unique' => 'Nome de usuário já registrado',
+                'office.required' => 'Campo obrigatório',
+                'wage.required' => 'Campo obrigatório',
+                'date_entry.required' => 'Campo obrigatório',
+                'name.before_or_equal' => 'Data inválida',
+                'password.required' => 'Campo obrigatório',
+                'password.min' => 'Senha deve conter no mínimo 8 caracteres',
+                'password.same' => 'Senha não se correspodem',
+                'password_confirmation.required' => 'Campo obrigatório',
+                'password_confirmation.same' => 'Senha não se correspodem',
+            ];
+    }
+
+    public function mount(): void
+    {
+        $this->office = '';
+    }
 
     public function create(): RedirectResponse|Redirector
     {
         $this->validate();
 
         $office = Office::firstWhere('name', $this->office);
-        $employee = new Employee;
 
-        if ($office) {
-            $employee = $office->employees()->create([
-                'name' => $this->name,
-                'cpf' => $this->cpf,
-                'username' => $this->username,
-                'wage' => str_replace(',', '.', $this->wage),
-                'date_entry' => $this->date_entry,
-                'password' => Hash::make($this->password),
-            ]);
-        } else {
-            $employee = Employee::create([
-                'name' => $this->name,
-                'cpf' => $this->cpf,
-                'username' => $this->username,
-                'wage' => str_replace(',', '.', $this->wage),
-                'date_entry' => $this->date_entry,
-                'password' => Hash::make($this->password),
-            ]);
-        }
+        $employee = $office->employees()->create([
+            'name' => $this->name,
+            'cpf' => $this->cpf,
+            'username' => $this->username,
+            'wage' => str_replace(',', '.', $this->wage),
+            'date_entry' => $this->date_entry,
+            'password' => Hash::make($this->password),
+        ]);
 
-        if ($this->employeeRoles) {
-            $employee->assignRole($this->employeeRoles);
+
+        if ($this->employee_roles) {
+            $employee->assignRole($this->employee_roles);
         }
 
         if ($employee) {

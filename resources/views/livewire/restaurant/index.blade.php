@@ -2,7 +2,9 @@
     <section class="bg-gray-50 w-full antialiased flex justify-center min-h-[91vh]">
         <div class="w-full sm:w-11/12 p-4 lg:px-12">
             <div class="pb-4 flex justify-center sm:justify-start">
-                <span class="text-4xl font-bold text-[#2A384C]">Restaurantes</span>
+                <span class="text-4xl font-bold text-[#2A384C]">
+                    Restaurantes
+                </span>
             </div>
             <div class="bg-white relative shadow-md sm:rounded-lg">
 
@@ -65,9 +67,15 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr class="overflow-x-hidden">
                                 <th scope="col" class="p-4 w-10"></th>
-                                <th scope="col" class="p-4 w-40 text-center">Restaurante</th>
-                                <th scope="col" class="p-4 text-center">Contato</th>
-                                <th scope="col" class="p-4 w-40 text-center">Última atualização</th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Restaurante
+                                </th>
+                                <th scope="col" class="p-4 text-center">
+                                    Contato
+                                </th>
+                                <th scope="col" class="p-4 w-40 text-center">
+                                    Última atualização
+                                </th>
                                 <th scope="col" class="p-4 w-40"></th>
                             </tr>
                         </thead>
@@ -116,7 +124,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('restaurant.form-view', {'id' : {{ $restaurant->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -127,7 +135,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('restaurant.form-delete', {'id' : {{ $restaurant->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -189,7 +197,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('restaurant.form-view', {'id' : {{ $restaurant->id }}})"
-                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-yellow-500 focus:outline-none rounded-lg border hover:text-white focus:ring-yellow-300 border-yellow-500 hover:bg-yellow-500  focus:z-10 focus:ring-4"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                                 title="Visualizar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
                                                     fill="currentColor" class="w-4 h-4">
@@ -200,7 +208,7 @@
                                             </button>
                                             <button
                                                 wire:click="openModal('restaurant.form-delete', {'id' : {{ $restaurant->id }}})"
-                                                class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center"
+                                                class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 title="Deletar">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">

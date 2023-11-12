@@ -20,7 +20,7 @@ class FormView extends Component
 
     public string $username;
 
-    public Collection $employeeRoles;
+    public Collection $employee_roles;
 
     public ?string $office = '';
 
@@ -32,14 +32,14 @@ class FormView extends Component
 
     public Employee $employee;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
-        $employee = Employee::firstWhere('id', $id);
+        $employee = Employee::find($id);
         $this->employee = $employee;
         $this->name = $employee->name;
         $this->cpf = $employee->cpf;
         $this->username = $employee->username;
-        $this->employeeRoles = $employee->roles;
+        $this->employee_roles = $employee->roles;
         $this->office = $employee->office ? $employee->office->name : $this->office;
         $this->wage = str_replace('.', ',', $employee->wage);
         $this->date_entry = $employee->date_entry;

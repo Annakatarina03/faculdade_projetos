@@ -12,7 +12,7 @@
             <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                class="w-full md:w-auto p-8 text-left transition-all bg-white md:rounded-lg shadow-xl z-40">
+                class="w-screen md:w-auto p-8 text-left transition-all bg-white md:rounded-lg shadow-xl z-40">
                 <div class="flex justify-center items-center rounded-t border-b">
                     @if ($show)
                         @livewire($component, $params)

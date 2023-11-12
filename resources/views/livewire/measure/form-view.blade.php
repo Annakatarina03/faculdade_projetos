@@ -1,6 +1,7 @@
 <div class="min-w-[30vw]">
-    <div class="flex py-4 rounded-t border-b">
+    <div class="flex justify-between items-center py-4 rounded-t border-b">
         <h3 class="text-lg font-semibold text-gray-900">Informações da medida</h3>
+        @include('layouts.components.logo')
     </div>
     <form method="POST" class="py-2">
         @csrf
@@ -26,18 +27,9 @@
                     ])
                         placeholder="Nome da medida" disabled>
                 </div>
-                @error('name')
-                    <div class="absolute bottom-0 flex gap-1 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-red-600" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                        </svg>
-                        <span class="text-red-600 text-sm w-full">{{ $message }}</span>
-                    </div>
-                @enderror
             </div>
         </div>
-        <div class="items-center sm:flex py-4 gap-2">
+        <div class="items-center flex py-4 gap-4">
             <button wire:click.prevent='closeModal'
                 class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
                 <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"

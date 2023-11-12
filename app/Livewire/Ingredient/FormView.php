@@ -18,7 +18,7 @@ class FormView extends Component
 
     public Ingredient $ingredient;
 
-    public function mount($id = null): void
+    public function mount(int $id = null): void
     {
         $ingredient = Ingredient::find($id);
 
