@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 class Revenue extends Model
 {
@@ -29,7 +30,7 @@ class Revenue extends Model
         'creation_date',
         'method_preparation',
         'number_servings',
-        'unpublished_recipe'
+        'unpublished_recipe',
     ];
 
     protected $guarded = [
@@ -62,7 +63,8 @@ class Revenue extends Model
     public function ingredients(): BelongsToMany
     {
         return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'revenue_id', 'ingredient_id')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot(['amount', 'measure_id']);
     }
 
     public function tasting(): BelongsToMany
@@ -70,5 +72,10 @@ class Revenue extends Model
         return $this->belongsToMany(Employee::class, 'recipes_tasting', 'revenue_id', 'taster_id')
             ->withPivot(['tasting_date', 'tasting_note'])
             ->withTimestamps();
+    }
+
+    public function getCreationDateAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
     }
 }

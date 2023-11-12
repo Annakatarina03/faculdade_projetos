@@ -12,6 +12,20 @@ class RecipeIngredient extends Model
 
     protected $table = 'recipe_ingredients';
 
+    protected $fillable = [
+        'ingredient_id',
+        'revenue_id',
+        'measure_id',
+        'amount'
+    ];
+
+    protected $casts = [
+        'ingredient_id' => 'integer',
+        'revenue_id' => 'integer',
+        'measure_id' => 'integer',
+        'amount' => 'integer'
+    ];
+
     public $timestamp = true;
 
     public function revenue(): HasOne
