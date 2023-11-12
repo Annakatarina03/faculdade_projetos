@@ -13,12 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ["Massas", "Bebidas", "Sopas", "Doces e Sobremesas", "Lanches"];
-
-        foreach ($categories as $category) {
-            Category::create([
-                'name' => $category
-            ]);
-        }
+        // 
     }
 }

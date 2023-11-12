@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Office;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -14,7 +13,7 @@ class OfficeSeeder extends Seeder
      */
     public function run(): void
     {
-        $positions = ["Administrador", "Chefe de cozinha", "Degustador", "Publicador"];
+        $positions = ["Administrador"];
 
         foreach ($positions as $office) {
             Office::create([

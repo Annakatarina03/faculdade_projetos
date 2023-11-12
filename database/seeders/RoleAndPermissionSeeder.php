@@ -31,10 +31,10 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'delete-tasting']);
 
 
-        $adminRole = Role::create(['name' => 'Administrador']);
-        $editorRole = Role::create(['name' => 'Editor']);
-        $chefRole = Role::create(['name' => 'Chef de Cozinha']);
-        $tasterRole = Role::create(['name' => 'Degustador']);
+        $adminRole = Role::create(['name' => 'administrador']);
+        $editorRole = Role::create(['name' => 'editor']);
+        $chefRole = Role::create(['name' => 'chefe-de-cozinha']);
+        $tasterRole = Role::create(['name' => 'degustador']);
 
         $adminRole->givePermissionTo([
             'create-employee',

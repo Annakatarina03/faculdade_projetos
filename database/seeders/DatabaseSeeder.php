@@ -24,67 +24,68 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             OfficeSeeder::class,
-            CategorySeeder::class,
-            MeasureSeeder::class,
+            // CategorySeeder::class,
+            // MeasureSeeder::class,
             RoleAndPermissionSeeder::class,
+            EmployeeSeeder::class,
         ]);
 
-        $restaurants = Restaurant::factory(8)
-            ->create();
+        // $restaurants = Restaurant::factory(8)
+        //     ->create();
 
-        $employees = Employee::factory(45)
-            ->create();
+        // $employees = Employee::factory(45)
+        //     ->create();
 
-        $revenues = Revenue::factory()
-            ->count(50)
-            ->recycle($employees)
-            ->has(Image::factory()->count(1))
-            ->create();
+        // $revenues = Revenue::factory()
+        //     ->count(50)
+        //     ->recycle($employees)
+        //     ->has(Image::factory()->count(1))
+        //     ->create();
 
-        $cookbooks = CookBook::factory()
-            ->count(10)
-            ->recycle($employees)
-            ->create();
+        // $cookbooks = CookBook::factory()
+        //     ->count(10)
+        //     ->recycle($employees)
+        //     ->create();
 
-        $revenues->each(fn ($revenue) => $revenue->cookbooks()
-            ->attach(
-                $cookbooks
-                    ->random(1, CookBook::count())
-                    ->value('id')
-            ));
+        // $revenues->each(fn ($revenue) => $revenue->cookbooks()
+        //     ->attach(
+        //         $cookbooks
+        //             ->random(1, CookBook::count())
+        //             ->value('id')
+        //     ));
 
-        $restaurants->each(fn ($restaurant) => $restaurant
-            ->employees()
-            ->attach(
-                $employees->random(1, Employee::count())->value('id'),
-                [
-                    'date_entry' => $faker->dateTimeBetween('-30 years', '-10 years'),
-                    'resignation_date' => $faker->dateTimeBetween('-2 years', 'now')
-                ]
-            ));
+        // $restaurants->each(fn ($restaurant) => $restaurant
+        //     ->employees()
+        //     ->attach(
+        //         $employees->random(1, Employee::count())->value('id'),
+        //         [
+        //             'date_entry' => $faker->dateTimeBetween('-30 years', '-10 years'),
+        //             'resignation_date' => $faker->dateTimeBetween('-2 years', 'now')
+        //         ]
+        //     ));
 
-        $revenues->each(fn ($revenue) => $revenue
-            ->tasting()
-            ->attach(
-                Employee::whereHas('office', fn ($office) => $office->where('description', 'Degustador'))->inRandomOrder()->value('id'),
-                [
-                    'tasting_date' => $faker->date(),
-                    'tasting_note' => $faker->randomFloat(2, 0, 10)
-                ]
-            ));
+        // $revenues->each(fn ($revenue) => $revenue
+        //     ->tasting()
+        //     ->attach(
+        //         Employee::whereHas('office', fn ($office) => $office->where('description', 'Degustador'))->inRandomOrder()->value('id'),
+        //         [
+        //             'tasting_date' => $faker->date(),
+        //             'tasting_note' => $faker->randomFloat(2, 0, 10)
+        //         ]
+        //     ));
 
-        $ingredients = Ingredient::factory()
-            ->count(15)
-            ->create();
+        // $ingredients = Ingredient::factory()
+        //     ->count(15)
+        //     ->create();
 
-        $revenues->each(fn ($revenue) => $revenue
-            ->ingredients()
-            ->attach(
-                $ingredients->random(1, Ingredient::count())->value('id'),
-                [
-                    'amount' => $faker->randomDigit,
-                    'measure_id' => rand(1, Measure::count())
-                ]
-            ));
+        // $revenues->each(fn ($revenue) => $revenue
+        //     ->ingredients()
+        //     ->attach(
+        //         $ingredients->random(1, Ingredient::count())->value('id'),
+        //         [
+        //             'amount' => $faker->randomDigit,
+        //             'measure_id' => rand(1, Measure::count())
+        //         ]
+        //     ));
     }
 }

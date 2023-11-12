@@ -13,12 +13,6 @@ class MeasureSeeder extends Seeder
      */
     public function run(): void
     {
-        $measures = ['xícara', 'colher (chá)', 'colher (sopa)', 'colher (café)', 'ml', 'kg'];
-
-        foreach ($measures as $measure) {
-            Measure::create([
-                'name' => $measure
-            ]);
-        }
+        //    
     }
 }
