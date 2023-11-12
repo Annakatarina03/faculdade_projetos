@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\RecipeTasting\ScheduleTasting;
+namespace App\Livewire\RecipeTasting\MyTasting;
 
 use App\Models\Employee;
 use App\Models\RecipeTasting;
@@ -33,7 +33,7 @@ class FormCreate extends Component
 
     public string $taster_name;
 
-    public string $tasting_date;
+    public ?string $tasting_note;
 
     public string $average_grade;
 
@@ -45,7 +45,7 @@ class FormCreate extends Component
     {
         return
             [
-                'tasting_date' => ['required', 'after_or_equal:today']
+                'tasting_note' => ['required'],
             ];
     }
 
@@ -53,8 +53,7 @@ class FormCreate extends Component
     {
         return
             [
-                'tasting_date.required' => 'Campo obrigatório',
-                'tasting_date.after_or_equal' => 'Data inválida'
+                'tasting_note.required' => 'Campo obrigatório',
             ];
     }
 
@@ -68,18 +67,19 @@ class FormCreate extends Component
 
             $this->taster
                 ->tastingRevenues()
-                ->attach($this->revenue->id, [
-                    'tasting_date' => $this->tasting_date
+                ->updateExistingPivot($this->revenue->id, [
+                    'tasting_note' => (float) str_replace(",", ".", $this->tasting_note)
                 ]);
+
             DB::commit();
             return redirect()
-                ->route('tasting.revenues-schedule-tasting')
-                ->with('success', 'Degustação marcada com sucesso');
+                ->route('tasting.revenues-my-tasting')
+                ->with('success', 'Degustação avaliada com sucesso');
         } catch (UniqueConstraintViolationException $e) {
             DB::rollBack();
             return redirect()
-                ->route('tasting.revenues-schedule-tasting')
-                ->with('error', 'Erro na marcação da degustação');
+                ->route('tasting.revenues-my-tasting')
+                ->with('error', 'Erro na avaliação da degustação');
         }
     }
 
@@ -87,6 +87,7 @@ class FormCreate extends Component
     {
         $total_notes = $recipe_tastings
             ->reduce(fn ($total, $recipe_tasting) => ($total + $recipe_tasting->tasting_note));
+
         return $total_notes ? $total_notes / $recipe_tastings->count() : 0;
     }
 
@@ -94,7 +95,9 @@ class FormCreate extends Component
     {
         $this->taster = Employee::find(Auth::user()->id);
         $this->revenue = Revenue::find($id);
-        $recipe_tastings = RecipeTasting::where('revenue_id', $this->revenue->id)->get();
+        $recipe_tastings = RecipeTasting::where('revenue_id', $this->revenue->id)
+            ->whereNotNull('tasting_note')
+            ->get();
         $this->recipe_name = $this->revenue->name;
         $this->chef_name = $this->revenue->chef->name;
         $this->number_servings = $this->revenue->number_servings;
@@ -102,10 +105,16 @@ class FormCreate extends Component
         $this->creation_date = $this->revenue->creation_date;
         $this->taster_name = $this->taster->name;
         $this->average_grade = number_format($this->calculateNote($recipe_tastings), 1, ',', '.');
+
+        $this->tasting_note = $recipe_tastings
+            ->where('taster_id', $this->taster->id)
+            ->pluck('tasting_note')->first();
+        $this->tasting_note = $this->tasting_note ? number_format($this->tasting_note, 1, ',', '.') : null;
     }
 
     public function render(): View
     {
-        return view('livewire.recipe-tasting.schedule-tasting.form-create');
+
+        return view('livewire.recipe-tasting.my-tasting.form-create');
     }
 }

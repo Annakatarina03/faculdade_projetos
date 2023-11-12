@@ -13,7 +13,7 @@ class RecipeTastingController extends Controller
      */
     public function index(): View
     {
-        return view('senac.recipe-tasting.schedule-tasting.index');
+        return view('senac.recipe-tasting.schedule-tasting');
     }
 
     /**
