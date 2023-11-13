@@ -334,7 +334,7 @@
                                 <path
                                     d="M50.9 17.5c-1.5.8-3.2 2.9-3.8 4.6-1.2 3.4-1.7 107.9-.5 107.9.6 0 54.1 10.2 60.7 11.6l2.7.6V83.7 25.2l-2.7-.6c-5.8-1.2-51.2-8.6-52.5-8.6-.7.1-2.5.7-3.9 1.5zm103.1 2L128.3 24l-7.3 1.2v58.4l.8 58.4c.7 0 48.2-9.1 58-11.1l5.2-1v-54-54.1l-2.9-2.9c-3.7-3.6-4.4-3.6-28.1.6zM23.4 22.8c-1.2.2-3.2 1.4-4.5 2.8l-2.4 2.6-.3 59.8.7 62.3c.6 1.4 2.1 3.3 3.3 4.1 1.3.9 23.3 5.8 48.9 11l46.5 9.4 46.7-9.4 48.6-10.4c1.2-.6 2.5-1.9 3.1-3 1.4-2.7 1.4-122.4-.1-125.2-1.8-3.4-6.6-4.8-12.6-3.6l-5.3 1.1v54.9c0 59.9.1 59.4-5.7 61.6-1.5.6-18.9 4.3-38.5 8.2l-35.8 7.1-35.8-7c-19.6-3.9-37.3-7.9-39.2-8.9-2.4-1.1-3.9-2.8-4.7-5.2-.9-2.5-1.2-18.4-1.2-57.3L34.3 24c-.5-.1-2.6-.4-4.8-.8s-5-.6-6.1-.4z" />
                             </svg>
-                            Publicações
+                            Livros
                         </a>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
@@ -372,6 +372,52 @@
                         </div>
                     </div>
                 @endrole
+
+                @role('editor')
+                    <div class="dashboard-nav-dropdown relative flex flex-col">
+                        <a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 512 512">
+                                <path
+                                    d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H296c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z" />
+                            </svg>
+                            Publicações
+                        </a>
+                        <div class='dashboard-nav-dropdown-menu hidden flex-col'>
+                            <div class="w-full pl-8">
+                                <a href="{{ route('cookbooks.my-cookbooks') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('cookbooks/my-cookbooks') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H296c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Minhas publicações
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-full pl-8">
+                                <a href=""
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('') ? 'active' : '' }}">
+                                    <div class="dashboard-nav-dropdown-item-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H296c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H384c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z" />
+                                        </svg>
+                                    </div>
+                                    <div class="row-text-link flex w-[120px]">
+                                        Todas as publicações
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endrole
+
             </nav>
             <div class="w-full flex justify-center sm:justify-start lg:justify-center px-6">
                 <div
