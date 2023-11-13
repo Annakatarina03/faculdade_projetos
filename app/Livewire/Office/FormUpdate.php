@@ -62,16 +62,15 @@ class FormUpdate extends Component
     public function mount(int $id = null)
     {
 
-        $office = Office::find($id);
-        if (!$office) {
+        $this->office = Office::find($id);
+        if (!$this->office) {
             return redirect()
                 ->route('admin.positions.index')
                 ->with('error', 'Cargo não registrado');
         }
 
-        $this->office = $office;
-        $this->name = $office->name;
-        $this->description = $office->description;
+        $this->name = $this->office->name;
+        $this->description = $this->office->description;
     }
 
     public function render(): View

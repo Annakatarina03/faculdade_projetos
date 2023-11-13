@@ -3,19 +3,15 @@
 namespace App\Livewire\Revenue\MyRevenue;
 
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Ingredient;
 use App\Models\Measure;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Illuminate\Support\Str;
 
 class FormUpdate extends Component
 {
@@ -53,7 +49,6 @@ class FormUpdate extends Component
                 'category' => ['required'],
                 'method_preparation' => ['required'],
                 'recipe_ingredients.*.ingredient' => ['required', 'distinct'],
-                'recipe_ingredients.*.amount' => ['integer', 'min:1'],
             ];
     }
 
@@ -67,7 +62,6 @@ class FormUpdate extends Component
                 'method_preparation.required' => 'Campo obrigatório',
                 'recipe_ingredients.*.ingredient.required' => 'Campo obrigatório',
                 'recipe_ingredients.*.ingredient.distinct' => 'Ingrediente já adicionado',
-                'recipe_ingredients.*.amount.min' => 'Valor inválido',
             ];
     }
     public function add(): void
@@ -100,12 +94,15 @@ class FormUpdate extends Component
                 fn ($recipe_ingredient) =>
                 [
                     'ingredient_id' => Ingredient::firstWhere('name', $recipe_ingredient['ingredient'])->id,
-                    'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
-                    'measure_id' => $recipe_ingredient['measure'] ?  Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
+                    'amount' => $recipe_ingredient['amount']  ? (int) $recipe_ingredient['amount'] : null,
+                    'measure_id' => $recipe_ingredient['measure'] ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
                 ]
             );
 
+
+
         $this->revenue->ingredients()->sync($recipe_ingredients);
+
 
         if ($this->image_recipe) {
             if ($this->revenue->images()->first()) {
@@ -124,7 +121,6 @@ class FormUpdate extends Component
             'creation_date' => $this->creation_date,
             'method_preparation' => $this->method_preparation,
             'number_servings' => $this->number_servings ? $this->number_servings : null,
-            'unpublished_recipe' => Revenue::where('name', $this->recipe_name)->first() === null ? true : false
         ]);
 
         if ($updated_revenue) {
@@ -155,7 +151,7 @@ class FormUpdate extends Component
                 [
                     'ingredient' => Ingredient::find($recipe_ingredient->ingredient_id)->name,
                     'measure' => $recipe_ingredient->measure_id ? Measure::find($recipe_ingredient->measure_id)->name : '',
-                    'amount' => $recipe_ingredient->amount
+                    'amount' => $recipe_ingredient->amount ? $recipe_ingredient->amount : ''
                 ]
             )->toArray();
     }

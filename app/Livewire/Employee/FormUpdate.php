@@ -84,6 +84,11 @@ class FormUpdate extends Component
     public function update(): RedirectResponse|Redirector
     {
         $this->validate();
+
+        /**
+         * @var Office $employee_office
+         */
+
         $employee_office = Office::firstWhere('name', $this->office);
 
         $this->employee->office()->associate($employee_office);
@@ -115,22 +120,21 @@ class FormUpdate extends Component
     public function mount(int $id = null)
     {
 
-        $employee = Employee::find($id);
+        $this->employee = Employee::find($id);
 
-        if (!$employee) {
+        if (!$this->employee) {
             return redirect()
                 ->route('admin.employees.index')
                 ->with('error', 'Funcionário não registrado');
         }
-        $this->employee = $employee;
-        $this->name = $employee->name;
-        $this->cpf = $employee->cpf;
-        $this->username = $employee->username;
-        $this->employee_roles = $employee->roles->pluck('name')->toArray();
-        $this->office = $employee->office ? $employee->office->name : $this->office;
-        $this->wage = str_replace('.', ',', $employee->wage);
-        $this->date_entry = $employee->date_entry;
-        $this->status = $employee->status;
+        $this->name = $this->employee->name;
+        $this->cpf = $this->employee->cpf;
+        $this->username = $this->employee->username;
+        $this->employee_roles = $this->employee->roles->pluck('name')->toArray();
+        $this->office = $this->employee->office ? $this->employee->office->name : $this->office;
+        $this->wage = str_replace('.', ',', $this->employee->wage);
+        $this->date_entry = $this->employee->date_entry;
+        $this->status = $this->employee->status;
         $this->password = '';
     }
 

@@ -34,16 +34,17 @@ class FormView extends Component
 
     public function mount(int $id = null): void
     {
-        $employee = Employee::find($id);
-        $this->employee = $employee;
-        $this->name = $employee->name;
-        $this->cpf = $employee->cpf;
-        $this->username = $employee->username;
-        $this->employee_roles = $employee->roles;
-        $this->office = $employee->office ? $employee->office->name : $this->office;
-        $this->wage = str_replace('.', ',', $employee->wage);
-        $this->date_entry = $employee->date_entry;
-        $this->status = $employee->status;
+
+        $this->employee = Employee::find($id);
+
+        $this->name = $this->employee->name;
+        $this->cpf = $this->employee->cpf;
+        $this->username = $this->employee->username;
+        $this->employee_roles = $this->employee->roles;
+        $this->office = $this->employee->office ? $this->employee->office->name : $this->office;
+        $this->wage = str_replace('.', ',', $this->employee->wage);
+        $this->date_entry = $this->employee->date_entry;
+        $this->status = $this->employee->status;
     }
 
     public function render(): View

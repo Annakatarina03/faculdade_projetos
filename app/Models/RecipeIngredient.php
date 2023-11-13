@@ -26,6 +26,8 @@ class RecipeIngredient extends Model
         'amount' => 'integer'
     ];
 
+    protected $primaryKey = ['revenue_id', 'ingredient_id'];
+
     public $timestamp = true;
 
     public function revenue(): HasOne

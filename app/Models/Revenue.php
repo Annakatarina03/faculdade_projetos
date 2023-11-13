@@ -63,8 +63,8 @@ class Revenue extends Model
     public function ingredients(): BelongsToMany
     {
         return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'revenue_id', 'ingredient_id')
-            ->withTimestamps()
-            ->withPivot(['amount', 'measure_id']);
+            ->withPivot(['amount', 'measure_id'])
+            ->withTimestamps();
     }
 
     public function tasting(): BelongsToMany

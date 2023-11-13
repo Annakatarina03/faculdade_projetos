@@ -37,15 +37,15 @@ class FormUpdate extends Component
 
     public function mount(int $id = null)
     {
-        $employee = Employee::find($id);
 
-        if (!$employee) {
+        $this->employee = Employee::find($id);
+
+        if (!$this->employee) {
             return redirect()
                 ->route('profile')
                 ->with('error', 'Funcionário não registrado');
         }
-        $this->employee = $employee;
-        $this->fantasy_name = $employee->fantasy_name;
+        $this->fantasy_name = $this->employee->fantasy_name;
     }
 
     public function render(): View

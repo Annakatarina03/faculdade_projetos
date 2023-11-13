@@ -54,19 +54,18 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização da Categoria');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
 
-        $category = Category::find($id);
+        $this->category = Category::find($id);
 
-        if (!$category) {
+        if (!$this->category) {
             return redirect()->route('admin.categories.index')
                 ->with('error', 'Categoria não registrada');
         }
 
-        $this->category = $category;
 
-        $this->name = $category->name;
+        $this->name = $this->category->name;
     }
 
     public function render(): View

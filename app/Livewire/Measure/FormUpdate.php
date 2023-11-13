@@ -57,16 +57,15 @@ class FormUpdate extends Component
     public function mount(int $id = null)
     {
 
-        $measure = Measure::find($id);
+        $this->measure = Measure::find($id);
 
-        if (!$measure) {
+        if (!$this->measure) {
             return redirect()
                 ->route('admin.measures.index')
                 ->with('error', 'Medida não registrada');
         }
 
-        $this->measure = $measure;
-        $this->name = $measure->name;
+        $this->name = $this->measure->name;
     }
 
     public function render(): View

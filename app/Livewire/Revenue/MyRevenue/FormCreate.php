@@ -64,7 +64,6 @@ class FormCreate extends Component
                 'method_preparation.required' => 'Campo obrigatório',
                 'recipe_ingredients.*.ingredient.required' => 'Campo obrigatório',
                 'recipe_ingredients.*.ingredient.distinct' => 'Ingrediente já adicionado',
-                'recipe_ingredients.*.amount.min' => 'Valor inválido',
             ];
     }
 
@@ -97,22 +96,20 @@ class FormCreate extends Component
                 'creation_date' => $this->creation_date,
                 'method_preparation' => $this->method_preparation,
                 'number_servings' => $this->number_servings ? $this->number_servings : null,
-                'unpublished_recipe' => Revenue::where('name', $this->recipe_name)->first() === null ? true : false
+                'unpublished_recipe' => Revenue::firstWhere('name', $this->recipe_name) === null ? true : false
             ]
         );
 
-        collect($this->recipe_ingredients)
+        $recipe_ingredients = collect($this->recipe_ingredients)
             ->map(fn ($recipe_ingredient) =>
             [
-                RecipeIngredient::create(
-                    [
-                        'ingredient_id' => Ingredient::firstWhere('name', $recipe_ingredient['ingredient'])->id,
-                        'revenue_id' => $revenue->id,
-                        'measure_id' => $recipe_ingredient['measure']  ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
-                        'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
-                    ]
-                )
+                'ingredient_id' => Ingredient::firstWhere('name', $recipe_ingredient['ingredient'])->id,
+                'revenue_id' => $revenue->id,
+                'measure_id' => $recipe_ingredient['measure']  ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
+                'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
             ]);
+
+        $revenue->ingredients()->attach($recipe_ingredients);
 
 
         if ($this->image_recipe) {

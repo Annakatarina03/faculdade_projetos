@@ -286,7 +286,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="pb-3.5">
+                                    <div class="pt-3">
                                         <button wire:click.prevent="del({{ $index }})"
                                             class="flex items-center justify-center text-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium text-sm px-2 py-2 text-center"
                                             title="Deletar">

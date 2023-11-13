@@ -60,17 +60,16 @@ class FormUpdate extends Component
     public function mount(int $id = null)
     {
 
-        $ingredient = Ingredient::find($id);
+        $this->ingredient = Ingredient::find($id);
 
-        if (!$ingredient) {
+        if (!$this->ingredient) {
             return redirect()
                 ->route('admin.ingredients.index')
                 ->with('error', 'Ingrediente não registrado');
         }
 
-        $this->ingredient = $ingredient;
-        $this->name = $ingredient->name;
-        $this->description = $ingredient->description;
+        $this->name = $this->ingredient->name;
+        $this->description =  $this->ingredient->description;
     }
 
     public function render(): View

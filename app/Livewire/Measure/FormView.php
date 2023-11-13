@@ -18,10 +18,8 @@ class FormView extends Component
 
     public function mount(int $id = null): void
     {
-        $measure = Measure::find($id);
-
-        $this->measure = $measure;
-        $this->name = $measure->name;
+        $this->measure = Measure::find($id);
+        $this->name = $this->measure->name;
     }
 
     public function render(): View

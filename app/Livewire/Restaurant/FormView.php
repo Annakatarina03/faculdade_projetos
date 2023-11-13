@@ -20,11 +20,9 @@ class FormView extends Component
 
     public function mount($id = null): void
     {
-        $restaurant = Restaurant::find($id);
-
-        $this->restaurant = $restaurant;
-        $this->name = $restaurant->name;
-        $this->contact = $restaurant->contact;
+        $this->restaurant = Restaurant::find($id);
+        $this->name =  $this->restaurant->name;
+        $this->contact =  $this->restaurant->contact;
     }
 
     public function render(): View

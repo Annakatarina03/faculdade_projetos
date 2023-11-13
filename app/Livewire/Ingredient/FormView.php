@@ -20,11 +20,10 @@ class FormView extends Component
 
     public function mount(int $id = null): void
     {
-        $ingredient = Ingredient::find($id);
 
-        $this->ingredient = $ingredient;
-        $this->name = $ingredient->name;
-        $this->description = $ingredient->description;
+        $this->ingredient = Ingredient::find($id);
+        $this->name = $this->ingredient->name;
+        $this->description = $this->ingredient->description;
     }
 
     public function render(): View

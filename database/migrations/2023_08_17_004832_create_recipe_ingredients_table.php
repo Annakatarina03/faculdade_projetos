@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->smallInteger('amount')->nullable()->comment('Quantidade do ingrediente na receita');
 
-            $table->primary(['ingredient_id', 'revenue_id']);
+            $table->index(['ingredient_id', 'revenue_id']);
 
             $table->timestamps();
         });

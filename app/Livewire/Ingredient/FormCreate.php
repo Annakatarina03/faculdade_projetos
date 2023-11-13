@@ -39,6 +39,11 @@ class FormCreate extends Component
     {
         $this->validate();
 
+        /**
+         * @var Ingredient $ingredient
+         */
+
+
         $ingredient = Ingredient::create([
             'name' => $this->name,
             'description' => $this->description

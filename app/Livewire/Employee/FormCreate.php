@@ -87,7 +87,16 @@ class FormCreate extends Component
     {
         $this->validate();
 
+        /**
+         * @var Office $office
+         */
+
         $office = Office::firstWhere('name', $this->office);
+
+        /**
+         * @var Employee $employee
+         */
+
 
         $employee = $office->employees()->create([
             'name' => $this->name,

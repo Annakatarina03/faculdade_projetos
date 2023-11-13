@@ -18,10 +18,8 @@ class FormView extends Component
 
     public function mount($id = null): void
     {
-        $category = Category::find($id);
-
-        $this->category = $category;
-        $this->name = $category->name;
+        $this->category = Category::find($id);
+        $this->name = $this->category->name;
     }
 
     public function render(): View

@@ -20,11 +20,9 @@ class FormView extends Component
 
     public function mount(int $id = null): void
     {
-        $office = Office::find($id);
-
-        $this->office = $office;
-        $this->name = $office->name;
-        $this->description = $office->description;
+        $this->office = Office::find($id);
+        $this->name = $this->office->name;
+        $this->description = $this->office->description;
     }
 
     public function render(): View
