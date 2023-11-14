@@ -83,6 +83,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-update');
+        return view('livewire.cook-book.my-cook-books.form-update');
     }
 }

@@ -30,6 +30,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-view');
+        return view('livewire.cook-book.my-cook-books.form-view');
     }
 }

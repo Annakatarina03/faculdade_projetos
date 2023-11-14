@@ -80,6 +80,6 @@ class FormCreate extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-create');
+        return view('livewire.cook-book.my-cook-books.form-create');
     }
 }

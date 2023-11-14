@@ -54,6 +54,6 @@ class FormDelete extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-delete');
+        return view('livewire.cook-book.my-cook-books.form-delete');
     }
 }

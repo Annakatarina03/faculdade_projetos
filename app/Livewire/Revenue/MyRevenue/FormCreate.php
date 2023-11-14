@@ -5,11 +5,9 @@ namespace App\Livewire\Revenue\MyRevenue;
 use App\Models\Category;
 use App\Models\Ingredient;
 use App\Models\Measure;
-use App\Models\RecipeIngredient;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -107,10 +105,9 @@ class FormCreate extends Component
                 'revenue_id' => $revenue->id,
                 'measure_id' => $recipe_ingredient['measure']  ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
                 'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
-            ]);
+            ])->pluck(null, 'ingredient_id');
 
         $revenue->ingredients()->attach($recipe_ingredients);
-
 
         if ($this->image_recipe) {
             $extension_file = $this->image_recipe->getClientOriginalExtension();

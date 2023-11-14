@@ -314,23 +314,23 @@
                         <label for="method_preparation" class="block mb-2 text-sm font-medium text-gray-900">
                             Modo de preparo <span class="text-red-500" title="Campo obrigatório">*</span>
                         </label>
-                        <textarea @class([
-                            'bg-gray-50',
-                            'mb-2',
-                            'border-1',
-                            'border-gray-300',
-                            'border-red-500' => $errors->has('method_preparation'),
-                            'text-gray-900',
-                            'text-sm rounded-lg',
-                            'focus:ring-blue-600',
-                            'focus:border-blue-600',
-                            'block',
-                            'w-full',
-                            'p-2.5',
-                            'rounded-xl',
-                            'resize-none',
-                        ]) id="method_preparation" name="method_preparation" cols="40"
-                            rows="8" wire:model.live="method_preparation"></textarea>
+                        <textarea id="method_preparation" name="method_preparation" cols="40" rows="8"
+                            wire:model.live="method_preparation" @class([
+                                'bg-gray-50',
+                                'mb-2',
+                                'border-1',
+                                'border-gray-300',
+                                'border-red-500' => $errors->has('method_preparation'),
+                                'text-gray-900',
+                                'text-sm rounded-lg',
+                                'focus:ring-blue-600',
+                                'focus:border-blue-600',
+                                'block',
+                                'w-full',
+                                'p-2.5',
+                                'rounded-xl',
+                                'resize-none',
+                            ])></textarea>
                     </div>
                     @error('method_preparation')
                         <div class="absolute bottom-0 flex gap-1 items-center">
@@ -338,7 +338,9 @@
                                 <path
                                     d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                             </svg>
-                            <span class="text-red-600 text-sm w-full">{{ $message }}</span>
+                            <span class="text-red-600 text-sm w-full">
+                                {{ $message }}
+                            </span>
                         </div>
                     @enderror
                 </div>
@@ -364,7 +366,7 @@
                         ])>
                             <div class="flex flex-col items-center justify-center">
                                 @if ($image_recipe)
-                                    <img class="w-full rounded-lg" src="{{ $image_recipe->temporaryUrl() }}"
+                                    <img class="w-96 max-h-36 rounded-lg" src="{{ $image_recipe->temporaryUrl() }}"
                                         alt="{{ $recipe_name }}">
                                 @else
                                     <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true"

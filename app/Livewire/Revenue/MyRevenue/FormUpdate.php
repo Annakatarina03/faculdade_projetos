@@ -8,6 +8,7 @@ use App\Models\Measure;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -97,12 +98,9 @@ class FormUpdate extends Component
                     'amount' => $recipe_ingredient['amount']  ? (int) $recipe_ingredient['amount'] : null,
                     'measure_id' => $recipe_ingredient['measure'] ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
                 ]
-            );
-
-
+            )->pluck(null, 'ingredient_id');
 
         $this->revenue->ingredients()->sync($recipe_ingredients);
-
 
         if ($this->image_recipe) {
             if ($this->revenue->images()->first()) {
@@ -143,7 +141,6 @@ class FormUpdate extends Component
         $this->category = $this->revenue->category->name;
         $this->creation_date = $this->revenue->creation_date;
         $this->method_preparation = $this->revenue->method_preparation;
-
         $this->recipe_ingredients = $this->revenue->ingredients
             ->pluck('pivot')
             ->map(

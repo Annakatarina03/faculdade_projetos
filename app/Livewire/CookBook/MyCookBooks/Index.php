@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\CookBook\MyCookBooks;
+namespace App\Livewire\Cookbook\MyCookBooks;
 
 use App\Models\CookBook;
 use App\Traits\WithModal;
@@ -22,6 +22,6 @@ class Index extends Component
             ->paginate(5)
             ->onEachSide(0);
 
-        return view('livewire.cookbook.my-cookbooks.index', compact(['cookbooks']));
+        return view('livewire.cook-book.my-cook-books.index', compact(['cookbooks']));
     }
 }
