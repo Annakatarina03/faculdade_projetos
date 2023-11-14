@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
      * Cookbooks routes
      */
 
-    Route::get('/cookbooks/my-cookbooks', [MyCookBook::class, 'index'])->name('cookbooks.my-cookbooks');
+    Route::get('/cookbooks/my-cookbooks', [MyCookBook::class, 'index'])->name('cookbook.my-cookbooks');
 });
 
 
