@@ -338,8 +338,8 @@
                         </a>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
-                                <a href="{{ route('cookbooks.my-cookbooks') }}"
-                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('cookbooks/my-cookbooks') ? 'active' : '' }}">
+                                <a href="{{ route('cookbook.cookbooks') }}"
+                                    class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('cookbook/my-cookbooks') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
                                             viewBox="0 0 237 191" preserveAspectRatio="xMidYMid meet"
@@ -354,7 +354,7 @@
                                 </a>
                             </div>
                             <div class="w-full pl-8">
-                                <a href=""
+                                <a href="{{ route('cookbook.cookbooks') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white"
@@ -385,7 +385,7 @@
                         </a>
                         <div class='dashboard-nav-dropdown-menu hidden flex-col'>
                             <div class="w-full pl-8">
-                                <a href="{{ route('cookbooks.my-cookbooks') }}"
+                                <a href="{{ route('cookbook.my-cookbooks') }}"
                                     class="dashboard-nav-dropdown-item min-h-[40px] pt-2 pr-4 pb-2 pl-6 flex justify-start items-center transition ease-out duration-500 gap-3 hover:bg-[#8E9FAE] {{ Request::is('cookbooks/my-cookbooks') ? 'active' : '' }}">
                                     <div class="dashboard-nav-dropdown-item-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white"
