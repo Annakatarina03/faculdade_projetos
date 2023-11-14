@@ -63,12 +63,12 @@ class FormUpdate extends Component
 
         if ($cookbook) {
             return redirect()
-                ->route('cookbooks.my-cookbooks')
+                ->route('cookbook.my-cookbooks')
                 ->with('success', 'Livro de receitas atualizado com sucesso');
         }
 
         return redirect()
-            ->route('cookbooks.my-cookbooks')
+            ->route('cookbook.my-cookbooks')
             ->with('error', 'Erro na atualização do livro de receitas');
     }
 

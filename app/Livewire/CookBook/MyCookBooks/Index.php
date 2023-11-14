@@ -17,7 +17,8 @@ class Index extends Component
 
     public function render(): View
     {
-        $cookbooks = CookBook::where([['title', 'like', "%$this->search%"]])
+        $cookbooks = CookBook::where('id', auth()->user()->id)
+            ->where([['title', 'like', "%$this->search%"]])
             ->orderBy('title')
             ->paginate(5)
             ->onEachSide(0);
