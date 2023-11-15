@@ -27,7 +27,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        $office = $this->office;
-        return view('livewire.office.form-view', compact(['office']));
+        return view('livewire.office.form-view');
     }
 }

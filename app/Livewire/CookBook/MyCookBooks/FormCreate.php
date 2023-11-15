@@ -73,7 +73,6 @@ class FormCreate extends Component
     public function  mount(): void
     {
         $faker = Faker::create();
-
         $this->isbn = $faker->isbn13();
         $this->editor = auth()->user()->name;
     }

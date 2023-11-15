@@ -7,7 +7,7 @@ use App\Traits\WithModal;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 
 class FormDelete extends Component
 {

@@ -66,8 +66,7 @@ class Index extends Component
 
     public function render(): View
     {
-        $positions = Office::all();
-
+        $positions = Office::all()->sortBy('name');
         return view('livewire.employee.profile.index', compact(['positions']));
     }
 }

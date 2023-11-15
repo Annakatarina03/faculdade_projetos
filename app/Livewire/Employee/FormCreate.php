@@ -3,6 +3,7 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Office;
+use App\Models\Restaurant;
 use App\Traits\WithModal;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -34,6 +35,8 @@ class FormCreate extends Component
 
     public string $password_confirmation;
 
+    public array $employees_restaurant = [];
+
     public function rules(): array
     {
         return
@@ -51,8 +54,10 @@ class FormCreate extends Component
                     },
                 ],                'date_entry' => ['required', 'before_or_equal:today'],
                 'password' => ['required', 'min:8', 'same:password_confirmation'],
-                'password_confirmation' => ['required', 'same:password']
-
+                'password_confirmation' => ['required', 'same:password'],
+                'employees_restaurant.*.restaurant' => ['required', 'distinct'],
+                'employees_restaurant.*.date_entry' => ['required', 'before_or_equal:today'],
+                'employees_restaurant.*.resignation_date' => ['before_or_equal:today']
             ];
     }
 
@@ -75,12 +80,35 @@ class FormCreate extends Component
                 'password.same' => 'Senha não se correspodem',
                 'password_confirmation.required' => 'Campo obrigatório',
                 'password_confirmation.same' => 'Senha não se correspodem',
+                'employees_restaurant.*.restaurant.required' => 'Campo obrigatório',
+                'employees_restaurant.*.restaurant.distinct' => 'Restaurante já adicionado',
+                'employees_restaurant.*.date_entry.required' => 'Campo obrigatório',
+                'employees_restaurant.*.date_entry.before_or_equal' => 'Data inválida',
+                'employees_restaurant.*.resignation_date.before_or_equal' => 'Data inválida',
             ];
+    }
+
+    public function add(): void
+    {
+        $this->employees_restaurant[] =
+            [
+                'restaurant' => '',
+                'date_entry' => '',
+                'resignation_date' => '',
+            ];
+    }
+
+    public function del(int $index): void
+    {
+        unset($this->employees_restaurant[$index]);
+        $this->employees_restaurant = array_values($this->employees_restaurant);
+        $this->resetValidation("employees_restaurant.$index");
     }
 
     public function mount(): void
     {
         $this->office = '';
+        $this->employees_restaurant = [];
     }
 
     public function create(): RedirectResponse|Redirector
@@ -107,6 +135,15 @@ class FormCreate extends Component
             'password' => Hash::make($this->password),
         ]);
 
+        $employees_restaurant = collect($this->employees_restaurant)
+            ->map(fn ($employee_restaurant) =>
+            [
+                'restaurant_id' => Restaurant::firstWhere('name', $employee_restaurant['restaurant'])->id,
+                'date_entry' =>  $employee_restaurant['date_entry'],
+                'resignation_date' =>  $employee_restaurant['resignation_date'] ? $employee_restaurant['resignation_date'] : null
+            ]);
+
+        $employee->restaurants()->attach($employees_restaurant);
 
         if ($this->employee_roles) {
             $employee->assignRole($this->employee_roles);
@@ -125,9 +162,10 @@ class FormCreate extends Component
 
     public function render(): View
     {
-        $positions = Office::all();
-        $roles = Role::all();
+        $positions = Office::all()->sortBy('name');
+        $roles = Role::all()->sortBy('name');
+        $restaurants = Restaurant::all()->sortBy('name');
 
-        return view('livewire.employee.form-create', compact(['positions', 'roles']));
+        return view('livewire.employee.form-create', compact(['positions', 'roles', 'restaurants']));
     }
 }

@@ -13,13 +13,14 @@ class FormDelete extends Component
 {
     use WithModal;
 
+    public bool $has_employees;
+
     public Office $office;
-    public bool $is_employees;
 
     public function mount(int $id): void
     {
         $this->office = Office::find($id);
-        $this->is_employees = !empty($this->office->employees()->get()->toArray());
+        $this->has_employees = !$this->office->employees()->get()->isEmpty();
     }
 
     public function delete(Office $office): RedirectResponse|Redirector
@@ -32,7 +33,7 @@ class FormDelete extends Component
         }
 
 
-        if ($this->is_employees) {
+        if ($this->has_employees) {
             return redirect()
                 ->route('admin.positions.index')
                 ->with('error', 'Existe funcionários vinculados a esse cargo');

@@ -17,10 +17,15 @@ class Index extends Component
 
     public function render(): View
     {
-        $cookbooks = CookBook::where([['title', 'like', "%$this->search%"]])
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $cookbooks
+         */
+
+        $cookbooks = CookBook::where('title', 'like', "%$this->search%")
             ->orderBy('title')
             ->paginate(5)
             ->onEachSide(0);
+
         return view('livewire.cook-book.cook-books.index', compact(['cookbooks']));
     }
 }

@@ -63,8 +63,11 @@ class FormUpdate extends Component
             ->with('error', 'Erro na atualização do restaurante');
     }
 
-    public function mount($id = null)
+    public function mount(int $id = null)
     {
+        /**
+         * @var Restaurant $restaurant
+         */
 
         $restaurant = Restaurant::find($id);
 
@@ -81,7 +84,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        $restaurant = $this->restaurant;
-        return view('livewire.restaurant.form-update', compact(['restaurant']));
+        return view('livewire.restaurant.form-update');
     }
 }

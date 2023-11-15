@@ -7,7 +7,6 @@ use App\Traits\WithModal;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\Attributes\Rule as RuleLivewire;
 use Livewire\Features\SupportRedirects\Redirector;
 
 class FormCreate extends Component
@@ -47,6 +46,10 @@ class FormCreate extends Component
     public function create(): RedirectResponse|Redirector
     {
         $this->validate();
+
+        /**
+         * @var Restaurant $restaurant
+         */
 
         $restaurant = Restaurant::create([
             'name' => $this->name,

@@ -63,6 +63,7 @@ class FormUpdate extends Component
     {
 
         $this->office = Office::find($id);
+
         if (!$this->office) {
             return redirect()
                 ->route('admin.positions.index')
@@ -75,7 +76,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        $office = $this->office;
-        return view('livewire.office.form-update', compact(['office']));
+        return view('livewire.office.form-update');
     }
 }

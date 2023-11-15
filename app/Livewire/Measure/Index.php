@@ -17,9 +17,15 @@ class Index extends Component
 
     public function render(): View
     {
+
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $measures
+         */
+
         $measures = Measure::where('name', 'like', "%$this->search%")
             ->orderBy('name')
-            ->paginate(5)->onEachSide(0);
+            ->paginate(5)
+            ->onEachSide(0);
 
         return view('livewire.measure.index', compact(['measures']));
     }

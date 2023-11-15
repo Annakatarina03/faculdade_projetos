@@ -18,6 +18,10 @@ class Index extends Component
     public function render(): View
     {
 
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $positions
+         */
+
         $positions = Office::where('name', 'like', "%$this->search%")
             ->orderBy('name')
             ->paginate(5)->onEachSide(0);

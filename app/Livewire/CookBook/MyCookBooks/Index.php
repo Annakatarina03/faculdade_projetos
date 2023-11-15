@@ -17,8 +17,13 @@ class Index extends Component
 
     public function render(): View
     {
+
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $cookbooks
+         */
+
         $cookbooks = CookBook::where('id', auth()->user()->id)
-            ->where([['title', 'like', "%$this->search%"]])
+            ->where('title', 'like', "%$this->search%")
             ->orderBy('title')
             ->paginate(5)
             ->onEachSide(0);

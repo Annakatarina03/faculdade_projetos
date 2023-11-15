@@ -13,10 +13,13 @@ class Index extends Component
     use WithPagination;
     use WithModal;
 
-    public $search = '';
+    public string $search = '';
 
     public function render(): View
     {
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $ingredients
+         */
 
         $ingredients = Ingredient::where('name', 'like', "%$this->search%")
             ->orderBy('name')

@@ -5,6 +5,7 @@ namespace App\Livewire\Employee;
 use App\Helpers\Formatter;
 use App\Models\Employee;
 use App\Models\Office;
+use App\Models\Restaurant;
 use App\Traits\WithModal;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -37,6 +38,8 @@ class FormUpdate extends Component
 
     public bool $status;
 
+    public mixed $employees_restaurant;
+
     public Employee $employee;
 
 
@@ -64,6 +67,9 @@ class FormUpdate extends Component
                     }
                 },
             ],
+            'employees_restaurant.*.restaurant' => ['required', 'distinct'],
+            'employees_restaurant.*.date_entry' => ['required', 'before_or_equal:today'],
+            'employees_restaurant.*.resignation_date' => ['before_or_equal:today']
         ];
     }
 
@@ -76,10 +82,34 @@ class FormUpdate extends Component
             'cpf.unique' => 'CPF já registrado',
             'cpf.min' => 'CPF inválido',
             'wage.required' => 'Campo obrigatório',
-            'password.min' => 'A senha deve ter no mínimo 8 caracteres'
+            'password.min' => 'A senha deve ter no mínimo 8 caracteres',
+            'employees_restaurant.*.restaurant' => ['required', 'distinct'],
+            'employees_restaurant.*.date_entry' => ['required', 'before_or_equal:today'],
+            'employees_restaurant.*.resignation_date' => ['before_or_equal:today'],
+            'employees_restaurant.*.restaurant.required' => 'Campo obrigatório',
+            'employees_restaurant.*.restaurant.distinct' => 'Restaurante já adicionado',
+            'employees_restaurant.*.date_entry.required' => 'Campo obrigatório',
+            'employees_restaurant.*.date_entry.before_or_equal' => 'Data inválida',
+            'employees_restaurant.*.resignation_date.before_or_equal' => 'Data inválida',
         ];
     }
 
+    public function add(): void
+    {
+        $this->employees_restaurant[] =
+            [
+                'restaurant' => '',
+                'date_entry' => '',
+                'resignation_date' => '',
+            ];
+    }
+
+    public function del(int $index): void
+    {
+        unset($this->employees_restaurant[$index]);
+        $this->employees_restaurant = array_values($this->employees_restaurant);
+        $this->resetValidation("employees_restaurant.$index");
+    }
 
     public function update(): RedirectResponse|Redirector
     {
@@ -92,7 +122,18 @@ class FormUpdate extends Component
         $employee_office = Office::firstWhere('name', $this->office);
 
         $this->employee->office()->associate($employee_office);
+
         $this->employee->syncRoles($this->employee_roles);
+
+        $employees_restaurant = collect($this->employees_restaurant)
+            ->map(fn ($employee_restaurant) =>
+            [
+                'restaurant_id' => Restaurant::firstWhere('name', $employee_restaurant['restaurant'])->id,
+                'date_entry' =>  $employee_restaurant['date_entry'],
+                'resignation_date' =>  $employee_restaurant['resignation_date'] ? $employee_restaurant['resignation_date'] : null
+            ])->pluck(null, 'restaurant_id');
+
+        $this->employee->restaurants()->sync($employees_restaurant);
 
         $updated_employee = $this->employee->update([
             'name' => $this->name,
@@ -136,14 +177,24 @@ class FormUpdate extends Component
         $this->date_entry = $this->employee->date_entry;
         $this->status = $this->employee->status;
         $this->password = '';
+        $this->employees_restaurant = $this->employee->restaurants
+            ->pluck('pivot')
+            ->map(
+                fn ($employee_restaurant) =>
+                [
+                    'restaurant' => Restaurant::find($employee_restaurant->restaurant_id)->name,
+                    'date_entry' => $employee_restaurant->date_entry,
+                    'resignation_date' => $employee_restaurant->resignation_date ? $employee_restaurant->resignation_date : ''
+                ]
+            )->toArray();
     }
 
     public function render(): View
     {
-        $positions = Office::all();
-        $employee = $this->employee;
-        $roles = Role::all();
+        $positions = Office::all()->sortBy('name');
+        $roles = Role::all()->sortBy('name');
+        $restaurants = Restaurant::all()->sortBy('name');
 
-        return view('livewire.employee.form-update', compact(['positions', 'employee', 'roles']));
+        return view('livewire.employee.form-update', compact(['positions', 'roles', 'restaurants']));
     }
 }

@@ -22,7 +22,6 @@ class FormView extends Component
     public function mount(int $id = null): void
     {
         $this->cookbook = CookBook::find($id);
-
         $this->title = $this->cookbook->title;
         $this->isbn = $this->cookbook->isbn;
         $this->editor = $this->cookbook->employee->name;

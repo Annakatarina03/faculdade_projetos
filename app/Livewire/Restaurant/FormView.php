@@ -27,7 +27,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        $restaurant = $this->restaurant;
-        return view('livewire.restaurant.form-view', compact(['restaurant']));
+        return view('livewire.restaurant.form-view');
     }
 }

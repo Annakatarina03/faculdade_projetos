@@ -19,8 +19,14 @@ class Index extends Component
     public function render(): View
     {
         $taster = Employee::find(Auth::user()->id);
+
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $revenues
+         */
+
         $revenues = $taster->tastingRevenues()
-            ->paginate(12)
+            ->orderBy('name')
+            ->paginate(5)
             ->onEachSide(0);
 
         return view('livewire.recipe-tasting.my-tasting.index', compact(['revenues']));
