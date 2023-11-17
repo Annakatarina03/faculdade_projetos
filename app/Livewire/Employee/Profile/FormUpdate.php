@@ -50,6 +50,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        return view('livewire.employee.profile.form-update', compact(['employee']));
+        return view('livewire.employee.profile.form-update');
     }
 }

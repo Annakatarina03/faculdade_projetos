@@ -61,12 +61,12 @@ class FormCreate extends Component
 
         if ($cookbook) {
             return redirect()
-                ->route('cookbook.my-cookbooks')
+                ->route('cookbooks.my-cookbooks')
                 ->with('success', 'Livro de receitas registrado com sucesso');
         }
 
         return redirect()
-            ->route('cookbook.my-cookbooks')
+            ->route('cookbooks.my-cookbooks')
             ->with('error', 'Erro no registro do livro de receitas');
     }
 

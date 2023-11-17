@@ -29,13 +29,13 @@ class FormDelete extends Component
 
         if (!$cookBook) {
             return redirect()
-                ->route('cookbook.my-cookbooks')
+                ->route('cookbooks.my-cookbooks')
                 ->with('error', 'Livro de receitas não registrado');
         }
 
         if ($this->has_publications) {
             return redirect()
-                ->route('cookbook.my-cookbooks')
+                ->route('cookbooks.my-cookbooks')
                 ->with('error', 'Esse livro consta em uma publicação');
         }
 
@@ -43,12 +43,12 @@ class FormDelete extends Component
 
         if ($cookbook_disabled) {
             return redirect()
-                ->route('cookbook.my-cookbooks')
+                ->route('cookbooks.my-cookbooks')
                 ->with('success', 'Livro de receitas excluído com sucesso');
         }
 
         return redirect()
-            ->route('cookbook.my-cookbooks')
+            ->route('cookbooks.my-cookbooks')
             ->with('error', 'Erro na exclusão do livro de receitas');
     }
 

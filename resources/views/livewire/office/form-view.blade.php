@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="items-center sm:flex py-4 gap-2">
+        <div class="items-center flex py-4 gap-2">
             <button wire:click.prevent='closeModal'
                 class="w-full justify-center sm:w-auto text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
                 <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"

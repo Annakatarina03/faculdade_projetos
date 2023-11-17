@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 @if (session()->has('success'))
-                    <div class="flex items-center p-2  text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
+                    <div class="flex items-center p-2 justify-center text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
                         role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -33,7 +33,7 @@
                     </div>
                 @endif
                 @if (session()->has('error'))
-                    <div class="flex items-center p-2  text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
+                    <div class="flex items-center p-2 justify-center text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
                         role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

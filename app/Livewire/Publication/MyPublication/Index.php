@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Livewire\Cookbook\MyCookBooks;
+namespace App\Livewire\Publication\MyPublication;
 
 use App\Models\CookBook;
 use App\Traits\WithModal;
-use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
+
     use WithPagination;
     use WithModal;
 
     public string $search = '';
 
-    public function render(): View
+    public function render()
     {
-
         /**
          * @var \Illuminate\Pagination\LengthAwarePaginator $cookbooks
          */
@@ -28,6 +27,6 @@ class Index extends Component
             ->paginate(5)
             ->onEachSide(0);
 
-        return view('livewire.cook-book.my-cook-books.index', compact(['cookbooks']));
+        return view('livewire.publication.my-publication.index', compact(['cookbooks']));
     }
 }

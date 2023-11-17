@@ -74,6 +74,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        return view('livewire.ingredient.form-update', compact(['ingredient']));
+        return view('livewire.ingredient.form-update');
     }
 }

@@ -24,6 +24,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        return view('livewire.measure.form-view', compact(['measure']));
+        return view('livewire.measure.form-view');
     }
 }
