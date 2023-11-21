@@ -19,7 +19,7 @@
                 Você tentou acessar uma página para a qual não tinha autorização prévia.
             </div>
             <div class="message3">
-                <a class="back-button" href="{{ url()->previous() }}" type="button"
+                <a class="back-button" href="{{ route('system') }}" type="button"
                     class="btn btn-outline-primary">Voltar</a>
             </div>
         </div>

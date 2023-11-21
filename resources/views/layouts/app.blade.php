@@ -126,7 +126,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="dashboard-nav-dropdown relative flex flex-col">
+                        {{-- <div class="dashboard-nav-dropdown relative flex flex-col">
                             <a href="#!"
                                 class="dashboard-nav-item dashboard-nav-dropdown-toggle w-full min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex justify-start items-center gap-3 hover:bg-[#8E9FAE]">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 448 512">
@@ -168,8 +168,8 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <div class='dashboard-nav-dropdown'>
+                        </div> --}}
+                        {{-- <div class='dashboard-nav-dropdown'>
                             <a href="#!"
                                 class="dashboard-nav-item dashboard-nav-dropdown-toggle min-h-[56px] pt-2 pr-4 pb-2 pl-8 flex items-center gap-3 hover:bg-[#8E9FAE]">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 512 512">
@@ -195,7 +195,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     @endrole
                     {{-- Painel do Chefe de Cozinha --}}
                     @role(['administrador', 'editor', 'chefe-de-cozinha', 'degustador'])

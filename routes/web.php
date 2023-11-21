@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CookBookController;
 use App\Http\Controllers\EmployeeController;
@@ -19,11 +20,12 @@ use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TastingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware('verified')->name('dashboard');
 
     /**
      * Employees routes
@@ -147,7 +149,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/publications/publish/cookbook/pdf/{cookbook}', [PublicationController::class, 'show'])->name('publications.cookbooks-pdf');
 
-    // Route::get('/system');
+    Route::get('/system', [AuthenticatedSessionController::class, 'system'])->name('system');
+
     Route::get('/metas', [MetasController::class, 'index'])->name('metas');
 });
 

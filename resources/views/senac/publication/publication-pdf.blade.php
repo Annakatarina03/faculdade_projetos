@@ -1,4 +1,3 @@
-div
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,7 @@ div
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>{{ $cookbook->title }}</title>
 
     <style>
         @font-face {
@@ -71,8 +70,8 @@ div
     <div class="container">
         @foreach ($revenues as $revenue)
             <div class="container-image">
-                <img src="{{ public_path("storage/{$revenue->images->first()->url}") }}" title="{{ $revenue->name }}"
-                    alt="{{ $revenue->name }}">
+                <img src="{{ $revenue->images()->first() !== null ? public_path("storage/{$revenue->images->first()->url}") : public_path('storage/revenues/no_image.png') }}"
+                    title="{{ $revenue->name }}" alt="{{ $revenue->name }}">
             </div>
             <div class="recipe">
                 <div class="container-title">

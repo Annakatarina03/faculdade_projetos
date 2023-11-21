@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('admin/employees');
+        return redirect('dashboard');
     }
 
     /**
@@ -44,5 +43,20 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function system()
+    {
+        $user = auth()->user();
+
+        if ($user->hasRole('administrador')) {
+            return redirect()->route('admin.employees.index');
+        } else if ($user->hasRole('chefe-de-cozinha')) {
+            return redirect()->route('revenues.my-revenues');
+        } else if ($user->hasRole('degustador')) {
+            return redirect()->route('tasting.revenues-my-tasting');
+        } else if ($user->hasRole('editor')) {
+            return redirect()->route('cookbooks.my-cookbooks');
+        }
     }
 }

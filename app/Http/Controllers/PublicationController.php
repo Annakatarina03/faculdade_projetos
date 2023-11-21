@@ -47,7 +47,7 @@ class PublicationController extends Controller
         );
 
 
-        return $pdf->stream();
+        return $pdf->stream($cookbook->title . '.pdf');
     }
 
     /**
