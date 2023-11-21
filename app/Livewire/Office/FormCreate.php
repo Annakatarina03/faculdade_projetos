@@ -39,6 +39,10 @@ class FormCreate extends Component
     {
         $this->validate();
 
+        /**
+         * @var Office $office
+         */
+
         $office = Office::create([
             'name' => $this->name,
             'description' => $this->description,

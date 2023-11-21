@@ -2,16 +2,14 @@
 
 namespace App\Livewire\RecipeTasting\MyTasting;
 
+use App\Helpers\RecipeTasting as UtilRecipeTasting;
 use App\Models\Employee;
 use App\Models\RecipeTasting;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -61,51 +59,31 @@ class FormCreate extends Component
     {
         $this->validate();
 
-        DB::beginTransaction();
+        $this->revenue
+            ->tasting()
+            ->syncWithoutDetaching(
+                [
+                    $this->taster->id => ['tasting_note' => (float) str_replace(",", ".", $this->tasting_note)]
+                ]
+            );
 
-        try {
-
-            $this->taster
-                ->tastingRevenues()
-                ->updateExistingPivot($this->revenue->id, [
-                    'tasting_note' => (float) str_replace(",", ".", $this->tasting_note)
-                ]);
-
-            DB::commit();
-            return redirect()
-                ->route('tasting.revenues-my-tasting')
-                ->with('success', 'Degustação avaliada com sucesso');
-        } catch (UniqueConstraintViolationException $e) {
-            DB::rollBack();
-            return redirect()
-                ->route('tasting.revenues-my-tasting')
-                ->with('error', 'Erro na avaliação da degustação');
-        }
-    }
-
-    private function calculateNote(Collection $recipe_tastings): float
-    {
-        $total_notes = $recipe_tastings
-            ->reduce(fn ($total, $recipe_tasting) => ($total + $recipe_tasting->tasting_note));
-
-        return $total_notes ? $total_notes / $recipe_tastings->count() : 0;
+        return redirect()
+            ->route('tasting.revenues-my-tasting')
+            ->with('success', 'Degustação avaliada com sucesso');
     }
 
     public function mount(int $id = null): void
     {
         $this->taster = Employee::find(Auth::user()->id);
         $this->revenue = Revenue::find($id);
-        $recipe_tastings = RecipeTasting::where('revenue_id', $this->revenue->id)
-            ->whereNotNull('tasting_note')
-            ->get();
+        $recipe_tastings = RecipeTasting::where('revenue_id', $this->revenue->id)->whereNotNull('tasting_note')->get();
         $this->recipe_name = $this->revenue->name;
         $this->chef_name = $this->revenue->chef->name;
         $this->number_servings = $this->revenue->number_servings;
         $this->category = $this->revenue->category->name;
         $this->creation_date = $this->revenue->creation_date;
         $this->taster_name = $this->taster->name;
-        $this->average_grade = number_format($this->calculateNote($recipe_tastings), 1, ',', '.');
-
+        $this->average_grade = UtilRecipeTasting::calculateAverageScore($recipe_tastings);
         $this->tasting_note = $recipe_tastings
             ->where('taster_id', $this->taster->id)
             ->pluck('tasting_note')->first();

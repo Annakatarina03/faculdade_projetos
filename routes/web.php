@@ -1,17 +1,22 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CookBookController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MeasureController;
-use App\Http\Controllers\MyCookBook;
+use App\Http\Controllers\MyCookBookController;
+use App\Http\Controllers\MyPublicationController;
 use App\Http\Controllers\MyRevenueController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\PublishController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RecipeTastingController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TastingController;
+use App\Models\CookBook;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
@@ -83,7 +88,16 @@ Route::middleware('auth')->group(function () {
      * Cookbooks routes
      */
 
-    Route::get('/cookbooks/my-cookbooks', [MyCookBook::class, 'index'])->name('cookbooks.my-cookbooks');
+    Route::get('/cookbooks/my-cookbooks', [MyCookBookController::class, 'index'])->name('cookbooks.my-cookbooks');
+    Route::get('/cookbooks/all-cookbooks', [CookBookController::class, 'index'])->name('cookbooks.all-cookbooks');
+
+    /**
+     * Publication routes
+     */
+
+    Route::get('/publications/my-publications/cookbooks', [MyPublicationController::class, 'index'])->name('publications.my-publications.cookbooks');
+    Route::get('/publications/all-publications/cookbooks', [PublicationController::class, 'index'])->name('publications.all-publications.cookbooks');
+    Route::get('/publications/publish/cookbooks', [PublishController::class, 'index'])->name('publications.publish.cookbooks');
 });
 
 

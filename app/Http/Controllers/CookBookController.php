@@ -6,14 +6,14 @@ use App\Models\CookBook;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MyCookBook extends Controller
+class CookBookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('senac.cookbook.my-cookbooks');
+        return view('senac.cookbook.cookbooks');
     }
 
     /**

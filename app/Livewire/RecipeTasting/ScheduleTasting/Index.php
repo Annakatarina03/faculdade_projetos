@@ -21,8 +21,14 @@ class Index extends Component
     {
         $taster = Employee::find(Auth::user()->id);
         $tasterRevenuesId = $taster->tastingRevenues->pluck('id');
+
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $revenues
+         */
+
         $revenues = Revenue::where('name', 'like', "%$this->search%")
             ->whereNotIn('id', $tasterRevenuesId)
+            ->orderBy('name')
             ->paginate(12)
             ->onEachSide(0);
 

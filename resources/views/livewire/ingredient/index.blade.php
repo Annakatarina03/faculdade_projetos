@@ -14,7 +14,7 @@
                         <div class="w-full md:w-3/12">
                             <form>
                                 <div class="relative flex gap-2">
-                                    <input type="search" id="search" name="search"
+                                    <input type="search" id="search" name="search" wire:model.live="search"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                                         placeholder="Nome do ingrediente">
                                 </div>

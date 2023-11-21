@@ -1,6 +1,6 @@
 <section class="bg-white min-h-screen flex justify-center">
     <div class="md:py-12 md:px-4 flex justify-center w-full lg:py-16">
-        <div class="bg-[#D1D9DF] w-full md:w-[850px] md:h-5/6 shadow-[0px_1px_3px_rgba(0,0,0,0.7)] md:rounded-3xl">
+        <div class="bg-[#D1D9DF] w-full md:w-[850px] md:h-3/6 shadow-[0px_1px_3px_rgba(0,0,0,0.7)] md:rounded-3xl">
 
             @if (session()->has('success'))
                 <div class="w-full flex justify-center">

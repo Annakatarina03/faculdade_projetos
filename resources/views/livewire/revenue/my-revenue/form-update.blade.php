@@ -355,9 +355,9 @@
                             'w-64',
                             'max-h-44',
                             'h-36',
-                            'border-2' => !$image_recipe,
+                            'border-2' => $image_recipe,
                             'border-gray-300',
-                            'border-dashed' => !$image_recipe,
+                            'border-dashed' => $image_recipe,
                             'rounded-lg',
                             'cursor-pointer',
                             'bg-gray-50',
@@ -365,10 +365,9 @@
                             <div class="flex flex-col items-center justify-center">
 
                                 @if ($image_recipe || $revenue->images()->first())
-                                    <img class="w-full rounded-lg"
+                                    <img class="w-96 max-h-36 rounded-lg"
                                         src="{{ $image_recipe ? $image_recipe->temporaryUrl() : url("storage/{$revenue->images()->first()->url}") }}"
-                                        alt="{{ $revenue->name }}" title="{{ $revenue->name }}"
-                                        class="w-full rounded-lg">
+                                        alt="{{ $revenue->name }}" title="{{ $revenue->name }}">
                                 @else
                                     <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">

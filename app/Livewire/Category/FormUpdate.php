@@ -51,7 +51,7 @@ class FormUpdate extends Component
 
         return redirect()
             ->route('admin.categories.index')
-            ->with('error', 'Erro na atualização da Categoria');
+            ->with('error', 'Erro na atualização da categoria');
     }
 
     public function mount(int $id = null)
@@ -70,8 +70,6 @@ class FormUpdate extends Component
 
     public function render(): View
     {
-        $category = $this->category;
-
-        return view('livewire.category.form-update', compact(['category']));
+        return view('livewire.category.form-update');
     }
 }

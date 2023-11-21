@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\CookBook\MyCookBooks;
+namespace App\Livewire\Cookbook\MyCookBooks;
 
 use App\Models\CookBook;
 use App\Traits\WithModal;
@@ -17,11 +17,17 @@ class Index extends Component
 
     public function render(): View
     {
-        $cookbooks = CookBook::where([['title', 'like', "%$this->search%"]])
+
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $cookbooks
+         */
+
+        $cookbooks = CookBook::where('editor_id', auth()->user()->id)
+            ->where('title', 'like', "%$this->search%")
             ->orderBy('title')
             ->paginate(5)
             ->onEachSide(0);
 
-        return view('livewire.cookbook.my-cookbooks.index', compact(['cookbooks']));
+        return view('livewire.cook-book.my-cook-books.index', compact(['cookbooks']));
     }
 }

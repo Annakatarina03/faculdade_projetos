@@ -7,7 +7,7 @@ use App\Traits\WithModal;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 
 class FormDelete extends Component
 {
@@ -54,6 +54,6 @@ class FormDelete extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-delete');
+        return view('livewire.cook-book.my-cook-books.form-delete');
     }
 }

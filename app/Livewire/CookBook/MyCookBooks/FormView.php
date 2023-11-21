@@ -22,7 +22,6 @@ class FormView extends Component
     public function mount(int $id = null): void
     {
         $this->cookbook = CookBook::find($id);
-
         $this->title = $this->cookbook->title;
         $this->isbn = $this->cookbook->isbn;
         $this->editor = $this->cookbook->employee->name;
@@ -30,6 +29,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        return view('livewire.cookbook.my-cookbooks.form-view');
+        return view('livewire.cook-book.my-cook-books.form-view');
     }
 }

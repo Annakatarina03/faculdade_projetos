@@ -2,16 +2,14 @@
 
 namespace App\Livewire\RecipeTasting\ScheduleTasting;
 
+use App\Helpers\RecipeTasting as UtilRecipeTasting;
 use App\Models\Employee;
 use App\Models\RecipeTasting;
 use App\Models\Revenue;
 use App\Traits\WithModal;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -62,32 +60,16 @@ class FormCreate extends Component
     {
         $this->validate();
 
-        DB::beginTransaction();
+        $this->revenue->tasting()
+            ->attach(
+                [
+                    $this->taster->id => ['tasting_date' => $this->tasting_date]
+                ]
+            );
 
-        try {
-
-            $this->taster
-                ->tastingRevenues()
-                ->attach($this->revenue->id, [
-                    'tasting_date' => $this->tasting_date
-                ]);
-            DB::commit();
-            return redirect()
-                ->route('tasting.revenues-schedule-tasting')
-                ->with('success', 'Degustação marcada com sucesso');
-        } catch (UniqueConstraintViolationException $e) {
-            DB::rollBack();
-            return redirect()
-                ->route('tasting.revenues-schedule-tasting')
-                ->with('error', 'Erro na marcação da degustação');
-        }
-    }
-
-    private function calculateNote(Collection $recipe_tastings): float
-    {
-        $total_notes = $recipe_tastings
-            ->reduce(fn ($total, $recipe_tasting) => ($total + $recipe_tasting->tasting_note));
-        return $total_notes ? $total_notes / $recipe_tastings->count() : 0;
+        return redirect()
+            ->route('tasting.revenues-schedule-tasting')
+            ->with('success', 'Degustação marcada com sucesso');
     }
 
     public function mount(int $id = null): void
@@ -101,7 +83,7 @@ class FormCreate extends Component
         $this->category = $this->revenue->category->name;
         $this->creation_date = $this->revenue->creation_date;
         $this->taster_name = $this->taster->name;
-        $this->average_grade = number_format($this->calculateNote($recipe_tastings), 1, ',', '.');
+        $this->average_grade = UtilRecipeTasting::calculateAverageScore($recipe_tastings);
     }
 
     public function render(): View

@@ -4,7 +4,6 @@ namespace App\Livewire\Measure;
 
 use App\Models\Measure;
 use App\Models\RecipeIngredient;
-use App\Models\RecipeTasting;
 use App\Traits\WithModal;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -16,6 +15,7 @@ class FormDelete extends Component
     use WithModal;
 
     public bool $has_recipes;
+
     public Measure $measure;
 
     public function mount(int $id = null): void

@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Thiagoprz\EloquentCompositeKey\HasCompositePrimaryKey;
 
 class RecipeIngredient extends Model
 {
     use HasFactory;
+
 
     protected $table = 'recipe_ingredients';
 
@@ -27,6 +29,8 @@ class RecipeIngredient extends Model
     ];
 
     protected $primaryKey = ['revenue_id', 'ingredient_id'];
+
+    public $incrementing = false;
 
     public $timestamp = true;
 

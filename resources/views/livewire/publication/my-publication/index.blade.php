@@ -2,7 +2,7 @@
     <div class="w-full sm:w-11/12 p-4 lg:px-12">
         <div class="pb-4 flex justify-center sm:justify-start">
             <span class="text-4xl font-bold text-[#2A384C]">
-                Meus livros de receitas
+                Minhas publicação
             </span>
 
         </div>
@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 @if (session()->has('success'))
-                    <div class="flex items-center p-2 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
+                    <div class="flex items-center p-2 justify-center text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
                         role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 @elseif (session()->has('error'))
-                    <div class="flex items-center p-2  text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
+                    <div class="flex items-center p-2 justify-center text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
                         role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -49,7 +49,7 @@
                 @endif
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <button wire:click="openModal('cookbook.my-cookbooks.form-create')"
+                    <button wire:click="openModal('cook-book.my-cook-books.form-create')"
                         class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                         <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="flex items-center justify-center space-x-4">
                             <button
-                                wire:click="openModal('cookbook.my-cookbooks.form-update', {'id' : {{ $cookbook->id }}})"
+                                wire:click="openModal('cook-book.my-cook-books.form-update', {'id' : {{ $cookbook->id }}})"
                                 class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                                 title="Editar">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20"
@@ -90,7 +90,7 @@
                                 </svg>
                             </button>
                             <button
-                                wire:click="openModal('cookbook.my-cookbooks.form-view', {'id' : {{ $cookbook->id }}})"
+                                wire:click="openModal('cook-book.my-cook-books.form-view', {'id' : {{ $cookbook->id }}})"
                                 class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300"
                                 title="Visualizar">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor"
@@ -101,7 +101,7 @@
                                 </svg>
                             </button>
                             <button
-                                wire:click="openModal('cookbook.my-cookbooks.form-delete', {'id' : {{ $cookbook->id }}})"
+                                wire:click="openModal('cook-book.my-cook-books.form-delete', {'id' : {{ $cookbook->id }}})"
                                 class="py-2 px-3 flex items-center justify-center text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300"
                                 title="Deletar">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20"

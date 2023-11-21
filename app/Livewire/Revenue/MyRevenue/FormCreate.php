@@ -3,14 +3,15 @@
 namespace App\Livewire\Revenue\MyRevenue;
 
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Ingredient;
 use App\Models\Measure;
-use App\Models\RecipeIngredient;
 use App\Models\Revenue;
 use App\Traits\WithModal;
+use Exception;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -88,50 +89,71 @@ class FormCreate extends Component
     {
         $this->validate();
 
-        $revenue = Revenue::create(
-            [
-                'name' => $this->recipe_name,
-                'chef_id' => auth()->user()->id,
-                'category_id' => Category::where('name', $this->category)->first()->id,
-                'creation_date' => $this->creation_date,
-                'method_preparation' => $this->method_preparation,
-                'number_servings' => $this->number_servings ? $this->number_servings : null,
-                'unpublished_recipe' => Revenue::firstWhere('name', $this->recipe_name) === null ? true : false
-            ]
-        );
+        try {
 
-        $recipe_ingredients = collect($this->recipe_ingredients)
-            ->map(fn ($recipe_ingredient) =>
-            [
-                'ingredient_id' => Ingredient::firstWhere('name', $recipe_ingredient['ingredient'])->id,
-                'revenue_id' => $revenue->id,
-                'measure_id' => $recipe_ingredient['measure']  ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
-                'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
-            ]);
+            DB::beginTransaction();
 
-        $revenue->ingredients()->attach($recipe_ingredients);
+            /**
+             * @var Employee $revenue_chef
+             */
 
+            $revenue_chef = Employee::firstWhere('name', $this->chef_name);
 
-        if ($this->image_recipe) {
-            $extension_file = $this->image_recipe->getClientOriginalExtension();
-            $name_file = uniqid() . "." . $extension_file;
-            $url = $this->image_recipe->storeAs('revenues', $name_file);
-            $revenue->images()->create(
+            /**
+             * @var Category $revenue_category
+             */
+
+            $revenue_category = Category::firstWhere('name', $this->category);
+
+            $revenue = new Revenue;
+            $revenue->name = $this->recipe_name;
+            $revenue->creation_date = $this->creation_date;
+            $revenue->method_preparation = $this->method_preparation;
+            $revenue->number_servings = $this->number_servings ? $this->number_servings : null;
+            $revenue->unpublished_recipe = Revenue::firstWhere('name', $this->recipe_name) === null ? true : false;
+
+            $revenue->chef()->associate($revenue_chef);
+            $revenue->category()->associate($revenue_category);
+
+            $revenue->save();
+
+            if ($this->image_recipe) {
+                $extension_file = $this->image_recipe->getClientOriginalExtension();
+                $name_file = uniqid() . "." . $extension_file;
+                $url = $this->image_recipe->storeAs('revenues', $name_file);
+                $revenue->images()->create(
+                    [
+                        'url' => $url
+                    ]
+                );
+            }
+
+            $recipe_ingredients = collect($this->recipe_ingredients)
+                ->map(fn ($recipe_ingredient) =>
                 [
-                    'url' => $url
-                ]
-            );
-        }
+                    'ingredient_id' => Ingredient::firstWhere('name', $recipe_ingredient['ingredient'])->id,
+                    'revenue_id' => $revenue->id,
+                    'measure_id' => $recipe_ingredient['measure']  ? Measure::firstWhere('name', $recipe_ingredient['measure'])->id : null,
+                    'amount' => $recipe_ingredient['amount'] ? $recipe_ingredient['amount'] : null,
+                ])->pluck(null, 'ingredient_id');
 
-        if ($revenue) {
+            $revenue->ingredients()->attach($recipe_ingredients);
+
+            DB::commit();
+
+            if ($revenue) {
+                return redirect()
+                    ->route('revenues.my-revenues')
+                    ->with('success', 'Receita registrada com sucesso');
+            }
+        } catch (Exception $e) {
+
+            DB::rollBack();
+
             return redirect()
                 ->route('revenues.my-revenues')
-                ->with('success', 'Receita registrada com sucesso');
+                ->with('error', $e->getMessage());
         }
-
-        return redirect()
-            ->route('revenues.my-revenues')
-            ->with('error', 'Erro no registro da receita');
     }
 
     public function mount(): void
@@ -145,9 +167,9 @@ class FormCreate extends Component
 
     public function render(): View
     {
-        $ingredients = Ingredient::all();
-        $measures = Measure::all();
-        $categories = Category::all();
+        $ingredients = Ingredient::all()->sortBy('name');
+        $measures = Measure::all()->sortBy('name');
+        $categories = Category::all()->sortBy('name');
 
         return view('livewire.revenue.my-revenue.form-create', compact(['ingredients', 'measures', 'categories']));
     }

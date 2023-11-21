@@ -58,9 +58,9 @@ class FormView extends Component
 
     public function render(): View
     {
-        $ingredients = Ingredient::all();
-        $measures = Measure::all();
-        $categories = Category::all();
+        $ingredients = Ingredient::all()->sortBy('name');
+        $measures = Measure::all()->sortBy('name');
+        $categories = Category::all()->sortBy('name');
 
         return view('livewire.revenue.revenues.form-view', compact(['ingredients', 'measures', 'categories']));
     }

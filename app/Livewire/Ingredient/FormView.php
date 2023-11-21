@@ -28,7 +28,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        $ingredient = $this->ingredient;
-        return view('livewire.ingredient.form-view', compact(['ingredient']));
+        return view('livewire.ingredient.form-view');
     }
 }

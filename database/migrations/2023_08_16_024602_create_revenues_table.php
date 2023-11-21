@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
 
             $table->date('creation_date')->nullable()->comment('Data de criação da receita');
-            $table->string('method_preparation', 1000)->comment('Modo de preparo da receita');
+            $table->string('method_preparation', 2000)->comment('Modo de preparo da receita');
             $table->smallInteger('number_servings')->nullable()->comment('Número de porções da receita');
             $table->boolean('unpublished_recipe')->comment('A receita é inédita?');
 

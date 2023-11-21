@@ -20,7 +20,7 @@ class FormDelete extends Component
     public function mount($id = null): void
     {
         $this->category = Category::find($id);
-        $this->is_revenues = !empty($this->category->revenues()->get()->toArray());
+        $this->is_revenues = !$this->category->revenues()->get()->isEmpty();
     }
 
     public function delete(Category $category): RedirectResponse|Redirector
@@ -35,7 +35,7 @@ class FormDelete extends Component
         if ($this->is_revenues) {
             return redirect()
                 ->route('admin.categories.index')
-                ->with('error', 'Existe receitas vinculados a essa categoria');
+                ->with('error', 'Existe receitas vinculadas a essa categoria');
         }
 
         $category_disabled = $category->delete();

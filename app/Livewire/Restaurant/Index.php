@@ -18,9 +18,14 @@ class Index extends Component
     public function render(): View
     {
 
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $restaurants
+         */
+
         $restaurants = Restaurant::where('name', 'like', "%$this->search%")
             ->orderBy('name')
-            ->paginate(5)->onEachSide(0);
+            ->paginate(5)
+            ->onEachSide(0);
 
         return view('livewire.restaurant.index', compact(['restaurants']));
     }

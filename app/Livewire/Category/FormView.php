@@ -24,7 +24,6 @@ class FormView extends Component
 
     public function render(): View
     {
-        $category = $this->category;
-        return view('livewire.category.form-view', compact(['category']));
+        return view('livewire.category.form-view');
     }
 }

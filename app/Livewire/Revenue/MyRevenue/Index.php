@@ -25,11 +25,12 @@ class Index extends Component
         $chef = Employee::find(Auth::user()->id);
 
         /**
-         * @var Collection $revenues
+         * @var \Illuminate\Pagination\LengthAwarePaginator $revenues
          */
 
         $revenues = $chef->revenues()
-            ->paginate(12)
+            ->orderBy('name')
+            ->paginate(5)
             ->onEachSide(0);
 
         return view('livewire.revenue.my-revenue.index', compact(['revenues']));

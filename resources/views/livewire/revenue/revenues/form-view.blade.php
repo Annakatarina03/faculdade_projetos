@@ -185,8 +185,7 @@
                                                     'pointer-events-none',
                                                 ]) disabled
                                                 name="recipe_ingredients-{{ $index }}-amount"
-                                                wire:model.live="recipe_ingredients.{{ $index }}.amount"
-                                                placeholder="Ex: 1">
+                                                wire:model.live="recipe_ingredients.{{ $index }}.amount">
                                         </div>
                                         @error("recipe_ingredients.$index.amount")
                                             <div class="absolute bottom-0 flex gap-1 items-center"
@@ -284,7 +283,7 @@
                             class="flex flex-col items-center justify-center w-64 max-h-44 h-36 border-gray-300 rounded-lg bg-gray-50">
                             <div class="flex flex-col items-center justify-center">
                                 @if ($image_recipe || $revenue->images()->first())
-                                    <img class="w-full rounded-lg"
+                                    <img class="w-96 max-h-36 rounded-lg"
                                         src="{{ $image_recipe ? $image_recipe->temporaryUrl() : url("storage/{$revenue->images()->first()->url}") }}"
                                         alt="{{ $revenue->name }}" title="{{ $revenue->name }}"
                                         class="w-full rounded-lg">

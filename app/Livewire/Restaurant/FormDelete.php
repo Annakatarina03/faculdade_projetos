@@ -13,13 +13,14 @@ class FormDelete extends Component
 {
     use WithModal;
 
+    public bool $has_employees;
+
     public Restaurant $restaurant;
 
     public function mount($id = null): void
     {
-        $restaurant = Restaurant::find($id);
-
-        $this->restaurant = $restaurant;
+        $this->restaurant = Restaurant::find($id);
+        $this->has_employees = !$this->restaurant->employees()->get()->isEmpty();
     }
 
     public function delete(Restaurant $restaurant): RedirectResponse|Redirector
@@ -29,6 +30,12 @@ class FormDelete extends Component
             return redirect()
                 ->route('admin.restaurants.index')
                 ->with('error', 'Restaurante não registrado');
+        }
+
+        if ($this->has_employees) {
+            return redirect()
+                ->route('admin.restaurants.index')
+                ->with('error', 'Existem funcionários vinculados a esse restaurante');
         }
 
         $restaurant_disabled = $restaurant->delete();
