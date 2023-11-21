@@ -53,9 +53,9 @@ class FormDelete extends Component
                 ->with('error', 'Existem degustações vinculadas a esse degustador');
         }
 
-        $employee_disabled = $employee->delete();
+        $delete_employee = $employee->delete();
 
-        if ($employee_disabled) {
+        if ($delete_employee) {
             return redirect()
                 ->route('admin.employees.index')
                 ->with('success', 'Funcionário excluído com sucesso');

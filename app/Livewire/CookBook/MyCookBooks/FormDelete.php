@@ -39,9 +39,9 @@ class FormDelete extends Component
                 ->with('error', 'Esse livro consta em uma publicação');
         }
 
-        $cookbook_disabled = $cookBook->delete();
+        $delete_cookbook = $cookBook->delete();
 
-        if ($cookbook_disabled) {
+        if ($delete_cookbook) {
             return redirect()
                 ->route('cookbooks.my-cookbooks')
                 ->with('success', 'Livro de receitas excluído com sucesso');

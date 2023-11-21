@@ -37,9 +37,9 @@ class FormDelete extends Component
                 ->with('error', 'Existem receitas vinculadas a esse ingrediente');
         }
 
-        $ingredient_disabled = $ingredient->delete();
+        $delete_ingredient = $ingredient->delete();
 
-        if ($ingredient_disabled) {
+        if ($delete_ingredient) {
             return redirect()
                 ->route('admin.ingredients.index')
                 ->with('success', 'Ingrediente excluído com sucesso');

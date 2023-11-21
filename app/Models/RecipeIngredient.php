@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Thiagoprz\EloquentCompositeKey\HasCompositePrimaryKey;
 
-class RecipeIngredient extends Model
+class RecipeIngredient extends Pivot
 {
     use HasFactory;
 
@@ -44,8 +47,8 @@ class RecipeIngredient extends Model
         return $this->hasOne(Ingredient::class, 'id', 'ingredient_id');
     }
 
-    public function measure(): HasOne
+    public function measure(): HasMany
     {
-        return $this->hasOne(Measure::class, 'id', 'measure_id');
+        return $this->hasMany(Measure::class, 'id', 'measure_id');
     }
 }

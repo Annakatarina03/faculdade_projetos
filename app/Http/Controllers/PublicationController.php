@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CookBook;
 use App\Models\CookBookRecipe;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PublicationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('senac.publication.all-publications');
     }
 
     /**
@@ -34,17 +37,25 @@ class PublicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CookBookRecipe $cookBookRecipe)
+    public function show(int $id)
     {
-        //
+        $cookbook = CookBook::find($id);
+        $revenues = $cookbook->revenues()->get();
+        $pdf = pdf::loadView(
+            'senac.publication.publication-pdf',
+            ['cookbook' => $cookbook, 'revenues' => $revenues]
+        );
+
+
+        return $pdf->stream();
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CookBookRecipe $cookBookRecipe)
+    public function edit()
     {
-        //
+        // 
     }
 
     /**

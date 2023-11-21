@@ -40,9 +40,9 @@ class FormDelete extends Component
         }
 
 
-        $office_disabled = $office->delete();
+        $delete_office = $office->delete();
 
-        if ($office_disabled) {
+        if ($delete_office) {
             return redirect()
                 ->route('admin.positions.index')
                 ->with('success', 'Cargo excluído com sucesso');

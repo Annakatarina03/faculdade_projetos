@@ -38,9 +38,9 @@ class FormDelete extends Component
                 ->with('error', 'Existe receitas vinculadas a essa categoria');
         }
 
-        $category_disabled = $category->delete();
+        $delete_category = $category->delete();
 
-        if ($category_disabled) {
+        if ($delete_category) {
             return redirect()
                 ->route('admin.categories.index')
                 ->with('success', 'Categoria excluída com sucesso');

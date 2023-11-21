@@ -38,9 +38,9 @@ class FormDelete extends Component
                 ->with('error', 'Existem funcionários vinculados a esse restaurante');
         }
 
-        $restaurant_disabled = $restaurant->delete();
+        $delete_restaurant = $restaurant->delete();
 
-        if ($restaurant_disabled) {
+        if ($delete_restaurant) {
             return redirect()
                 ->route('admin.restaurants.index')
                 ->with('success', 'Restaurante excluído com sucesso');

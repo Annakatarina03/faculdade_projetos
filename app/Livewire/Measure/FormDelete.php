@@ -39,9 +39,9 @@ class FormDelete extends Component
                 ->with('error', 'Existem receitas vinculadas a essa medida');
         }
 
-        $measure_disabled = $measure->delete();
+        $delete_measure = $measure->delete();
 
-        if ($measure_disabled) {
+        if ($delete_measure) {
             return redirect()
                 ->route('admin.measures.index')
                 ->with('success', 'Medida excluída com sucesso');
