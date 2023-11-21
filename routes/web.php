@@ -5,6 +5,7 @@ use App\Http\Controllers\CookBookController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MeasureController;
+use App\Http\Controllers\MetasController;
 use App\Http\Controllers\MyCookBookController;
 use App\Http\Controllers\MyPublicationController;
 use App\Http\Controllers\MyRevenueController;
@@ -147,6 +148,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/publications/publish/cookbook/pdf/{cookbook}', [PublicationController::class, 'show'])->name('publications.cookbooks-pdf');
 
     // Route::get('/system');
+    Route::get('/metas', [MetasController::class, 'index'])->name('metas');
 });
 
 
